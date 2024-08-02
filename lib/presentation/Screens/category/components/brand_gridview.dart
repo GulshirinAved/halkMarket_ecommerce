@@ -16,7 +16,10 @@ class BrandGridview extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.only(top: 15.h),
-          child: TopTitle(topTitle: topTitle),
+          child: TopTitle(
+            topTitle: topTitle,
+            onTap: () {},
+          ),
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,

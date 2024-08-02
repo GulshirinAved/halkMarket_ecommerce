@@ -20,6 +20,7 @@ const String fruitIcon = 'assets/icons/fruit.svg';
 const String milkIcon = 'assets/icons/milk.svg';
 const String foodIcon = 'assets/icons/food.svg';
 const String waterIcon = 'assets/icons/water.svg';
+const String filterIcon = 'assets/icons/filter.svg';
 
 //images
 const String bannerImage = 'assets/images/banner.png';
@@ -76,6 +77,42 @@ final List<Map<String, dynamic>> newProducts = [
     'prevPrice': '18.20',
     'desc': 'Смесь для выпечки Печем дома "Оладьи"',
     'weight': '250',
+  },
+  {
+    'image': product1Image,
+    'isNew': true,
+    'isSale': false,
+    'price': '14.20',
+    'prevPrice': '18.20',
+    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
+    'weight': '250',
+  },
+  {
+    'image': product2Image,
+    'isNew': true,
+    'isSale': true,
+    'price': '14.20',
+    'prevPrice': '18.20',
+    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
+    'weight': '250',
+  },
+  {
+    'image': product1Image,
+    'isNew': true,
+    'isSale': false,
+    'price': '14.20',
+    'prevPrice': '18.20',
+    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
+    'weight': '250',
+  },
+  {
+    'image': product2Image,
+    'isNew': true,
+    'isSale': true,
+    'price': '14.20',
+    'prevPrice': '18.20',
+    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
+    'weight': '250',
   }
 ];
 final List<String> tipQuestion = [
@@ -93,4 +130,12 @@ final List<String> milkProducts = [
   'Сливки, кефир, творог',
   'Йогурт, айран',
   'Сгущённое молоко',
+];
+final List subCategories = [
+  'Молоко',
+  'Кефир',
+  'Творог',
+  'Сыр',
+  'Йогурт',
+  'Сметана и сливки',
 ];

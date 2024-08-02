@@ -10,8 +10,8 @@ import 'package:halkmarket_ecommerce/presentation/Screens/home/components/smallT
 class ProductCard extends StatelessWidget {
   final int index;
   const ProductCard({
-    super.key,
     required this.index,
+    super.key,
   });
 
   @override

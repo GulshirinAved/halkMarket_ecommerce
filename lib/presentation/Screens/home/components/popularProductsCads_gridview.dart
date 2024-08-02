@@ -14,7 +14,10 @@ class PopularProductsGridview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const TopTitle(topTitle: 'Популярные категории'),
+        TopTitle(
+          topTitle: 'Популярные категории',
+          onTap: () {},
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

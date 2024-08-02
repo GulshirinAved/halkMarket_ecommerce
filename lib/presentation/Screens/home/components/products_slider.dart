@@ -19,6 +19,7 @@ class ProductsSlider extends StatelessWidget {
         children: [
           TopTitle(
             topTitle: topTitle,
+            onTap: () {},
           ),
           SizedBox(
             height: 230.h,

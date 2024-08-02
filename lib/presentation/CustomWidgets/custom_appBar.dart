@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,19 +8,32 @@ import 'package:halkmarket_ecommerce/blocs/category/tabBar/tab_bar_cubit.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_textField.dart';
 
-enum AppBarStyle { onlySearch, searchAndTabbar }
+enum AppBarStyle {
+  onlySearch,
+  searchAndTabbar,
+  categoryProfile,
+}
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBarStyle appBarStyle;
   final double? toolBarHeight;
+  final bool? leading;
+  final String? title;
+  final List<Widget>? actions;
   const CustomAppBar({
     required this.appBarStyle,
     this.toolBarHeight,
+    this.leading = false,
+    this.title,
+    this.actions,
     super.key,
   });
   const CustomAppBar._({
     required this.appBarStyle,
     this.toolBarHeight,
+    this.leading = false,
+    this.title,
+    this.actions,
   });
   factory CustomAppBar.onlySearch() {
     return const CustomAppBar._(
@@ -32,16 +46,47 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolBarHeight: 110.h,
     );
   }
+  factory CustomAppBar.categoryProfile(
+      {required String title, required List<Widget> actions}) {
+    return CustomAppBar._(
+      appBarStyle: AppBarStyle.categoryProfile,
+      leading: true,
+      title: title,
+      actions: actions,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       toolbarHeight: toolBarHeight ?? kToolbarHeight,
+      leading: leading == true
+          ? IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.keyboard_arrow_left,
+              ),
+            )
+          : null,
       title: appBarStyle == AppBarStyle.onlySearch ||
               appBarStyle == AppBarStyle.searchAndTabbar
           ? CustomTextField.search(context: context)
-          : null,
-      flexibleSpace: appBarStyle == AppBarStyle.searchAndTabbar
+          : appBarStyle == AppBarStyle.categoryProfile
+              ? Text(
+                  title ?? '',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppFonts.fontSize20,
+                    color: AppColors.darkPurpleColor,
+                  ),
+                )
+              : null,
+      actions: actions,
+      flexibleSpace: appBarStyle == AppBarStyle.searchAndTabbar ||
+              appBarStyle == AppBarStyle.categoryProfile
           ? Container(
               decoration: BoxDecoration(
                 color: AppColors.whiteColor,
