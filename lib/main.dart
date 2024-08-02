@@ -24,6 +24,7 @@ void main() {
           popupMenuTheme: PopupMenuThemeData(
             color: AppColors.whiteColor,
           ),
+          dividerTheme: DividerThemeData(color: AppColors.grey5Color),
           radioTheme: RadioThemeData(
             fillColor: WidgetStatePropertyAll(
               AppColors.darkPurpleColor,

@@ -19,14 +19,16 @@ class TopTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           //title
-          Text(
-            topTitle,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: AppFonts.fontSize20,
-              color: AppColors.darkPurpleColor,
+          Expanded(
+            child: Text(
+              topTitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: AppFonts.fontSize20,
+                color: AppColors.darkPurpleColor,
+              ),
             ),
           ),
           //right arrow icon

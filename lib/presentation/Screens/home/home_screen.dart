@@ -2,12 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halkmarket_ecommerce/app_localization.dart';
 
 import 'package:halkmarket_ecommerce/blocs/home/answerTip/answering_tip_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
-import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_textField.dart';
+import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/banner_slider.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/deliveryAddress_tile.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/follow_card.dart';
@@ -39,15 +38,7 @@ class HomeScreen extends StatelessWidget {
                       EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
                   child: const DeliveryAddressTile(),
                 ),
-                bottom: AppBar(
-                  //search field
-                  title: CustomTextField(
-                    hintText: AppLocalization.of(context)
-                            .getTransatedValues('search') ??
-                        '',
-                    needPrefix: 1,
-                  ),
-                ),
+                bottom: CustomAppBar.onlySearch(),
               ),
               SliverToBoxAdapter(
                 child: Column(

@@ -7,6 +7,8 @@ class AppColors {
   static Color grey1Color = const Color(0xFF847D8E);
   static Color grey2Color = const Color(0xFFF8F8F8);
   static Color grey3Color = const Color(0xFFC9C9C9);
+  static Color grey4Color = const Color(0xFFC7C7C7);
+  static Color grey5Color = const Color(0xFFD8CDC6);
   static Color purpleColor = const Color(0xFF5D3399);
   static Color darkPurpleColor = const Color(0xFF311D4D);
   static Color lightPurpleColor = const Color(0xFFEBE1EE);
@@ -29,6 +31,8 @@ class AppFonts {
 class AppBorders {
   static BorderRadius borderRadius4 =
       const BorderRadius.all(Radius.circular(4.0)).w;
+  static BorderRadius borderRadius6 =
+      const BorderRadius.all(Radius.circular(6.0)).w;
   static BorderRadius borderRadius8 =
       const BorderRadius.all(Radius.circular(8.0)).w;
   static BorderRadius borderRadius12 =

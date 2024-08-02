@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/category/category_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/home_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
@@ -45,7 +46,7 @@ class BottomNavBar extends StatelessWidget {
       case 0:
         return const HomeScreen();
       case 1:
-        return Container();
+        return const CategoryScreen();
       case 2:
         return Container();
       case 3:

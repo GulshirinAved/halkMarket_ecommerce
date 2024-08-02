@@ -26,6 +26,8 @@ const String bannerImage = 'assets/images/banner.png';
 const String product1Image = 'assets/images/products/product1.png';
 const String product2Image = 'assets/images/products/product2.png';
 const String milkProductsImage = 'assets/images/products/milkProducts.png';
+const String eggImage = 'assets/images/products/egg.png';
+const String brandImage = 'assets/images/brand.png';
 
 List<Map<String, dynamic>> bottomNavBarItemName = [
   {
@@ -82,4 +84,13 @@ final List<String> tipQuestion = [
   'Знаю лишь самое простое: шампунь, зубная паста',
   'Пару раз брал(а) патчи/маски/крем, но мало что про них знаю',
   'Беру только продукты, про косметику не знаю',
+];
+final List<String> milkProducts = [
+  'Яйца',
+  'Сливки, кефир, творог',
+  'Молоко, коктейль',
+  'Сыр',
+  'Сливки, кефир, творог',
+  'Йогурт, айран',
+  'Сгущённое молоко',
 ];

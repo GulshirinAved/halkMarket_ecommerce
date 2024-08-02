@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:halkmarket_ecommerce/app_localization.dart';
 
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 
-enum TExtFieldStyle { search, normal }
+enum TextFieldStyle { search, normal }
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -22,10 +23,10 @@ class CustomTextField extends StatelessWidget {
   });
   factory CustomTextField.search({
     required final BuildContext context,
-    final String? hintText,
-    final int? needPrefix,
   }) {
-    return CustomTextField._(hintText: hintText!, needPrefix: needPrefix ?? 0);
+    return CustomTextField._(
+        hintText: AppLocalization.of(context).getTransatedValues('search')!,
+        needPrefix: 1);
   }
 
   @override
