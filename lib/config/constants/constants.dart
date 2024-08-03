@@ -1,4 +1,7 @@
 //fonts
+import 'package:flutter/cupertino.dart';
+import 'package:halkmarket_ecommerce/app_localization.dart';
+
 const String fontNunitoSans = 'assets/fonts/NunitoSans.ttf';
 
 //icons
@@ -138,4 +141,38 @@ final List subCategories = [
   'Сыр',
   'Йогурт',
   'Сметана и сливки',
+];
+final List<String> sortTitle = [
+  'default',
+  'popular',
+  'news',
+  'cheap',
+  'expensive',
+  'bigDiscount',
+];
+List<String> getPriceList(BuildContext context) {
+  return [
+    AppLocalization.of(context).getTransatedValues('toFiftyMan') ?? '',
+    '50-200 ${AppLocalization.of(context).getTransatedValues('manat')}',
+    '200 ${AppLocalization.of(context).getTransatedValues('manat')} ${AppLocalization.of(context).getTransatedValues('and')} ${AppLocalization.of(context).getTransatedValues('high')}',
+    AppLocalization.of(context).getTransatedValues('notMatter') ?? '',
+  ];
+}
+
+final List<String> categories = [
+  'Фрукты и овощи',
+  'Молочные продукты',
+  'Продукты питания',
+  'Напитки',
+  'Правильное питание',
+  'Продукты питания',
+  'Напитки',
+  'Правильное питание',
+];
+final List<String> brands = [
+  'Elin',
+  'Aýaz baba',
+  'Balgaýmak',
+  'Zamana',
+  'Правильное питание',
 ];

@@ -57,10 +57,7 @@ class FollowCard extends StatelessWidget {
                 child: Container(
                   height: 37,
                   margin: EdgeInsets.only(right: 6.w),
-                  child: const CustomTextField(
-                    hintText: 'Введите почту',
-                    needPrefix: 2,
-                  ),
+                  child: CustomTextField.normal(hinText: 'Введите почту'),
                 ),
               ),
               //follow button

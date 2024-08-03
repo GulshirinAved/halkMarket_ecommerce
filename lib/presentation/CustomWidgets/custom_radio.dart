@@ -6,12 +6,16 @@ class CustomRadio extends StatelessWidget {
   final String value;
   final String groupValue;
   final Function(String?)? onChanged;
+  final double fontSize;
+  final bool? radioLeft;
 
   const CustomRadio({
     required this.title,
     required this.value,
     required this.groupValue,
     required this.onChanged,
+    required this.fontSize,
+    this.radioLeft = false,
     super.key,
   });
 
@@ -19,12 +23,15 @@ class CustomRadio extends StatelessWidget {
   Widget build(BuildContext context) {
     return RadioListTile(
       dense: true,
+      controlAffinity: radioLeft == true
+          ? ListTileControlAffinity.leading
+          : ListTileControlAffinity.trailing,
       visualDensity: VisualDensity.compact,
       title: Text(
         title,
         style: TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: AppFonts.fontSize10,
+          fontSize: fontSize,
           color: AppColors.darkPurpleColor,
         ),
       ),

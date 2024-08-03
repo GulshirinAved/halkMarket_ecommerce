@@ -3,32 +3,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:halkmarket_ecommerce/blocs/categoryProfile/bloc/select_sub_category_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/selectSubCategory/select_sub_category_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/category/categorySearch_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/category/components/filter_bottomSheet.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/components/products_gridview.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
-class CategoryProfileScreen extends StatelessWidget {
+class CategoryProfileScreen extends StatefulWidget {
   final String topTitle;
-  const CategoryProfileScreen({super.key, required this.topTitle});
+  const CategoryProfileScreen({required this.topTitle, super.key});
 
   @override
+  State<CategoryProfileScreen> createState() => _CategoryProfileScreenState();
+}
+
+class _CategoryProfileScreenState extends State<CategoryProfileScreen> {
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SelectSubCategoryBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SelectSubCategoryBloc(),
+        ),
+      ],
       child: Scaffold(
         appBar: CustomAppBar.categoryProfile(
-          title: topTitle,
+          title: widget.topTitle,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                filterBottomSheet(context);
+              },
               icon: SvgPicture.asset(
                 filterIcon,
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                pushScreenWithNavBar(context, const CategorySearchScreen());
+              },
               icon: SvgPicture.asset(
                 searchIcon,
                 colorFilter: ColorFilter.mode(

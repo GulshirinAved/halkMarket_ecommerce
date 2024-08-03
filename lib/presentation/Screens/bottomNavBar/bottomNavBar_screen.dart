@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/brandSelection/brand_selection_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/categorySelection/category_selection_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/priceSelection/price_selection_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/sortSelection/sort_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/category_screen.dart';
@@ -13,29 +18,47 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PersistentTabView(
-        stateManagement: true,
-        tabs: List.generate(
-          bottomNavBarItemName.length,
-          (index) => PersistentTabConfig(
-            screen: getScreenForIndex(index),
-            item: ItemConfig(
-              activeForegroundColor: AppColors.purpleColor,
-              filter: ColorFilter.mode(AppColors.purpleColor, BlendMode.srcIn),
-              inactiveIcon: SvgPicture.asset(
-                bottomNavBarItemName[index]['icon'],
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => SortSelectionBloc(),
+          ),
+          BlocProvider(
+            create: (context) => PriceSelectionBloc(),
+          ),
+          BlocProvider(
+            create: (context) => CategorySelectionBloc(),
+          ),
+          BlocProvider(
+            create: (context) => BrandSelectionBloc(),
+          ),
+        ],
+        child: PersistentTabView(
+          stateManagement: true,
+          tabs: List.generate(
+            bottomNavBarItemName.length,
+            (index) => PersistentTabConfig(
+              screen: getScreenForIndex(index),
+              item: ItemConfig(
+                activeForegroundColor: AppColors.purpleColor,
+                filter:
+                    ColorFilter.mode(AppColors.purpleColor, BlendMode.srcIn),
+                inactiveIcon: SvgPicture.asset(
+                  bottomNavBarItemName[index]['icon'],
+                ),
+                icon: SvgPicture.asset(
+                  bottomNavBarItemName[index]['iconBold'],
+                ),
+                activeColorSecondary: AppColors.purpleColor,
               ),
-              icon: SvgPicture.asset(
-                bottomNavBarItemName[index]['iconBold'],
-              ),
-              activeColorSecondary: AppColors.purpleColor,
             ),
           ),
-        ),
-        navBarBuilder: (navBarConfig) => Style4BottomNavBar(
-          navBarConfig: navBarConfig,
-          navBarDecoration: NavBarDecoration(
-              filter: ColorFilter.mode(AppColors.purpleColor, BlendMode.srcIn)),
+          navBarBuilder: (navBarConfig) => Style4BottomNavBar(
+            navBarConfig: navBarConfig,
+            navBarDecoration: NavBarDecoration(
+                filter:
+                    ColorFilter.mode(AppColors.purpleColor, BlendMode.srcIn)),
+          ),
         ),
       ),
     );

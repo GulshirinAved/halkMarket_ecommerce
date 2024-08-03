@@ -12,6 +12,7 @@ enum AppBarStyle {
   onlySearch,
   searchAndTabbar,
   categoryProfile,
+  searchWithLeading
 }
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,12 +21,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? leading;
   final String? title;
   final List<Widget>? actions;
+  final double? leadingWidth;
   const CustomAppBar({
     required this.appBarStyle,
     this.toolBarHeight,
     this.leading = false,
     this.title,
     this.actions,
+    this.leadingWidth,
     super.key,
   });
   const CustomAppBar._({
@@ -34,6 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading = false,
     this.title,
     this.actions,
+    this.leadingWidth,
   });
   factory CustomAppBar.onlySearch() {
     return const CustomAppBar._(
@@ -55,12 +59,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
     );
   }
-
+  factory CustomAppBar.searchWithLeading() {
+    return const CustomAppBar._(
+      appBarStyle: AppBarStyle.searchWithLeading,
+      leading: true,
+      leadingWidth: 25,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
       toolbarHeight: toolBarHeight ?? kToolbarHeight,
+      leadingWidth: leadingWidth,
       leading: leading == true
           ? IconButton(
               onPressed: () {
@@ -72,7 +83,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       title: appBarStyle == AppBarStyle.onlySearch ||
-              appBarStyle == AppBarStyle.searchAndTabbar
+              appBarStyle == AppBarStyle.searchAndTabbar ||
+              appBarStyle == AppBarStyle.searchWithLeading
           ? CustomTextField.search(context: context)
           : appBarStyle == AppBarStyle.categoryProfile
               ? Text(

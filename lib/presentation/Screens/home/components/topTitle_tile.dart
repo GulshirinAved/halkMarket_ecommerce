@@ -6,11 +6,11 @@ import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 
 class TopTitle extends StatelessWidget {
   final String topTitle;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool? needArrow;
   const TopTitle({
     required this.topTitle,
-    required this.onTap,
+    this.onTap,
     this.needArrow = true,
     super.key,
   });

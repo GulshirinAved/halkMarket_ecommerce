@@ -30,11 +30,17 @@ void main() {
               AppColors.darkPurpleColor,
             ),
           ),
+          checkboxTheme: CheckboxThemeData(
+              checkColor: WidgetStatePropertyAll(AppColors.whiteColor),
+              overlayColor: WidgetStatePropertyAll(
+                AppColors.purpleColor,
+              )),
           appBarTheme: AppBarTheme(
             surfaceTintColor: AppColors.whiteColor,
             backgroundColor: AppColors.whiteColor,
           ),
         ),
+        themeAnimationCurve: Curves.easeInOut,
         home: const BottomNavBar(),
         debugShowCheckedModeBanner: false,
         builder: (context, child) => MediaQuery(

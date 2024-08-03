@@ -11,22 +11,38 @@ enum TextFieldStyle { search, normal }
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final int needPrefix;
+  final Color? backColor;
+  final Color? borderColor;
 
   const CustomTextField({
     required this.hintText,
     required this.needPrefix,
+    this.backColor,
+    this.borderColor,
     super.key,
   });
   const CustomTextField._({
     required this.hintText,
     required this.needPrefix,
+    this.backColor,
+    this.borderColor,
   });
   factory CustomTextField.search({
     required final BuildContext context,
   }) {
     return CustomTextField._(
-        hintText: AppLocalization.of(context).getTransatedValues('search')!,
-        needPrefix: 1);
+      hintText: AppLocalization.of(context).getTransatedValues('search')!,
+      needPrefix: 1,
+    );
+  }
+  factory CustomTextField.normal(
+      {required String hinText, Color? backColor, Color? borderColor}) {
+    return CustomTextField._(
+      hintText: hinText,
+      needPrefix: 2,
+      backColor: backColor,
+      borderColor: borderColor,
+    );
   }
 
   @override
@@ -38,10 +54,12 @@ class CustomTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.all(10),
         border: OutlineInputBorder(
           borderRadius: AppBorders.borderRadius12,
-          borderSide: BorderSide.none,
+          borderSide: borderColor != null
+              ? BorderSide(color: borderColor!)
+              : BorderSide.none,
         ),
         filled: true,
-        fillColor: AppColors.greyColor,
+        fillColor: backColor ?? AppColors.greyColor,
         //if 1 is search,if 2 is null
         prefixIcon: needPrefix == 1
             ? SvgPicture.asset(

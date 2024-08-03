@@ -55,6 +55,7 @@ class ToolTipCard extends StatelessWidget {
                     title: tipQuestion[index],
                     value: tipQuestion[index],
                     groupValue: state.selectedTip,
+                    fontSize: AppFonts.fontSize10,
                     onChanged: (value) => context.read<AnsweringTipBloc>().add(
                           AnsweringTipEvent(
                             pressedTip: value ?? '',
