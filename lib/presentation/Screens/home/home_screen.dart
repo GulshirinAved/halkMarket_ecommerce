@@ -7,6 +7,7 @@ import 'package:halkmarket_ecommerce/blocs/home/answerTip/answering_tip_bloc.dar
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/category/categorySearch_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/banner_slider.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/deliveryAddress_tile.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/follow_card.dart';
@@ -14,6 +15,7 @@ import 'package:halkmarket_ecommerce/presentation/Screens/home/components/popula
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/products_slider.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/smallCategory_card.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/toolTip_card.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,7 +40,11 @@ class HomeScreen extends StatelessWidget {
                       EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
                   child: const DeliveryAddressTile(),
                 ),
-                bottom: CustomAppBar.onlySearch(),
+                bottom: CustomAppBar.onlySearch(
+                  onTap: () {
+                    pushScreenWithNavBar(context, CategorySearchScreen());
+                  },
+                ),
               ),
               SliverToBoxAdapter(
                 child: Column(

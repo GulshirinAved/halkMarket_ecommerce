@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/blocs/category/tabBar/tab_bar_cubit.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_tabbar.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_textField.dart';
 
 enum AppBarStyle {
@@ -23,6 +24,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final List<Widget>? actions;
   final double? leadingWidth;
+  final bool? centerTitle;
+  final double? fontSize;
+  final FontWeight? fontweight;
+  final Color? textColor;
+  final VoidCallback? onTap;
   const CustomAppBar({
     required this.appBarStyle,
     this.toolBarHeight,
@@ -30,6 +36,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.actions,
     this.leadingWidth,
+    this.centerTitle,
+    this.fontSize,
+    this.fontweight,
+    this.textColor,
+    this.onTap,
     super.key,
   });
   const CustomAppBar._({
@@ -39,10 +50,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.actions,
     this.leadingWidth,
+    this.centerTitle,
+    this.fontSize,
+    this.fontweight,
+    this.textColor,
+    this.onTap,
   });
-  factory CustomAppBar.onlySearch() {
-    return const CustomAppBar._(
+  factory CustomAppBar.onlySearch({VoidCallback? onTap}) {
+    return CustomAppBar._(
       appBarStyle: AppBarStyle.onlySearch,
+      onTap: onTap,
     );
   }
   factory CustomAppBar.searchAndTabbar() {
@@ -52,10 +69,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
   factory CustomAppBar.categoryProfile(
-      {required String title, required List<Widget> actions}) {
+      {required String title,
+      required List<Widget> actions,
+      bool? needLeading}) {
     return CustomAppBar._(
       appBarStyle: AppBarStyle.categoryProfile,
-      leading: true,
+      leading: needLeading ?? true,
       title: title,
       actions: actions,
     );
@@ -67,17 +86,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 25,
     );
   }
-  factory CustomAppBar.leadingTitle({required String title}) {
+  factory CustomAppBar.leadingTitle({
+    required String title,
+    required bool centerTitle,
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? textColor,
+    double? leadingWidth,
+  }) {
     return CustomAppBar._(
       appBarStyle: AppBarStyle.leadingTitle,
       leading: true,
       title: title,
+      centerTitle: centerTitle,
+      fontSize: fontSize,
+      fontweight: fontWeight,
+      textColor: textColor,
+      leadingWidth: leadingWidth,
     );
   }
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: true,
+      centerTitle: centerTitle ?? true,
       toolbarHeight: toolBarHeight ?? kToolbarHeight,
       leadingWidth: leadingWidth,
       leading: leading == true
@@ -93,14 +124,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: appBarStyle == AppBarStyle.onlySearch ||
               appBarStyle == AppBarStyle.searchAndTabbar ||
               appBarStyle == AppBarStyle.searchWithLeading
-          ? CustomTextField.search(context: context)
-          : appBarStyle == AppBarStyle.categoryProfile
+          ? CustomTextField.search(
+              context: context,
+              onTap: onTap,
+            )
+          : appBarStyle == AppBarStyle.categoryProfile ||
+                  appBarStyle == AppBarStyle.leadingTitle
               ? Text(
                   title ?? '',
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: AppFonts.fontSize20,
-                    color: AppColors.darkPurpleColor,
+                    fontWeight: fontweight ?? FontWeight.w600,
+                    fontSize: fontSize ?? AppFonts.fontSize20,
+                    color: textColor ?? AppColors.darkPurpleColor,
                   ),
                 )
               : null,
@@ -137,35 +172,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: BlocBuilder<TabCubit, int>(
                   builder: (context, state) {
-                    return TabBar(
+                    return CustomTabBar(
                       onTap: (index) =>
                           context.read<TabCubit>().changeTab(index),
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: AppFonts.fontSize12,
-                        color: AppColors.whiteColor,
-                      ),
-                      unselectedLabelStyle: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: AppFonts.fontSize12,
-                        color: AppColors.darkPurpleColor,
-                      ),
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      dividerColor: Colors.transparent,
-                      indicator: BoxDecoration(
-                        color: AppColors.purpleColor,
-                        borderRadius: AppBorders.borderRadius6,
-                      ),
-                      tabs: [
-                        Tab(
-                          text: AppLocalization.of(context)
-                              .getTransatedValues('catalog'),
-                        ),
-                        Tab(
-                          text: AppLocalization.of(context)
-                              .getTransatedValues('brands'),
-                        ),
-                      ],
+                      leftTitle: AppLocalization.of(context)
+                              .getTransatedValues('catalog') ??
+                          '',
+                      rightTitle: AppLocalization.of(context)
+                              .getTransatedValues('brands') ??
+                          '',
                     );
                   },
                 ),

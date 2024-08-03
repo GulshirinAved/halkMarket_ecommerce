@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/login_screen.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class LoginCard extends StatelessWidget {
   const LoginCard({
@@ -55,7 +57,9 @@ class LoginCard extends StatelessWidget {
             title: AppLocalization.of(context)
                     .getTransatedValues('loginAccaunt') ??
                 '',
-            onTap: () {},
+            onTap: () {
+              pushScreenWithNavBar(context, const LoginScreen());
+            },
           ),
         ],
       ),

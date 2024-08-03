@@ -36,5 +36,19 @@
     "helpAndInfo": "Kömek we maglumat",
     "aboutUs": "Biz hakda",
     "lang": "Dil",
-    "theme": "Tema"
+    "theme": "Tema",
+    "register": "Hasaba al",
+    "phone": "Telefon",
+    "password": "Açar sözi",
+    "confirmPass": "Açar sözüni tassykla",
+    "or": "ýa-da",
+    "forgetPass": "Açar sözüňizi ýatdan çykardyňyzmy?",
+    "confirmCode": "Kody tassyklama",
+    "writeCode": "Kody giriziň",
+    "resend": "Kody täzeden iber",
+    "cart": "Sebet",
+    "productQuantity": "Haryt mukdary",
+    "delivery": "Eltip bermek",
+    "totalSum": "Jemi",
+    "orderReady": "Sargyda taýýarlamak"
 }

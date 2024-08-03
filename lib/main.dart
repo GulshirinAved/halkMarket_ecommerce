@@ -31,10 +31,11 @@ void main() {
             ),
           ),
           checkboxTheme: CheckboxThemeData(
-              checkColor: WidgetStatePropertyAll(AppColors.whiteColor),
-              overlayColor: WidgetStatePropertyAll(
-                AppColors.purpleColor,
-              )),
+            checkColor: WidgetStatePropertyAll(AppColors.whiteColor),
+            overlayColor: WidgetStatePropertyAll(
+              AppColors.purpleColor,
+            ),
+          ),
           appBarTheme: AppBarTheme(
             surfaceTintColor: AppColors.whiteColor,
             backgroundColor: AppColors.whiteColor,

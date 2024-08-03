@@ -29,6 +29,11 @@ const String infoIcon = 'assets/icons/info.svg';
 const String crownIcon = 'assets/icons/crown.svg';
 const String globeIcon = 'assets/icons/globe.svg';
 const String moonIcon = 'assets/icons/moon.svg';
+const String eyeIcon = 'assets/icons/eye.svg';
+const String eyeOffIcon = 'assets/icons/eyeOff.svg';
+const String googleIcon = 'assets/icons/google.svg';
+const String appleIcon = 'assets/icons/apple.svg';
+const String trashIcon = 'assets/icons/trash.svg';
 
 //images
 const String bannerImage = 'assets/images/banner.png';
@@ -37,6 +42,7 @@ const String product2Image = 'assets/images/products/product2.png';
 const String milkProductsImage = 'assets/images/products/milkProducts.png';
 const String eggImage = 'assets/images/products/egg.png';
 const String brandImage = 'assets/images/brand.png';
+const String halkMarketImage = 'assets/images/halkMarket.png';
 
 List<Map<String, dynamic>> bottomNavBarItemName = [
   {
@@ -189,4 +195,12 @@ final List<Map<String, dynamic>> profileCard = [
 final List<Map<String, dynamic>> profile2Card = [
   {'icon': globeIcon, 'title': 'lang'},
   {'icon': moonIcon, 'title': 'theme'},
+];
+final List<String> cartBill = [
+  'cart',
+  'productQuantity',
+  'price',
+  'delivery',
+  'sale',
+  'totalSum'
 ];

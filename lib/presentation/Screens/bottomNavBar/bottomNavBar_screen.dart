@@ -7,7 +7,9 @@ import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/priceSelection
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/sortSelection/sort_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/cart/cart_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/category_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/favorite/favorite_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/home_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
@@ -71,9 +73,9 @@ class BottomNavBar extends StatelessWidget {
       case 1:
         return const CategoryScreen();
       case 2:
-        return Container();
+        return const FavoriteScreen();
       case 3:
-        return Container();
+        return const CartScreen();
       default:
         return Container();
     }

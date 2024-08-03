@@ -10,22 +10,27 @@ class CategorySearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.searchWithLeading(),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              TopTitle(
-                topTitle: AppLocalization.of(context)
-                        .getTransatedValues('recommended') ??
-                    '',
-                needArrow: false,
-              ),
-              const ProductsGridview(),
-            ],
-          ),
-        ],
+    return PopScope(
+      onPopInvoked: (value) {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        appBar: CustomAppBar.searchWithLeading(),
+        body: ListView(
+          children: [
+            Column(
+              children: [
+                TopTitle(
+                  topTitle: AppLocalization.of(context)
+                          .getTransatedValues('recommended') ??
+                      '',
+                  needArrow: false,
+                ),
+                const ProductsGridview(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

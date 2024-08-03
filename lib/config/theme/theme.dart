@@ -13,6 +13,7 @@ class AppColors {
   static Color darkPurpleColor = const Color(0xFF311D4D);
   static Color lightPurpleColor = const Color(0xFFEBE1EE);
   static Color lightPurple1Color = const Color(0xFFBA92F2);
+  static Color lightPurple2Color = const Color(0xFFFCF2FF);
   static Color yellowColor = const Color(0xFFFBBB01);
   static Color blueColor = const Color(0xFF4F82E4);
   static Color redColor = const Color(0xFFF24D60);
@@ -27,6 +28,7 @@ class AppFonts {
   static double fontSize16 = 16.sp;
   static double fontSize18 = 18.sp;
   static double fontSize20 = 20.sp;
+  static double fontSize24 = 24.sp;
 }
 
 class AppBorders {
