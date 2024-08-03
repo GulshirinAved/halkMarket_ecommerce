@@ -68,6 +68,7 @@ class FollowCard extends StatelessWidget {
                 fontSize: AppFonts.fontSize10,
                 title: 'Подписаться',
                 fontweight: FontWeight.w700,
+                onTap: () {},
               ),
             ],
           ),

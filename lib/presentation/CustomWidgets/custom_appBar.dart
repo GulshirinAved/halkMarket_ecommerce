@@ -12,7 +12,8 @@ enum AppBarStyle {
   onlySearch,
   searchAndTabbar,
   categoryProfile,
-  searchWithLeading
+  searchWithLeading,
+  leadingTitle,
 }
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -64,6 +65,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       appBarStyle: AppBarStyle.searchWithLeading,
       leading: true,
       leadingWidth: 25,
+    );
+  }
+  factory CustomAppBar.leadingTitle({required String title}) {
+    return CustomAppBar._(
+      appBarStyle: AppBarStyle.leadingTitle,
+      leading: true,
+      title: title,
     );
   }
   @override

@@ -143,6 +143,7 @@ class ProductCard extends StatelessWidget {
               textColor: AppColors.darkPurpleColor,
               fontSize: AppFonts.fontSize12,
               title: 'В корзину',
+              onTap: () {},
             ),
           ),
         ],

@@ -73,6 +73,7 @@ class ToolTipCard extends StatelessWidget {
             textColor: AppColors.whiteColor,
             fontSize: AppFonts.fontSize10,
             title: 'Перейти в каталог',
+            onTap: () {},
           ),
         ],
       ),

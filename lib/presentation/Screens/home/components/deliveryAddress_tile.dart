@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/profile_screen.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class DeliveryAddressTile extends StatelessWidget {
   const DeliveryAddressTile({
@@ -16,9 +18,12 @@ class DeliveryAddressTile extends StatelessWidget {
 
       //leading profile picture
       leading: IconButton.filled(
-        onPressed: () {},
+        onPressed: () {
+          pushScreenWithoutNavBar(context, const ProfileScreen());
+        },
         style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(AppColors.greyColor)),
+          backgroundColor: WidgetStatePropertyAll(AppColors.greyColor),
+        ),
         icon: SvgPicture.asset(userIcon),
       ),
       // add delivery address  button

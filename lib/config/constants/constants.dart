@@ -24,6 +24,11 @@ const String milkIcon = 'assets/icons/milk.svg';
 const String foodIcon = 'assets/icons/food.svg';
 const String waterIcon = 'assets/icons/water.svg';
 const String filterIcon = 'assets/icons/filter.svg';
+const String messageIcon = 'assets/icons/message.svg';
+const String infoIcon = 'assets/icons/info.svg';
+const String crownIcon = 'assets/icons/crown.svg';
+const String globeIcon = 'assets/icons/globe.svg';
+const String moonIcon = 'assets/icons/moon.svg';
 
 //images
 const String bannerImage = 'assets/images/banner.png';
@@ -175,4 +180,13 @@ final List<String> brands = [
   'Balgaýmak',
   'Zamana',
   'Правильное питание',
+];
+final List<Map<String, dynamic>> profileCard = [
+  {'icon': messageIcon, 'title': 'support'},
+  {'icon': infoIcon, 'title': 'helpAndInfo'},
+  {'icon': crownIcon, 'title': 'aboutUs'},
+];
+final List<Map<String, dynamic>> profile2Card = [
+  {'icon': globeIcon, 'title': 'lang'},
+  {'icon': moonIcon, 'title': 'theme'},
 ];

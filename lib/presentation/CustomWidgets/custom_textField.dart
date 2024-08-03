@@ -58,6 +58,12 @@ class CustomTextField extends StatelessWidget {
               ? BorderSide(color: borderColor!)
               : BorderSide.none,
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: AppBorders.borderRadius12,
+          borderSide: borderColor != null
+              ? BorderSide(color: borderColor!)
+              : BorderSide.none,
+        ),
         filled: true,
         fillColor: backColor ?? AppColors.greyColor,
         //if 1 is search,if 2 is null

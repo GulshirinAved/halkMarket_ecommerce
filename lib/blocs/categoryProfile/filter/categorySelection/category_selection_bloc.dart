@@ -6,6 +6,7 @@ part 'category_selection_state.dart';
 
 class CategorySelectionBloc
     extends Bloc<CategorySelectionEvent, CategorySelectionState> {
+  List<Map<String, dynamic>> category = [];
   CategorySelectionBloc() : super(CategorySelectionInitial(categoryList: [])) {
     on<ChooseCategoryEvent>((event, emit) {
       final updatedCategoryList =
@@ -22,6 +23,14 @@ class CategorySelectionBloc
       }
 
       emit(CategorySelectionUpdated(categoryList: updatedCategoryList));
+    });
+
+    on<ApplyCategoryEvent>((event, emit) {
+      category = state.categoryList;
+      emit(CategorySelectionUpdated(categoryList: category));
+    });
+    on<CleanCategoryEvent>((event, emit) {
+      emit(CategorySelectionUpdated(categoryList: []));
     });
   }
 }

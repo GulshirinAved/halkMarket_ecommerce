@@ -12,3 +12,11 @@ class ChooseBrandEvent extends BrandSelectionEvent {
 
   const ChooseBrandEvent({required this.pressedBrandName});
 }
+
+class ApplyBrandEvent extends BrandSelectionEvent {
+  const ApplyBrandEvent();
+}
+
+class CleanBrandEvent extends BrandSelectionEvent {
+  const CleanBrandEvent();
+}

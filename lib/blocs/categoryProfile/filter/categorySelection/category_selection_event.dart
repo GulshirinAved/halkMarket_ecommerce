@@ -12,3 +12,11 @@ class ChooseCategoryEvent extends CategorySelectionEvent {
 
   const ChooseCategoryEvent({required this.pressedCategoryName});
 }
+
+class ApplyCategoryEvent extends CategorySelectionEvent {
+  const ApplyCategoryEvent();
+}
+
+class CleanCategoryEvent extends CategorySelectionEvent {
+  const CleanCategoryEvent();
+}

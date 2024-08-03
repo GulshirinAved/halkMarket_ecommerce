@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final double fontSize;
   final String title;
   final FontWeight? fontweight;
+  final VoidCallback? onTap;
   const CustomButton({
     required this.width,
     required this.backColor,
@@ -16,6 +17,7 @@ class CustomButton extends StatelessWidget {
     required this.fontSize,
     required this.title,
     this.fontweight,
+    this.onTap,
     super.key,
   });
 
@@ -23,7 +25,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       minWidth: width.w,
-      onPressed: () {},
+      onPressed: onTap,
       shape: RoundedRectangleBorder(
         borderRadius: AppBorders.borderRadius8,
       ),
