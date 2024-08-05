@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:halkmarket_ecommerce/blocs/home/answerTip/answering_tip_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/categorySearch_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/banner_slider.dart';
@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 bottom: CustomAppBar.onlySearch(
                   onTap: () {
-                    pushScreenWithNavBar(context, CategorySearchScreen());
+                    pushScreenWithNavBar(context, const CategorySearchScreen());
                   },
                 ),
               ),
@@ -53,12 +53,13 @@ class HomeScreen extends StatelessWidget {
                     const BannerSlider(),
                     //small categories
                     SizedBox(
-                      height: 103.h,
+                      height: 100.h,
                       child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: smallCategories.length,
                         physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 10)
+                            .copyWith(bottom: 0),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) =>
                             SmallCategoryCard(index: index),

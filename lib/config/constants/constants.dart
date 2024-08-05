@@ -1,8 +1,10 @@
 //fonts
 import 'package:flutter/cupertino.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
+import 'package:halkmarket_ecommerce/data/models/product_model.dart';
 
-const String fontNunitoSans = 'assets/fonts/NunitoSans.ttf';
+const String fontNunitoSans = 'NunitoSans';
+const String fontExo2 = 'Exo2';
 
 //icons
 const String homeIcon = 'assets/icons/home.svg';
@@ -34,6 +36,8 @@ const String eyeOffIcon = 'assets/icons/eyeOff.svg';
 const String googleIcon = 'assets/icons/google.svg';
 const String appleIcon = 'assets/icons/apple.svg';
 const String trashIcon = 'assets/icons/trash.svg';
+const String cuteHeartIcon = 'assets/icons/cuteHeart.svg';
+const String cuteBoldHeartIcon = 'assets/icons/cuteBoldHeart.svg';
 
 //images
 const String bannerImage = 'assets/images/banner.png';
@@ -54,12 +58,12 @@ List<Map<String, dynamic>> bottomNavBarItemName = [
     'iconBold': categoryBoldIcon,
   },
   {
-    'icon': heartIcon,
-    'iconBold': heartBoldIcon,
-  },
-  {
     'icon': cartIcon,
     'iconBold': cartBoldIcon,
+  },
+  {
+    'icon': heartIcon,
+    'iconBold': heartBoldIcon,
   },
 ];
 
@@ -73,61 +77,77 @@ final List<Map<String, dynamic>> smallCategories = [
   {'icon': waterIcon, 'title': 'Напитки'},
 ];
 
-final List<Map<String, dynamic>> newProducts = [
-  {
-    'image': product1Image,
-    'isNew': true,
-    'isSale': false,
-    'price': '14.20',
-    'prevPrice': '18.20',
-    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
-    'weight': '250',
-  },
-  {
-    'image': product2Image,
-    'isNew': true,
-    'isSale': true,
-    'price': '14.20',
-    'prevPrice': '18.20',
-    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
-    'weight': '250',
-  },
-  {
-    'image': product1Image,
-    'isNew': true,
-    'isSale': false,
-    'price': '14.20',
-    'prevPrice': '18.20',
-    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
-    'weight': '250',
-  },
-  {
-    'image': product2Image,
-    'isNew': true,
-    'isSale': true,
-    'price': '14.20',
-    'prevPrice': '18.20',
-    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
-    'weight': '250',
-  },
-  {
-    'image': product1Image,
-    'isNew': true,
-    'isSale': false,
-    'price': '14.20',
-    'prevPrice': '18.20',
-    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
-    'weight': '250',
-  },
-  {
-    'image': product2Image,
-    'isNew': true,
-    'isSale': true,
-    'price': '14.20',
-    'prevPrice': '18.20',
-    'desc': 'Смесь для выпечки Печем дома "Оладьи"',
-    'weight': '250',
-  }
+final List<ProductModel> newProducts = [
+  ProductModel(
+    id: '1',
+    image: [product1Image],
+    isNew: true,
+    isSale: false,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
+  ProductModel(
+    id: '2',
+    image: [product2Image],
+    isNew: true,
+    isSale: false,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
+  ProductModel(
+    id: '3',
+    image: [product2Image],
+    isNew: true,
+    isSale: false,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
+  ProductModel(
+    id: '4',
+    image: [product2Image],
+    isNew: true,
+    isSale: true,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
+  ProductModel(
+    id: '5',
+    image: [product2Image],
+    isNew: true,
+    isSale: true,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
+  ProductModel(
+    id: '6',
+    image: [product2Image],
+    isNew: true,
+    isSale: true,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
+  ProductModel(
+    id: '7',
+    image: [product2Image],
+    isNew: true,
+    isSale: true,
+    price: 14,
+    prevPrice: '18.20',
+    desc: 'Смесь для выпечки Печем дома "Оладьи"',
+    weight: 250.0,
+  ),
 ];
 final List<String> tipQuestion = [
   'Что есть разные средства с гармоничным составом',
@@ -202,5 +222,9 @@ final List<String> cartBill = [
   'price',
   'delivery',
   'sale',
-  'totalSum'
+  'totalSum',
+];
+final List<String> langList = [
+  'Türkmen',
+  'Русский',
 ];

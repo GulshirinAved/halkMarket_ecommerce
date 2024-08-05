@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/constants/constants.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_textField.dart';
 
@@ -33,6 +34,7 @@ class FollowCard extends StatelessWidget {
           Text(
             'Подпишитесь на нас и узнавайте обо всем первыми!',
             style: TextStyle(
+              fontFamily: fontExo2,
               color: AppColors.whiteColor,
               fontWeight: FontWeight.w800,
               fontSize: AppFonts.fontSize16,

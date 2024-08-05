@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
+import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/components/products_gridview.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/topTitle_tile.dart';
@@ -25,8 +26,12 @@ class CategorySearchScreen extends StatelessWidget {
                           .getTransatedValues('recommended') ??
                       '',
                   needArrow: false,
+                  topMargin: 20,
+                  bottomMargin: 12,
                 ),
-                const ProductsGridview(),
+                ProductsGridview(
+                  productList: newProducts,
+                ),
               ],
             ),
           ],

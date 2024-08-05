@@ -1,22 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:halkmarket_ecommerce/app_localization.dart';
+import 'package:halkmarket_ecommerce/blocs/cartButton/cart_button_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
-import 'package:halkmarket_ecommerce/presentation/Screens/cart/components/cartCount_button.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
+import 'package:halkmarket_ecommerce/data/models/cart_model.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/cart/components/cartQuantity_buttons.dart';
 
 class CartProductCard extends StatelessWidget {
   final int index;
+  final CartItem cartItem;
   const CartProductCard({
-    super.key,
     required this.index,
+    required this.cartItem,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(newProducts[index]['image']),
+        Image.asset(cartItem.image![0]),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +31,7 @@ class CartProductCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Картофельное пюре "Rollton" с куриным вкусом',
+                      cartItem.desc ?? '',
                       maxLines: 2,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
@@ -35,7 +41,11 @@ class CartProductCard extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context
+                          .read<CartButtonBloc>()
+                          .add(RemoveCartEvent(cartItem));
+                    },
                     icon: SvgPicture.asset(
                       trashIcon,
                     ),
@@ -46,7 +56,7 @@ class CartProductCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '1546.00 ман',
+                    '${cartItem.price} ${AppLocalization.of(context).getTransatedValues('manat')}',
                     maxLines: 2,
                     style: TextStyle(
                       fontWeight: FontWeight.w800,
@@ -56,33 +66,16 @@ class CartProductCard extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.only(right: 10),
-                    child: Row(
-                      children: [
-                        const CartCountButton(
-                          icon: CupertinoIcons.minus,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text(
-                            '10 шт',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: AppFonts.fontSize16,
-                              color: AppColors.darkPurpleColor,
-                            ),
-                          ),
-                        ),
-                        const CartCountButton(
-                          icon: CupertinoIcons.plus,
-                        ),
-                      ],
+                    child: CartQuantityButtons(
+                      cartItem: cartItem,
+                      isCart: false,
                     ),
                   ),
                 ],
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/selectSubCategory/select_sub_category_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/categorySearch_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/components/filter_bottomSheet.dart';
@@ -102,7 +102,10 @@ class _CategoryProfileScreenState extends State<CategoryProfileScreen> {
                 ),
               ),
             ),
-            const Expanded(child: ProductsGridview()),
+            Expanded(
+                child: ProductsGridview(
+              productList: newProducts,
+            )),
           ],
         ),
       ),

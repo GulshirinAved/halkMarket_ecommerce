@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 
 class BannerSlider extends StatefulWidget {
   const BannerSlider({
@@ -47,7 +47,7 @@ class _BannerSliderState extends State<BannerSlider> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       height: 160.h,
       width: double.infinity,
       child: PageView.builder(

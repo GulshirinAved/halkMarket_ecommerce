@@ -6,7 +6,7 @@ import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/blocs/category/tabBar/tab_bar_cubit.dart';
 import 'package:halkmarket_ecommerce/blocs/home/passwordVisibility/password_obscure_cubit.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_tabbar.dart';

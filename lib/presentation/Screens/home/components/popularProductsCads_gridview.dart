@@ -17,68 +17,71 @@ class PopularProductsGridview extends StatelessWidget {
         TopTitle(
           topTitle: 'Популярные категории',
           onTap: () {},
+          bottomMargin: 12,
+          topMargin: 20,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //1 card
-                const PopularProductsCard(
-                  height: 131,
-                  width: 163,
-                  topTitle: 'Молочная продукция',
-                  image: milkProductsImage,
-                  imageHeight: 100,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                //2 and 3 cards
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const PopularProductsCard(
-                      height: 59,
-                      width: 163,
-                      topTitle: 'Молочная продукция',
-                      image: milkProductsImage,
-                      imageHeight: 32,
-                    ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
-                    const PopularProductsCard(
-                      height: 59,
-                      width: 163,
-                      topTitle: 'Молочная продукция',
-                      image: milkProductsImage,
-                      imageHeight: 32,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            //other 4 cards
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                for (int i = 0; i < 4; i++)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 15),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //1 card
+                  const Expanded(
                     child: PopularProductsCard(
-                      height: 58,
-                      width: 72,
-                      topTitle: 'Напитки',
+                      topTitle: 'Молочная продукция',
                       image: milkProductsImage,
-                      imageHeight: 30,
+                      imageHeight: 100,
                     ),
                   ),
-              ],
-            ),
-          ],
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  //2 and 3 cards
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const PopularProductsCard(
+                          topTitle: 'Молочная продукция',
+                          image: milkProductsImage,
+                          imageHeight: 32,
+                        ),
+                        SizedBox(
+                          height: 12.h,
+                        ),
+                        const PopularProductsCard(
+                          topTitle: 'Молочная продукция',
+                          image: milkProductsImage,
+                          imageHeight: 32,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              //other 4 cards
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  for (int i = 0; i < 4; i++)
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 15, left: 2, right: 2),
+                        child: PopularProductsCard(
+                          topTitle: 'Напитки',
+                          image: milkProductsImage,
+                          imageHeight: 30,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

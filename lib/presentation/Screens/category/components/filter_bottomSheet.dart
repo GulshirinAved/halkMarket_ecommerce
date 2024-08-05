@@ -10,7 +10,7 @@ import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/categorySelect
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/priceSelection/price_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/sortSelection/sort_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_checkBox.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_radio.dart';

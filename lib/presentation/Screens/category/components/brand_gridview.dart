@@ -19,6 +19,8 @@ class BrandGridview extends StatelessWidget {
           child: TopTitle(
             topTitle: topTitle,
             onTap: () {},
+            topMargin: 20,
+            bottomMargin: 10,
           ),
         ),
         SizedBox(

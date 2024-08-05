@@ -18,7 +18,7 @@
     "clean": "Arassala",
     "price": "Baha",
     "toFiftyMan": "50 manada çenli",
-    "manat": "ман",
+    "manat": "man",
     "and": "we",
     "high": "ýokary",
     "notMatter": "tapawudy ýok",
@@ -50,5 +50,6 @@
     "productQuantity": "Haryt mukdary",
     "delivery": "Eltip bermek",
     "totalSum": "Jemi",
-    "orderReady": "Sargyda taýýarlamak"
+    "orderReady": "Sargyda taýýarlamak",
+    "chooseLang": "Dili saýlaň"
 }

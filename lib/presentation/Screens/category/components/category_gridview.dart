@@ -25,6 +25,8 @@ class CategoryGridview extends StatelessWidget {
               topTitle: topTitle,
             ),
           ),
+          topMargin: 20,
+          bottomMargin: 5,
         ),
         SizedBox(
           height: 230.h,

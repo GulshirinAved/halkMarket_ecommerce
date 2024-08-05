@@ -1,13 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
+import 'package:halkmarket_ecommerce/blocs/language/language_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/components/lang_bottomSheet.dart';
 
 class ProfileCard extends StatelessWidget {
   final List cardList;
   final bool? isArrow;
+
   const ProfileCard({
     required this.cardList,
     this.isArrow = false,
@@ -28,6 +33,11 @@ class ProfileCard extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (context, index) => ListTile(
+          onTap: () {
+            if (index == 0 && cardList == profile2Card) {
+              langBottomSheet(context);
+            }
+          },
           minTileHeight: 34.h,
           leading: SvgPicture.asset(
             cardList[index]['icon'],
@@ -53,13 +63,19 @@ class ProfileCard extends StatelessWidget {
                       width: 1,
                       color: AppColors.grey5Color,
                     ),
-                    Text(
-                      'Русский',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: AppFonts.fontSize16,
-                        color: AppColors.darkPurpleColor,
-                      ),
+                    BlocBuilder<LanguageBloc, LanguageState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.languageCode == 'tr'
+                              ? langList[0]
+                              : langList[1],
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: AppFonts.fontSize16,
+                            color: AppColors.darkPurpleColor,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 )

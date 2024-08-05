@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halkmarket_ecommerce/blocs/home/answerTip/answering_tip_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_radio.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/toolTip_popUp.dart';
@@ -35,6 +35,7 @@ class ToolTipCard extends StatelessWidget {
                 child: Text(
                   'Что вы знаете о фирменной косметике из ВкусВилла?',
                   style: TextStyle(
+                    fontFamily: fontExo2,
                     fontWeight: FontWeight.w800,
                     fontSize: AppFonts.fontSize16,
                     color: AppColors.darkPurpleColor,
@@ -52,6 +53,7 @@ class ToolTipCard extends StatelessWidget {
               (index) => BlocBuilder<AnsweringTipBloc, AnsweringTipState>(
                 builder: (context, state) {
                   return CustomRadio(
+                    radioLeft: true,
                     title: tipQuestion[index],
                     value: tipQuestion[index],
                     groupValue: state.selectedTip,

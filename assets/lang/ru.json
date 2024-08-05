@@ -18,7 +18,7 @@
     "clean": "Очистить",
     "price": "Цена",
     "toFiftyMan": "до 50 ман",
-    "manat": "man",
+    "manat": "ман",
     "and": "и",
     "high": "выше",
     "notMatter": "неважно",
@@ -51,5 +51,6 @@
     "productQuantity": "Количество товаров",
     "delivery": "Доставка",
     "totalSum": "Общая сумма:",
-    "orderReady": "Подготовить заказ"
+    "orderReady": "Подготовить заказ",
+    "chooseLang": "Выберите язык"
 }

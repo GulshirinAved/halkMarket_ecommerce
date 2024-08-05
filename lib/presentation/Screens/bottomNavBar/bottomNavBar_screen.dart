@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:halkmarket_ecommerce/blocs/cartButton/cart_button_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/brandSelection/brand_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/categorySelection/category_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/priceSelection/price_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/sortSelection/sort_selection_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/favButton/fav_button_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/cart/cart_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/category/category_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/favorite/favorite_screen.dart';
@@ -34,6 +36,12 @@ class BottomNavBar extends StatelessWidget {
           BlocProvider(
             create: (context) => BrandSelectionBloc(),
           ),
+          BlocProvider(
+            create: (context) => FavButtonBloc()..add(LoadFavEvent()),
+          ),
+          BlocProvider(
+            create: (context) => CartButtonBloc()..add(LoadCartEvent()),
+          ),
         ],
         child: PersistentTabView(
           stateManagement: true,
@@ -58,8 +66,8 @@ class BottomNavBar extends StatelessWidget {
           navBarBuilder: (navBarConfig) => Style4BottomNavBar(
             navBarConfig: navBarConfig,
             navBarDecoration: NavBarDecoration(
-                filter:
-                    ColorFilter.mode(AppColors.purpleColor, BlendMode.srcIn)),
+              filter: ColorFilter.mode(AppColors.purpleColor, BlendMode.srcIn),
+            ),
           ),
         ),
       ),
@@ -73,9 +81,9 @@ class BottomNavBar extends StatelessWidget {
       case 1:
         return const CategoryScreen();
       case 2:
-        return const FavoriteScreen();
-      case 3:
         return const CartScreen();
+      case 3:
+        return const FavoriteScreen();
       default:
         return Container();
     }

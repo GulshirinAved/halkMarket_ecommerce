@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:halkmarket_ecommerce/config/theme/theme.dart';
+import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 
 class CustomTabBar extends StatelessWidget {
   final Function(int)? onTap;
