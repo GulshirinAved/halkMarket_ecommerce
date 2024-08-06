@@ -51,5 +51,11 @@
     "delivery": "Eltip bermek",
     "totalSum": "Jemi",
     "orderReady": "Sargyda taýýarlamak",
-    "chooseLang": "Dili saýlaň"
+    "chooseLang": "Dili saýlaň",
+    "myAddresses": "Meniň salgylarym",
+    "addAddressForDelivery": "Sargyt üçin salgynyzy goşuň",
+    "addAddress": "Salgyny goşmak",
+    "whereToDeliver": "Sargydyňyzy nirä eltmeli?",
+    "showInMap": "Kartadan görkeziň, gözlegi ulanyň ýa-da el bilen salgy goşuň",
+    "withoutSugar": "Şekersiz"
 }

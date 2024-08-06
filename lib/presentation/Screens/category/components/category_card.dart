@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 
 class CategoryCard extends StatelessWidget {
   final int index;
+  final List productList;
   const CategoryCard({
     required this.index,
+    required this.productList,
     super.key,
   });
 
@@ -27,7 +28,7 @@ class CategoryCard extends StatelessWidget {
         ),
         Positioned(
           top: 0,
-          child: Image.asset(eggImage),
+          child: Image.asset(productList[index]['image']),
         ),
         Positioned(
           bottom: 18,
@@ -37,7 +38,7 @@ class CategoryCard extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Text(
               maxLines: 3,
-              milkProducts[index],
+              productList[index]['name'],
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

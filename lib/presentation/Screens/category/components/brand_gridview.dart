@@ -5,8 +5,10 @@ import 'package:halkmarket_ecommerce/presentation/Screens/home/components/topTit
 
 class BrandGridview extends StatelessWidget {
   final String topTitle;
+  final List brandList;
   const BrandGridview({
     required this.topTitle,
+    required this.brandList,
     super.key,
   });
 
@@ -20,7 +22,7 @@ class BrandGridview extends StatelessWidget {
             topTitle: topTitle,
             onTap: () {},
             topMargin: 20,
-            bottomMargin: 10,
+            bottomMargin: 5,
           ),
         ),
         SizedBox(
@@ -33,9 +35,12 @@ class BrandGridview extends StatelessWidget {
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
             ),
-            itemCount: 8,
+            itemCount: brandList.length,
             shrinkWrap: true,
-            itemBuilder: (context, index) => const BrandCard(),
+            itemBuilder: (context, index) => BrandCard(
+              brandList: brandList,
+              index: index,
+            ),
           ),
         ),
       ],

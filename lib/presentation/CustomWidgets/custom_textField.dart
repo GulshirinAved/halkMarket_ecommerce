@@ -45,6 +45,7 @@ class CustomTextField extends StatelessWidget {
       hintText: AppLocalization.of(context).getTransatedValues('search')!,
       needPrefix: 1,
       onTap: onTap,
+      borderColor: AppColors.darkPurpleColor,
     );
   }
   factory CustomTextField.normal({
@@ -73,7 +74,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: isObscure ?? false,
       onTapOutside: (event) => FocusScope.of(context).requestFocus(FocusNode()),
       onTap: onTap,
-
+      enabled: true,
       cursorColor: AppColors.darkPurpleColor,
       // I do it for +993 prefix
       decoration: needPrefix == 3
@@ -94,8 +95,8 @@ class CustomTextField extends StatelessWidget {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: AppBorders.borderRadius12,
-                borderSide:
-                    BorderSide(color: borderColor ?? AppColors.greyColor),
+                borderSide: BorderSide(
+                    color: nonActiveBorderColor ?? AppColors.greyColor),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: AppBorders.borderRadius12,

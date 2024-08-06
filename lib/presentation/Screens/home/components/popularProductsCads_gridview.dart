@@ -29,10 +29,10 @@ class PopularProductsGridview extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   //1 card
-                  const Expanded(
+                  Expanded(
                     child: PopularProductsCard(
-                      topTitle: 'Молочная продукция',
-                      image: milkProductsImage,
+                      topTitle: popularProducts[0]['name'],
+                      image: popularProducts[0]['image'],
                       imageHeight: 100,
                     ),
                   ),
@@ -45,17 +45,17 @@ class PopularProductsGridview extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const PopularProductsCard(
-                          topTitle: 'Молочная продукция',
-                          image: milkProductsImage,
+                        PopularProductsCard(
+                          topTitle: popularProducts[1]['name'],
+                          image: popularProducts[1]['image'],
                           imageHeight: 32,
                         ),
                         SizedBox(
                           height: 12.h,
                         ),
-                        const PopularProductsCard(
-                          topTitle: 'Молочная продукция',
-                          image: milkProductsImage,
+                        PopularProductsCard(
+                          topTitle: popularProducts[2]['name'],
+                          image: popularProducts[2]['image'],
                           imageHeight: 32,
                         ),
                       ],
@@ -67,13 +67,14 @@ class PopularProductsGridview extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  for (int i = 0; i < 4; i++)
-                    const Expanded(
+                  for (int i = 3; i < popularProducts.length; i++)
+                    Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(top: 15, left: 2, right: 2),
+                        padding:
+                            const EdgeInsets.only(top: 15, left: 2, right: 2),
                         child: PopularProductsCard(
-                          topTitle: 'Напитки',
-                          image: milkProductsImage,
+                          topTitle: popularProducts[i]['name'],
+                          image: popularProducts[i]['image'],
                           imageHeight: 30,
                         ),
                       ),

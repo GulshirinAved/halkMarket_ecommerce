@@ -15,6 +15,7 @@ class CartItem {
   final bool? isSale;
   final bool? isNew;
   final double? weight;
+  final bool? withSugar;
   int quantity;
   CartItem({
     required this.id,
@@ -28,38 +29,9 @@ class CartItem {
     this.isSale,
     this.isNew,
     this.weight,
+    this.withSugar,
     this.quantity = 1,
   });
-
-  CartItem copyWith({
-    String? id,
-    String? name,
-    List<dynamic>? image,
-    int? price,
-    int? coin,
-    String? prevPrice,
-    String? discount,
-    String? desc,
-    bool? isSale,
-    bool? isNew,
-    double? weight,
-    int? quantity,
-  }) {
-    return CartItem(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      image: image ?? this.image,
-      price: price ?? this.price,
-      coin: coin ?? this.coin,
-      prevPrice: prevPrice ?? this.prevPrice,
-      discount: discount ?? this.discount,
-      desc: desc ?? this.desc,
-      isSale: isSale ?? this.isSale,
-      isNew: isNew ?? this.isNew,
-      weight: weight ?? this.weight,
-      quantity: quantity ?? this.quantity,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -74,6 +46,7 @@ class CartItem {
       'isSale': isSale,
       'isNew': isNew,
       'weight': weight,
+      'withSugar': withSugar,
       'quantity': quantity,
     };
   }
@@ -93,6 +66,7 @@ class CartItem {
       isSale: map['isSale'] != null ? map['isSale'] as bool : null,
       isNew: map['isNew'] != null ? map['isNew'] as bool : null,
       weight: map['weight'] != null ? map['weight'] as double : null,
+      withSugar: map['withSugar'] != null ? map['withSugar'] as bool : null,
       quantity: map['quantity'] as int,
     );
   }
@@ -101,6 +75,38 @@ class CartItem {
 
   factory CartItem.fromJson(String source) =>
       CartItem.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  CartItem copyWith({
+    String? id,
+    String? name,
+    List<dynamic>? image,
+    int? price,
+    int? coin,
+    String? prevPrice,
+    String? discount,
+    String? desc,
+    bool? isSale,
+    bool? isNew,
+    double? weight,
+    bool? withSugar,
+    int? quantity,
+  }) {
+    return CartItem(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      price: price ?? this.price,
+      coin: coin ?? this.coin,
+      prevPrice: prevPrice ?? this.prevPrice,
+      discount: discount ?? this.discount,
+      desc: desc ?? this.desc,
+      isSale: isSale ?? this.isSale,
+      isNew: isNew ?? this.isNew,
+      weight: weight ?? this.weight,
+      withSugar: withSugar ?? this.withSugar,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 
   @override
   bool operator ==(covariant CartItem other) {
@@ -117,6 +123,7 @@ class CartItem {
         other.isSale == isSale &&
         other.isNew == isNew &&
         other.weight == weight &&
+        other.withSugar == withSugar &&
         other.quantity == quantity;
   }
 
@@ -133,6 +140,7 @@ class CartItem {
         isSale.hashCode ^
         isNew.hashCode ^
         weight.hashCode ^
+        withSugar.hashCode ^
         quantity.hashCode;
   }
 }

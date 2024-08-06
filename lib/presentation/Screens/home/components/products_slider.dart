@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/data/models/cart_model.dart';
 import 'package:halkmarket_ecommerce/data/models/fav_model.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/product_card.dart';
@@ -8,8 +7,10 @@ import 'package:halkmarket_ecommerce/presentation/Screens/home/components/topTit
 
 class ProductsSlider extends StatelessWidget {
   final String topTitle;
+  final List productList;
   const ProductsSlider({
     required this.topTitle,
+    required this.productList,
     super.key,
   });
 
@@ -30,29 +31,29 @@ class ProductsSlider extends StatelessWidget {
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: newProducts.length,
+            itemCount: productList.length,
             itemBuilder: (BuildContext context, int index) {
               return ProductCard(
                 index: index,
                 favItem: FavItem(
-                  id: newProducts[index].id,
-                  isNew: newProducts[index].isNew,
-                  isSale: newProducts[index].isSale,
-                  image: newProducts[index].image,
-                  price: newProducts[index].price,
-                  prevPrice: newProducts[index].prevPrice,
-                  desc: newProducts[index].desc,
-                  weight: newProducts[index].weight,
+                  id: productList[index].id,
+                  isNew: productList[index].isNew,
+                  isSale: productList[index].isSale,
+                  image: productList[index].image,
+                  price: productList[index].price,
+                  prevPrice: productList[index].prevPrice,
+                  desc: productList[index].desc,
+                  weight: productList[index].weight,
                 ),
                 cartItem: CartItem(
-                  id: newProducts[index].id,
-                  isNew: newProducts[index].isNew,
-                  isSale: newProducts[index].isSale,
-                  image: newProducts[index].image,
-                  price: newProducts[index].price,
-                  prevPrice: newProducts[index].prevPrice,
-                  desc: newProducts[index].desc,
-                  weight: newProducts[index].weight,
+                  id: productList[index].id,
+                  isNew: productList[index].isNew,
+                  isSale: productList[index].isSale,
+                  image: productList[index].image,
+                  price: productList[index].price,
+                  prevPrice: productList[index].prevPrice,
+                  desc: productList[index].desc,
+                  weight: productList[index].weight,
                 ),
               );
             },

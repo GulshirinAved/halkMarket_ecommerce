@@ -1,12 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halkmarket_ecommerce/config/constants/constants.dart';
+
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 
 class BrandCard extends StatelessWidget {
+  final List brandList;
+  final int index;
   const BrandCard({
-    super.key,
-  });
+    required this.brandList,
+    required this.index,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +24,13 @@ class BrandCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.asset(brandImage),
+          Image.asset(brandList[index]['image']),
           Divider(
             endIndent: 5.w,
             indent: 5.w,
           ),
           Text(
-            'Gök önüm',
+            brandList[index]['name'],
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
@@ -33,7 +38,7 @@ class BrandCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontSize: AppFonts.fontSize10,
             ),
-          )
+          ),
         ],
       ),
     );

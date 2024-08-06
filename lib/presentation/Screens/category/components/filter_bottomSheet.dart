@@ -197,7 +197,7 @@ Widget _buildTile({
       ),
       BlocBuilder<ToggleCubit, bool>(
         builder: (context, showAll) {
-          int displayItemCount =
+          final int displayItemCount =
               showAll ? itemCount : (itemCount <= 5 ? itemCount : 5);
           return Column(
             children: List.generate(
@@ -267,6 +267,7 @@ class PriceTile extends StatelessWidget {
                             '',
                         borderColor: AppColors.grey1Color,
                         backColor: AppColors.whiteColor,
+                        nonActiveBorderColor: AppColors.grey1Color,
                       ),
                     ),
                   ),
@@ -280,6 +281,7 @@ class PriceTile extends StatelessWidget {
                             '',
                         borderColor: AppColors.grey1Color,
                         backColor: AppColors.whiteColor,
+                        nonActiveBorderColor: AppColors.grey1Color,
                       ),
                     ),
                   ),

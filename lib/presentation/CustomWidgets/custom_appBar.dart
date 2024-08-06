@@ -111,6 +111,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle ?? true,
       toolbarHeight: toolBarHeight ?? kToolbarHeight,
       leadingWidth: leadingWidth,
+      automaticallyImplyLeading: false,
       leading: leading == true
           ? IconButton(
               onPressed: () {

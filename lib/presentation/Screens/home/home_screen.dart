@@ -42,7 +42,12 @@ class HomeScreen extends StatelessWidget {
                 ),
                 bottom: CustomAppBar.onlySearch(
                   onTap: () {
-                    pushScreenWithNavBar(context, const CategorySearchScreen());
+                    pushScreenWithNavBar(
+                      context,
+                      const CategorySearchScreen(
+                        searchWithLeading: false,
+                      ),
+                    );
                   },
                 ),
               ),
@@ -67,43 +72,51 @@ class HomeScreen extends StatelessWidget {
                     ),
 
                     ///  categories with top names
-                    //new products
-                    const ProductsSlider(
+                    //fresh products
+                    ProductsSlider(
                       topTitle: 'Свежие поступления',
+                      productList: freshProducts,
                     ),
                     //sale products
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Cкидки и акции',
+                      productList: saleProducts,
                     ),
                     //popular products
                     const PopularProductsGridview(),
                     // new season
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Новинки сезона',
+                      productList: newProducts,
                     ),
                     //ready food products
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Продукты питания',
+                      productList: foodProducts,
                     ),
                     //toolTip Card
                     const ToolTipCard(),
                     //cleaning products
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Уборка и гигиена',
+                      productList: cleaningProducts,
                     ),
                     //cosmetics products
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Косметика и уход',
+                      productList: cosmeticsProducts,
                     ),
                     //follow card
                     const FollowCard(),
                     //milk products
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Молочные продукты',
+                      productList: milkProduct,
                     ),
                     //zoo products
-                    const ProductsSlider(
+                    ProductsSlider(
                       topTitle: 'Зоотовары',
+                      productList: zooProducts,
                     ),
                   ],
                 ),

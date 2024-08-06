@@ -31,7 +31,7 @@ class PopularProductsCard extends StatelessWidget {
               child: Text(
                 topTitle,
                 textAlign: TextAlign.left,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: AppColors.darkPurpleColor,

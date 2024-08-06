@@ -19,6 +19,8 @@ dependencies:
   equatable: ^2.0.5
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
 
 
 dev_dependencies:
@@ -31,6 +33,7 @@ flutter:
       - assets/icons/
       - assets/images/
       - assets/images/products/
+      - assets/images/brands/
       - assets/lang/ru.json
       - assets/lang/tr.json
   fonts:

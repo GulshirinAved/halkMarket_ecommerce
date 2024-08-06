@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/components/addAddress_bottomSheet.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
@@ -28,7 +30,9 @@ class DeliveryAddressTile extends StatelessWidget {
       ),
       // add delivery address  button
       title: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          addAddressBottomSheet(context);
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -46,7 +50,12 @@ class DeliveryAddressTile extends StatelessWidget {
           ],
         ),
       ),
-      trailing: SvgPicture.asset(locationIcon),
+      trailing: GestureDetector(
+        onTap: () {
+          addAddressBottomSheet(context);
+        },
+        child: SvgPicture.asset(locationIcon),
+      ),
     );
   }
 }

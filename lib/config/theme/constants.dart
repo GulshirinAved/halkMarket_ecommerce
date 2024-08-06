@@ -17,6 +17,7 @@ class AppColors {
   static Color yellowColor = const Color(0xFFFBBB01);
   static Color blueColor = const Color(0xFF4F82E4);
   static Color redColor = const Color(0xFFF24D60);
+  static Color greenColor = const Color(0xFF3A9870);
 }
 
 class AppFonts {
@@ -42,4 +43,6 @@ class AppBorders {
       const BorderRadius.all(Radius.circular(12.0)).w;
   static BorderRadius borderRadius16 =
       const BorderRadius.all(Radius.circular(16.0)).w;
+  static BorderRadius borderRadius20 =
+      const BorderRadius.all(Radius.circular(20.0)).w;
 }

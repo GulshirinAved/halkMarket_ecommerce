@@ -41,6 +41,7 @@ class ProductCard extends StatelessWidget {
         children: [
           Stack(
             children: [
+              //image
               Align(
                 alignment: Alignment.topCenter,
                 child: SizedBox(
@@ -50,6 +51,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
+              //favbutton
               Positioned(
                 right: 5,
                 left: 5,
@@ -121,6 +123,24 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
               ),
+              favItem.withSugar == false
+                  ? const SizedBox.shrink()
+                  : Positioned(
+                      bottom: 3.h,
+                      left: 7.w,
+                      child: RotationTransition(
+                        turns: const AlwaysStoppedAnimation(-5 / 360),
+                        child: SmallTitleCard(
+                          title: AppLocalization.of(
+                                context,
+                              ).getTransatedValues(
+                                'withoutSugar',
+                              ) ??
+                              '',
+                          backColor: AppColors.greenColor,
+                        ),
+                      ),
+                    ),
             ],
           ),
           //price
@@ -173,6 +193,7 @@ class ProductCard extends StatelessWidget {
               color: AppColors.grey1Color,
             ),
           ),
+          //cart button
           Expanded(
             child: Align(
               alignment: Alignment.center,
@@ -188,7 +209,7 @@ class ProductCard extends StatelessWidget {
                                 color: AppColors.grey3Color.withOpacity(0.35),
                                 offset: const Offset(4, 4),
                                 blurRadius: 15,
-                              )
+                              ),
                             ],
                           ),
                           child: CustomButton(

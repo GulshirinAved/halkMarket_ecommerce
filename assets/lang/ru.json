@@ -52,5 +52,11 @@
     "delivery": "Доставка",
     "totalSum": "Общая сумма:",
     "orderReady": "Подготовить заказ",
-    "chooseLang": "Выберите язык"
+    "chooseLang": "Выберите язык",
+    "myAddresses": "Мои адреса",
+    "addAddressForDelivery": "Добавьте адрес для доставки",
+    "addAddress": "Добавить адрес",
+    "whereToDeliver": "Куда доставить заказ?",
+    "showInMap": "Укажите на карте, восползуйтесь поиском, или добавьте адрес вручную",
+    "withoutSugar": "Без сахара"
 }

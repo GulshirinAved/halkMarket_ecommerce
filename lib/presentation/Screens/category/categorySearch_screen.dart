@@ -7,7 +7,8 @@ import 'package:halkmarket_ecommerce/presentation/Screens/category/components/pr
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/topTitle_tile.dart';
 
 class CategorySearchScreen extends StatelessWidget {
-  const CategorySearchScreen({super.key});
+  final bool? searchWithLeading;
+  const CategorySearchScreen({super.key, this.searchWithLeading = true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,9 @@ class CategorySearchScreen extends StatelessWidget {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
-        appBar: CustomAppBar.searchWithLeading(),
+        appBar: searchWithLeading == true
+            ? CustomAppBar.searchWithLeading()
+            : CustomAppBar.onlySearch(),
         body: ListView(
           children: [
             Column(
@@ -26,7 +29,7 @@ class CategorySearchScreen extends StatelessWidget {
                           .getTransatedValues('recommended') ??
                       '',
                   needArrow: false,
-                  topMargin: 20,
+                  topMargin: 15,
                   bottomMargin: 12,
                 ),
                 ProductsGridview(
