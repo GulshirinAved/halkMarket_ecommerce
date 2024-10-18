@@ -1,71 +1,49 @@
-import 'dart:async';
-
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halkmarket_ecommerce/config/constants/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/home/bannerSlider/banner_slider_cubit.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
+import 'package:halkmarket_ecommerce/data/endpoints.dart';
 
-class BannerSlider extends StatefulWidget {
+class BannerSlider extends StatelessWidget {
+  final List imageList;
+
   const BannerSlider({
+    required this.imageList,
     super.key,
   });
 
   @override
-  State<BannerSlider> createState() => _BannerSliderState();
-}
-
-class _BannerSliderState extends State<BannerSlider> {
-  late PageController _pageController;
-  Timer? _timer;
-  void startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (_pageController.page == 2) {
-        _pageController.jumpToPage(0);
-      } else {
-        _pageController.nextPage(
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    _pageController = PageController(initialPage: 0);
-    startTimer();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _pageController.dispose();
-    _timer?.cancel();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      height: 160.h,
-      width: double.infinity,
-      child: PageView.builder(
-        scrollDirection: Axis.horizontal,
-        controller: _pageController,
-        itemCount: 3,
-        itemBuilder: (context, index) => Container(
-          margin: EdgeInsets.symmetric(horizontal: 12.w),
+    return CarouselSlider.builder(
+      itemCount: imageList.length,
+      itemBuilder: (context, index, realIndex) {
+        final imageUrl =
+            imageList[index].image != null ? imageList[index].image.url : '';
+
+        return Container(
+          padding: const EdgeInsets.only(right: 10, top: 20, bottom: 20),
           child: ClipRRect(
             borderRadius: AppBorders.borderRadius12,
-            child: Image.asset(
-              bannerImage,
-              height: 160.h,
-              width: double.infinity,
+            child: ExtendedImage.network(
+              '${Endpoints().url}/$imageUrl',
+              height: 160,
+              width: 390,
               fit: BoxFit.cover,
             ),
           ),
-        ),
+        );
+      },
+      options: CarouselOptions(
+        onPageChanged: (index, reason) =>
+            context.read<BannerSliderCubit>().changeImage(index),
+        height: 160,
+        viewportFraction: 0.8,
+        autoPlay: true,
+        scrollPhysics: const BouncingScrollPhysics(),
+        autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+        autoPlayAnimationDuration: const Duration(milliseconds: 2000),
       ),
     );
   }

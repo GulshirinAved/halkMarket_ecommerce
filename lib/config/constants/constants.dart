@@ -1,7 +1,16 @@
 //fonts
-import 'package:flutter/cupertino.dart';
-import 'package:halkmarket_ecommerce/app_localization.dart';
-import 'package:halkmarket_ecommerce/data/models/product_model.dart';
+
+import 'package:halkmarket_ecommerce/presentation/Screens/home/changePass_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/chat_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/feedback_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/myAddress_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/myOrders_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/payMethod_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/personalData_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/faq_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/support_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/whereIsOrder_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/webview/webview_screen.dart';
 
 const String fontNunitoSans = 'NunitoSans';
 const String fontExo2 = 'Exo2';
@@ -26,97 +35,54 @@ const String milkIcon = 'assets/icons/milk.svg';
 const String foodIcon = 'assets/icons/food.svg';
 const String waterIcon = 'assets/icons/water.svg';
 const String filterIcon = 'assets/icons/filter.svg';
-const String messageIcon = 'assets/icons/message.svg';
 const String infoIcon = 'assets/icons/info.svg';
 const String crownIcon = 'assets/icons/crown.svg';
 const String globeIcon = 'assets/icons/globe.svg';
 const String moonIcon = 'assets/icons/moon.svg';
 const String eyeIcon = 'assets/icons/eye.svg';
 const String eyeOffIcon = 'assets/icons/eyeOff.svg';
-const String googleIcon = 'assets/icons/google.svg';
-const String appleIcon = 'assets/icons/apple.svg';
 const String trashIcon = 'assets/icons/trash.svg';
 const String cuteHeartIcon = 'assets/icons/cuteHeart.svg';
 const String cuteBoldHeartIcon = 'assets/icons/cuteBoldHeart.svg';
 const String gpsIcon = 'assets/icons/gps.svg';
 const String locateIcon = 'assets/icons/locate.svg';
 const String pencilIcon = 'assets/icons/pencil.svg';
+const String arrowUpIcon = 'assets/icons/arrowUp.svg';
+const String arrowDownIcon = 'assets/icons/arrowDown.svg';
+const String basketIcon = 'assets/icons/basket.svg';
+const String truckIcon = 'assets/icons/truck.svg';
+const String mapPinnedIcon = 'assets/icons/mapPinned.svg';
+const String percentIcon = 'assets/icons/percent.svg';
+const String userSquareIcon = 'assets/icons/userSquare.svg';
+const String walletIcon = 'assets/icons/wallet.svg';
+const String logoutIcon = 'assets/icons/logout.svg';
+const String shareIcon = 'assets/icons/share.svg';
+const String menuIcon = 'assets/icons/menu.svg';
+const String rotateArrowIcon = 'assets/icons/rotateArrow.svg';
+const String closeIcon = 'assets/icons/close.svg';
+const String lockIcon = 'assets/icons/lock.svg';
+const String groupMessageIcon = 'assets/icons/groupMessage.svg';
+const String helpIcon = 'assets/icons/help.svg';
+const String messageIcon = 'assets/icons/message.svg';
+const String addCardIcon = 'assets/icons/addCard.svg';
+const String cpuIcon = 'assets/icons/cpu.svg';
+const String cardIcon = 'assets/icons/card.svg';
+const String sendIcon = 'assets/icons/send.svg';
+const String attachIcon = 'assets/icons/attach.svg';
+const String plusIcon = 'assets/icons/plus.svg';
+const String notepadIcon = 'assets/icons/notepad.svg';
+const String shieldIcon = 'assets/icons/shield.svg';
 
 //images
-const String bannerImage = 'assets/images/banner.png';
-const String product1Image = 'assets/images/products/product1.png';
-const String product2Image = 'assets/images/products/product2.png';
-const String milkProductsImage = 'assets/images/products/milkProducts.png';
-const String eggImage = 'assets/images/products/egg.png';
-const String brandImage = 'assets/images/brands/brand.png';
-const String halkMarketImage = 'assets/images/halkMarket.png';
-const String sale1Image = 'assets/images/products/sale1.png';
-const String sale2Image = 'assets/images/products/sale2.png';
-const String cleaningImage = 'assets/images/products/oil.png';
-const String foodImage = 'assets/images/products/food.png';
-const String drinkImage = 'assets/images/products/drink.png';
-const String sweetImage = 'assets/images/products/sweet.png';
-const String cosmeticsImage = 'assets/images/products/cosmetics.png';
-const String zooImage = 'assets/images/products/zoo.png';
-const String new1Image = 'assets/images/products/new1.png';
-const String new2Image = 'assets/images/products/new2.png';
-const String foodProduct1Image = 'assets/images/products/foodProduct1.png';
-const String foodProduct2Image = 'assets/images/products/foodProduct2.png';
-const String cleaning1Image = 'assets/images/products/cleaning1.png';
-const String cleaning2Image = 'assets/images/products/cleaning2.png';
-const String cosmeticsProduct1Image =
-    'assets/images/products/cosmeticsProduct1.png';
-const String cosmeticsProduct2Image =
-    'assets/images/products/cosmeticsProduct2.png';
-const String milkProducts1Image = 'assets/images/products/milkProducts1.png';
-const String milkProducts2Image = 'assets/images/products/milkProducts2.png';
-const String zooProduct1Image = 'assets/images/products/zooProduct1.png';
-const String zooProduct2Image = 'assets/images/products/zooProduct2.png';
-const String milkCategoryImage = 'assets/images/products/milkCategory.png';
-const String milkCategory2Image = 'assets/images/products/milkCategory2.png';
-const String milkCategory3Image = 'assets/images/products/milkCategory3.png';
-const String milkCategory4Image = 'assets/images/products/milkCategory4.png';
-const String milkCategory5Image = 'assets/images/products/milkCategory5.png';
-const String foodCategory1Image = 'assets/images/products/foodCategory1.png';
-const String foodCategory2Image = 'assets/images/products/foodCategory2.png';
-const String foodCategory3Image = 'assets/images/products/foodCategory3.png';
-const String foodCategory4Image = 'assets/images/products/foodCategory4.png';
-const String foodCategory5Image = 'assets/images/products/foodCategory5.png';
-const String milkBrand1Image = 'assets/images/brands/milkBrand1.png';
-const String milkBrand2Image = 'assets/images/brands/milkBrand2.png';
-const String milkBrand3Image = 'assets/images/brands/milkBrand3.png';
-const String meatBrand1Image = 'assets/images/brands/meatBrand1.png';
-const String meatBrand2Image = 'assets/images/brands/meatBrand2.png';
-const String meatBrand3Image = 'assets/images/brands/meatBrand3.png';
-const String meatBrand4Image = 'assets/images/brands/meatBrand4.png';
-const String meatBrand5Image = 'assets/images/brands/meatBrand5.png';
-const String meatBrand6Image = 'assets/images/brands/meatBrand6.png';
-const String meatBrand7Image = 'assets/images/brands/meatBrand7.png';
-const String meatBrand8Image = 'assets/images/brands/meatBrand8.png';
-const String meatBrand9Image = 'assets/images/brands/meatBrand9.png';
-const String meatBrand10Image = 'assets/images/brands/meatBrand10.png';
-const String meatBrand11Image = 'assets/images/brands/meatBrand11.png';
-const String meatBrand12Image = 'assets/images/brands/meatBrand12.png';
-const String meatBrand13Image = 'assets/images/brands/meatBrand13.png';
-const String whiteBrand1Image = 'assets/images/brands/whiteBrand1.png';
-const String whiteBrand2Image = 'assets/images/brands/whiteBrand2.png';
-const String whiteBrand3Image = 'assets/images/brands/whiteBrand3.png';
-const String whiteBrand4Image = 'assets/images/brands/whiteBrand4.png';
-const String whiteBrand5Image = 'assets/images/brands/whiteBrand5.png';
-const String whiteBrand6Image = 'assets/images/brands/whiteBrand6.png';
-const String whiteBrand7Image = 'assets/images/brands/whiteBrand7.png';
-const String whiteBrand8Image = 'assets/images/brands/whiteBrand8.png';
-const String whiteBrand9Image = 'assets/images/brands/whiteBrand9.png';
-const String whiteBrand10Image = 'assets/images/brands/whiteBrand10.png';
-const String whiteBrand11Image = 'assets/images/brands/whiteBrand11.png';
-const String whiteBrand12Image = 'assets/images/brands/whiteBrand12.png';
-const String whiteBrand13Image = 'assets/images/brands/whiteBrand13.png';
-const String whiteBrand14Image = 'assets/images/brands/whiteBrand14.png';
-const String whiteBrand15Image = 'assets/images/brands/whiteBrand51.png';
-const String whiteBrand16Image = 'assets/images/brands/whiteBrand16.png';
-const String whiteBrand17Image = 'assets/images/brands/whiteBrand17.png';
-const String whiteBrand18Image = 'assets/images/brands/whiteBrand18.png';
 
+const String cardBg = 'assets/images/cardBg.png';
+const String halkMarketImage = 'assets/images/halkMarket.png';
+
+//animation
+const String emptyAnimation = 'assets/animation/empty.json';
+const String loadingAnimation = 'assets/animation/loading.json';
+const String errorAnimation = 'assets/animation/error.json';
+const String nowifiAnimation = 'assets/animation/nowifi.json';
 List<Map<String, dynamic>> bottomNavBarItemName = [
   {
     'icon': homeIcon,
@@ -136,765 +102,159 @@ List<Map<String, dynamic>> bottomNavBarItemName = [
   },
 ];
 
-//small categories
-final List<Map<String, dynamic>> smallCategories = [
-  {'icon': saleIcon, 'title': 'Скидки и акции'},
-  {'icon': newsIcon, 'title': 'Новинки сезона'},
-  {'icon': fruitIcon, 'title': 'Фрукты и овощи'},
-  {'icon': milkIcon, 'title': 'Молочные продукты'},
-  {'icon': foodIcon, 'title': 'Продукты питания'},
-  {'icon': waterIcon, 'title': 'Напитки'},
-];
-//homepage category products
-final List<ProductModel> freshProducts = [
-  ProductModel(
-      id: '1',
-      image: [product1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-    id: '2',
-    image: [product2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: false,
-  ),
-  ProductModel(
-    id: '3',
-    image: [product2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [product2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [product2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [product2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [product2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//sale products
-final List<ProductModel> saleProducts = [
-  ProductModel(
-      id: '1',
-      image: [sale1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [sale2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [sale2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [sale2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [sale2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [sale2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [sale2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//new products
-final List<ProductModel> newProducts = [
-  ProductModel(
-      id: '1',
-      image: [new1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [new2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [new2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [new2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [new2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [new2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [new2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//food products
-final List<ProductModel> foodProducts = [
-  ProductModel(
-      id: '1',
-      image: [foodProduct1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [foodProduct2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [foodProduct2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [foodProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [foodProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [foodProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [foodProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//cleaning products
-final List<ProductModel> cleaningProducts = [
-  ProductModel(
-      id: '1',
-      image: [cleaning1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [cleaning2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [cleaning2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [cleaning2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [cleaning2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [cleaning2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [cleaning2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-
-//cosmetics products
-final List<ProductModel> cosmeticsProducts = [
-  ProductModel(
-      id: '1',
-      image: [milkProducts1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [milkProducts2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [milkProducts2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [milkProducts2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [milkProducts2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [milkProducts2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [milkProducts2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//milk products
-final List<ProductModel> milkProduct = [
-  ProductModel(
-      id: '1',
-      image: [cosmeticsProduct1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [cosmeticsProduct2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [cosmeticsProduct2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [cosmeticsProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [cosmeticsProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [cosmeticsProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [cosmeticsProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//zoo products
-final List<ProductModel> zooProducts = [
-  ProductModel(
-      id: '1',
-      image: [zooProduct1Image],
-      isNew: true,
-      isSale: false,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: true),
-  ProductModel(
-    id: '2',
-    image: [zooProduct2Image],
-    isNew: true,
-    isSale: true,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-    withSugar: true,
-  ),
-  ProductModel(
-    id: '3',
-    image: [zooProduct2Image],
-    isNew: true,
-    isSale: false,
-    price: 14,
-    prevPrice: '18.20',
-    desc: 'Смесь для выпечки Печем дома "Оладьи"',
-    weight: 250.0,
-  ),
-  ProductModel(
-      id: '4',
-      image: [zooProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '5',
-      image: [zooProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '6',
-      image: [zooProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-  ProductModel(
-      id: '7',
-      image: [zooProduct2Image],
-      isNew: true,
-      isSale: true,
-      price: 14,
-      prevPrice: '18.20',
-      desc: 'Смесь для выпечки Печем дома "Оладьи"',
-      weight: 250.0,
-      withSugar: false),
-];
-//popular prodycts
-final List<Map<String, dynamic>> popularProducts = [
-  {'name': 'Молочная продукция', 'image': milkProductsImage},
-  {'name': 'Уборка и гигиена', 'image': cleaningImage},
-  {'name': 'Продукты питания', 'image': foodImage},
-  {'name': 'Напитки', 'image': drinkImage},
-  {'name': 'Конфеты', 'image': sweetImage},
-  {'name': 'Косметика', 'image': cosmeticsImage},
-  {'name': 'Зоотовары', 'image': zooImage},
-];
-
-final List<String> tipQuestion = [
-  'Что есть разные средства с гармоничным составом',
-  'Мне попадалась только косметика с натуральным составом',
-  'Знаю лишь самое простое: шампунь, зубная паста',
-  'Пару раз брал(а) патчи/маски/крем, но мало что про них знаю',
-  'Беру только продукты, про косметику не знаю',
-];
-final List<Map<String, dynamic>> milkCategoryProducts = [
-  {'name': 'Яйца', 'image': eggImage},
-  {'name': 'Молоко, коктейль', 'image': milkCategoryImage},
-  {'name': 'Сливки, кефир, творог', 'image': milkCategory2Image},
-  {'name': 'Сыр', 'image': milkCategory3Image},
-  {'name': 'Йогурт, айран', 'image': milkCategory4Image},
-  {'name': 'Сгущённое молоко', 'image': milkCategory5Image},
-];
-final List<Map<String, dynamic>> foodCategoryProducts = [
-  {'name': 'Торты', 'image': foodCategory1Image},
-  {'name': 'Конфеты, мармелад', 'image': foodCategory2Image},
-  {'name': 'Мука, кулинария', 'image': foodCategory3Image},
-  {'name': 'Растительное масло', 'image': foodCategory4Image},
-  {'name': 'Чипсы сухарики', 'image': foodCategory5Image},
-  {'name': 'Кофе', 'image': milkCategory5Image},
-];
-final List<Map<String, dynamic>> cookingCategoryProducts = [
-  {'name': 'Яйца', 'image': eggImage},
-  {'name': 'Молоко, коктейль', 'image': milkCategoryImage},
-  {'name': 'Сливки, кефир, творог', 'image': milkCategory2Image},
-  {'name': 'Сыр', 'image': milkCategory3Image},
-  {'name': 'Йогурт, айран', 'image': milkCategory4Image},
-  {'name': 'Сгущённое молоко', 'image': milkCategory5Image},
-];
-final List<Map<String, dynamic>> breakfastCategoryProducts = [
-  {'name': 'Яйца', 'image': eggImage},
-  {'name': 'Молоко, коктейль', 'image': milkCategoryImage},
-  {'name': 'Сливки, кефир, творог', 'image': milkCategory2Image},
-  {'name': 'Сыр', 'image': milkCategory3Image},
-  {'name': 'Йогурт, айран', 'image': milkCategory4Image},
-  {'name': 'Сгущённое молоко', 'image': milkCategory5Image},
-];
-
-final List subCategories = [
-  'Молоко',
-  'Кефир',
-  'Творог',
-  'Сыр',
-  'Йогурт',
-  'Сметана и сливки',
-];
 final List<String> sortTitle = [
-  'default',
   'popular',
-  'news',
-  'cheap',
+  'cheaper',
   'expensive',
-  'bigDiscount',
+  'recommended',
+  'newproducts',
 ];
-List<String> getPriceList(BuildContext context) {
-  return [
-    AppLocalization.of(context).getTransatedValues('toFiftyMan') ?? '',
-    '50-200 ${AppLocalization.of(context).getTransatedValues('manat')}',
-    '200 ${AppLocalization.of(context).getTransatedValues('manat')} ${AppLocalization.of(context).getTransatedValues('and')} ${AppLocalization.of(context).getTransatedValues('high')}',
-    AppLocalization.of(context).getTransatedValues('notMatter') ?? '',
-  ];
-}
 
-final List<String> categories = [
-  'Фрукты и овощи',
-  'Молочные продукты',
-  'Продукты питания',
-  'Напитки',
-  'Правильное питание',
-  'Продукты питания',
-  'Напитки',
-  'Правильное питание',
-];
-final List<String> brands = [
-  'Kenar',
-  'KHOSHBAKHT',
-  'Özgeriş',
-  'Buýsançly',
-  'Emin Et',
-  'Baltic mark',
-  'Galkan',
-  'Балтийский Невод',
-];
-final List<Map<String, dynamic>> milkBrands = [
-  {'name': 'Gök önüm', 'image': brandImage},
-  {'name': 'Gury iýmiş', 'image': milkBrand1Image},
-  {'name': 'Bagdan', 'image': milkBrand2Image},
-  {'name': 'Tudana', 'image': milkBrand3Image},
-];
-final List<Map<String, dynamic>> meatBrands = [
-  {'name': 'Hindi towugy', 'image': meatBrand1Image},
-  {'name': 'Kenar', 'image': meatBrand2Image},
-  {'name': 'Emin Et', 'image': meatBrand3Image},
-  {'name': 'KHOSHBAKHT', 'image': meatBrand4Image},
-  {'name': 'Buýsançly', 'image': meatBrand5Image},
-  {'name': 'За родину', 'image': meatBrand6Image},
-  {'name': 'Köşüli', 'image': meatBrand6Image},
-  {'name': 'Браславрыба', 'image': meatBrand7Image},
-  {'name': 'Baltic mark', 'image': meatBrand8Image},
-  {'name': 'Täze aý Şöhlat', 'image': meatBrand9Image},
-  {'name': 'Özgeriş', 'image': meatBrand10Image},
-  {'name': 'KHOSHBAKHT', 'image': meatBrand11Image},
-  {'name': 'Galkan', 'image': meatBrand12Image},
-  {'name': 'Балтийский Невод', 'image': meatBrand13Image},
-];
-final List<Map<String, dynamic>> milk2Brands = [
-  {'name': 'Aýaz baba', 'image': whiteBrand1Image},
-  {'name': 'Iner', 'image': whiteBrand2Image},
-  {'name': 'Creamburg', 'image': whiteBrand3Image},
-  {'name': 'Oltermanni', 'image': whiteBrand4Image},
-  {'name': 'Erteki', 'image': whiteBrand5Image},
-  {'name': 'Fruttis', 'image': whiteBrand6Image},
-  {'name': 'Dag etek', 'image': whiteBrand6Image},
-  {'name': 'Zamana', 'image': whiteBrand7Image},
-  {'name': 'Valio', 'image': whiteBrand8Image},
-  {'name': 'Damdaran', 'image': whiteBrand9Image},
-  {'name': 'Ice cream', 'image': whiteBrand10Image},
-  {'name': 'Нежный', 'image': whiteBrand11Image},
-  {'name': 'Balgaýmak', 'image': whiteBrand12Image},
-  {'name': 'Kalleh', 'image': whiteBrand13Image},
-  {'name': 'Ramak', 'image': whiteBrand10Image},
-  {'name': 'Нежный', 'image': whiteBrand11Image},
-  {'name': 'Algida', 'image': whiteBrand12Image},
-  {'name': 'Paýhas', 'image': whiteBrand13Image},
-];
 final List<Map<String, dynamic>> profileCard = [
-  {'icon': messageIcon, 'title': 'support'},
-  {'icon': infoIcon, 'title': 'helpAndInfo'},
-  {'icon': crownIcon, 'title': 'aboutUs'},
+  {
+    'icon': infoIcon,
+    'title': 'helpAndInfo',
+    'screen': const SupportScreen(),
+  },
+  {
+    'icon': crownIcon,
+    'title': 'aboutUs',
+    'screen': const WebViewScreen(
+      topTitle: 'aboutUs',
+      path: 'http://216.250.13.221:3000/about-us',
+    ),
+  },
+  {
+    'icon': groupMessageIcon,
+    'title': 'feedback',
+    'screen': const FeedbackScreen(),
+  },
+  {
+    'icon': helpIcon,
+    'title': 'faq',
+    'screen': const FaqScreen(),
+  },
+  {
+    'icon': messageIcon,
+    'title': 'chat',
+    'screen': const ChatScreen(),
+  },
+];
+final List<Map<String, dynamic>> longProfileCard = [
+  {
+    'icon': basketIcon,
+    'title': 'myOrders',
+    'screen': const MyordersScreen(),
+  },
+  {
+    'icon': truckIcon,
+    'title': 'whereMyOrder',
+    'screen': const WhereIsOrderScreen(),
+  },
+  {
+    'icon': mapPinnedIcon,
+    'title': 'myAddresses',
+    'screen': const MyAddressScreen(),
+  },
+  {
+    'icon': infoIcon,
+    'title': 'helpAndInfo',
+    'screen': const SupportScreen(),
+  },
+  {
+    'icon': percentIcon,
+    'title': 'bonusAndSale',
+    'screen': const MyordersScreen(),
+  },
+  {
+    'icon': crownIcon,
+    'title': 'aboutUs',
+    'screen': const WebViewScreen(
+      topTitle: 'aboutUs',
+      path: 'http://216.250.13.221:3000/about-us',
+    ),
+  },
+  {
+    'icon': groupMessageIcon,
+    'title': 'feedback',
+    'screen': const FeedbackScreen(),
+  },
+  {
+    'icon': helpIcon,
+    'title': 'faq',
+    'screen': const FaqScreen(),
+  },
+  {
+    'icon': messageIcon,
+    'title': 'chat',
+    'screen': const ChatScreen(),
+  },
 ];
 final List<Map<String, dynamic>> profile2Card = [
   {'icon': globeIcon, 'title': 'lang'},
   {'icon': moonIcon, 'title': 'theme'},
 ];
 final List<String> cartBill = [
-  'cart',
   'productQuantity',
   'price',
   'delivery',
-  'sale',
-  'totalSum',
 ];
 final List<String> langList = [
   'Türkmen',
   'Русский',
 ];
-final List mapOptionIcons = [locateIcon, pencilIcon, searchIcon];
+
+List<Map<String, dynamic>> settingsCards = [
+  {
+    'icon': userSquareIcon,
+    'title': 'privateData',
+    'screen': const PersonalDataScreen(),
+  },
+  {
+    'icon': lockIcon,
+    'title': 'changePass',
+    'screen': const ChangepassScreen(),
+  },
+  {
+    'icon': walletIcon,
+    'title': 'payMethod',
+    'screen': const PayMethodScreen(),
+  },
+];
+
+final List conditionsForOrdering = [
+  'orderCondition1',
+  'orderCondition2',
+  'orderCondition3',
+  'orderCondition4',
+  'orderCondition5',
+];
+final List addressEditOption = [
+  {'icon': pencilIcon, 'title': 'edit'},
+  {'icon': trashIcon, 'title': 'delete'},
+];
+final List<String> genderList = ['male', 'female'];
+final List<String> timeList = ['today', 'tomorrow'];
+final List<Map<String, dynamic>> clockList = [
+  {'untilTo': '10:00', 'untilFrom': '12:00'},
+  {'untilTo': '13:00', 'untilFrom': '15:00'},
+  {'untilTo': '16:00', 'untilFrom': '18:00'},
+  {'untilTo': '19:00', 'untilFrom': '21:00'},
+];
+final List<Map<String, dynamic>> helpList = [
+  {
+    'icon': walletIcon,
+    'title': 'conditionsOrders',
+    'path': 'http://216.250.13.221:3000/delivery-and-payment',
+  },
+  {
+    'icon': notepadIcon,
+    'title': 'usageRule',
+    'path': 'http://216.250.13.221:3000/delivery-and-payment',
+  },
+  {
+    'icon': shieldIcon,
+    'title': 'privacy',
+    'path': 'http://216.250.13.221:3000/delivery-and-payment',
+  }
+];

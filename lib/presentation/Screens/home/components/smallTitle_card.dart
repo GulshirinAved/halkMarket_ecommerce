@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 
 class SmallTitleCard extends StatelessWidget {
@@ -14,10 +13,10 @@ class SmallTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 16.h,
+      height: 16,
       padding: EdgeInsets.symmetric(
-        horizontal: 8.h,
-        vertical: 3.w,
+        horizontal: 8,
+        vertical: 3,
       ),
       decoration: BoxDecoration(
         color: backColor,

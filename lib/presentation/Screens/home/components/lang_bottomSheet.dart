@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/blocs/language/language_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
@@ -57,17 +57,16 @@ Future<dynamic> langBottomSheet(BuildContext context) {
                                 .read<LanguageBloc>()
                                 .add(RussianLanguageEvent());
                         Navigator.pop(context);
+                        Phoenix.rebirth(context);
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.symmetric(vertical: 12.h),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
                           color: (state as ChangeLanguageState).languageCode ==
                                           'tr' &&
                                       i == 0 ||
-                                  (state as ChangeLanguageState).languageCode ==
-                                          'ru' &&
-                                      i == 1
+                                  state.languageCode == 'ru' && i == 1
                               ? AppColors.lightPurpleColor
                               : AppColors.whiteColor,
                           borderRadius: AppBorders.borderRadius8,

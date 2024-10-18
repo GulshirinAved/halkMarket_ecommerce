@@ -29,5 +29,10 @@ ThemeData lightTheme() {
       surfaceTintColor: AppColors.whiteColor,
       backgroundColor: AppColors.whiteColor,
     ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: AppColors.purpleColor,
+      selectionColor: AppColors.lightPurple1Color,
+      selectionHandleColor: AppColors.purpleColor,
+    ),
   );
 }

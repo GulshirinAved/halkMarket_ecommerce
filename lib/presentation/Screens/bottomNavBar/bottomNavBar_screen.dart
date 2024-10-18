@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:halkmarket_ecommerce/blocs/cartButton/cart_button_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/cart/cartButton/cart_button_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/brandSelection/brand_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/categorySelection/category_selection_bloc.dart';
-import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/priceSelection/price_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/sortSelection/sort_selection_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/selectSubCategory/select_sub_category_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/favButton/fav_button_bloc.dart';
+
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/cart/cart_screen.dart';
@@ -28,10 +29,10 @@ class BottomNavBar extends StatelessWidget {
             create: (context) => SortSelectionBloc(),
           ),
           BlocProvider(
-            create: (context) => PriceSelectionBloc(),
+            create: (context) => CategorySelectionBloc(),
           ),
           BlocProvider(
-            create: (context) => CategorySelectionBloc(),
+            create: (context) => SelectSubCategoryBloc(),
           ),
           BlocProvider(
             create: (context) => BrandSelectionBloc(),
@@ -40,7 +41,7 @@ class BottomNavBar extends StatelessWidget {
             create: (context) => FavButtonBloc()..add(LoadFavEvent()),
           ),
           BlocProvider(
-            create: (context) => CartButtonBloc()..add(LoadCartEvent()),
+            create: (context) => CartButtonBloc()..add(const LoadCartEvent()),
           ),
         ],
         child: PersistentTabView(

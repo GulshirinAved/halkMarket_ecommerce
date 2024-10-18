@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:halkmarket_ecommerce/data/models/getAllProducts_model.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class FavItem {
@@ -9,13 +10,14 @@ class FavItem {
   final List<dynamic>? image;
   final int? price;
   final int? coin;
-  final String? prevPrice;
-  final String? discount;
+  final SimpleDiscount? discount;
   final String? desc;
   final bool? isSale;
   final bool? isNew;
-  final double? weight;
-  final bool? withSugar;
+  final bool? sugar;
+  final String? shopId;
+  final int? amount;
+  final UnitModel? unit;
 
   bool? isFavorite;
   FavItem({
@@ -24,13 +26,14 @@ class FavItem {
     this.image,
     this.price,
     this.coin,
-    this.prevPrice,
     this.discount,
     this.desc,
     this.isSale,
     this.isNew,
-    this.weight,
-    this.withSugar,
+    this.sugar,
+    this.shopId,
+    this.amount,
+    this.unit,
     this.isFavorite,
   });
 
@@ -41,12 +44,14 @@ class FavItem {
     int? price,
     int? coin,
     String? prevPrice,
-    String? discount,
+    SimpleDiscount? discount,
     String? desc,
     bool? isSale,
     bool? isNew,
-    double? weight,
-    bool? withSugar,
+    bool? sugar,
+    String? shopId,
+    int? amount,
+    UnitModel? unit,
     bool? isFavorite,
   }) {
     return FavItem(
@@ -55,16 +60,64 @@ class FavItem {
       image: image ?? this.image,
       price: price ?? this.price,
       coin: coin ?? this.coin,
-      prevPrice: prevPrice ?? this.prevPrice,
       discount: discount ?? this.discount,
       desc: desc ?? this.desc,
       isSale: isSale ?? this.isSale,
       isNew: isNew ?? this.isNew,
-      weight: weight ?? this.weight,
-      withSugar: withSugar ?? this.withSugar,
+      sugar: sugar ?? sugar,
+      shopId: shopId ?? this.shopId,
+      amount: amount ?? this.amount,
+      unit: unit ?? this.unit,
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'image': image,
+      'price': price,
+      'coin': coin,
+      'discount': discount,
+      'desc': desc,
+      'isSale': isSale,
+      'isNew': isNew,
+      'sugar': sugar,
+      'shopId': shopId,
+      'amount': amount,
+      'unit': unit,
+      'isFavorite': isFavorite,
+    };
+  }
+
+  factory FavItem.fromMap(Map<String, dynamic> map) {
+    return FavItem(
+      id: map['id'] as String,
+      name: map['name'] != null ? map['name'] as String : null,
+      image: map['image'] != null
+          ? List<dynamic>.from(map['image'] as List<dynamic>)
+          : null,
+      price: map['price'] != null ? map['price'] as int : null,
+      coin: map['coin'] != null ? map['coin'] as int : null,
+      discount: map['discount'] == null
+          ? null
+          : SimpleDiscount.fromJson(map['discount']),
+      desc: map['desc'] != null ? map['desc'] as String : null,
+      isSale: map['isSale'] != null ? map['isSale'] as bool : null,
+      isNew: map['isNew'] != null ? map['isNew'] as bool : null,
+      sugar: map['sugar'] != null ? map['sugar'] as bool : null,
+      shopId: map['shopId'] != null ? map['shopId'] as String : null,
+      amount: map['amount'] != null ? map['amount'] as int : null,
+      unit: map['unit'] == null ? null : UnitModel.fromJson(map['unit']),
+      isFavorite: map['isFavorite'] != null ? map['isFavorite'] as bool : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory FavItem.fromJson(String source) =>
+      FavItem.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool operator ==(covariant FavItem other) {
@@ -75,13 +128,14 @@ class FavItem {
         listEquals(other.image, image) &&
         other.price == price &&
         other.coin == coin &&
-        other.prevPrice == prevPrice &&
+        other.amount == amount &&
         other.discount == discount &&
         other.desc == desc &&
         other.isSale == isSale &&
         other.isNew == isNew &&
-        other.weight == weight &&
-        other.withSugar == withSugar &&
+        other.sugar == sugar &&
+        other.shopId == shopId &&
+        other.unit == unit &&
         other.isFavorite == isFavorite;
   }
 
@@ -91,57 +145,15 @@ class FavItem {
         name.hashCode ^
         image.hashCode ^
         price.hashCode ^
+        amount.hashCode ^
         coin.hashCode ^
-        prevPrice.hashCode ^
         discount.hashCode ^
         desc.hashCode ^
         isSale.hashCode ^
         isNew.hashCode ^
-        weight.hashCode ^
-        withSugar.hashCode ^
+        sugar.hashCode ^
+        shopId.hashCode ^
+        unit.hashCode ^
         isFavorite.hashCode;
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'image': image,
-      'price': price,
-      'coin': coin,
-      'prevPrice': prevPrice,
-      'discount': discount,
-      'desc': desc,
-      'isSale': isSale,
-      'isNew': isNew,
-      'weight': weight,
-      'withSugar': withSugar,
-      'isFavorite': isFavorite,
-    };
-  }
-
-  factory FavItem.fromMap(Map<String, dynamic> map) {
-    return FavItem(
-      id: map['id'] as String,
-      name: map['name'] != null ? map['name'] as String : null,
-      image: map['image'] != null
-          ? List<dynamic>.from((map['image'] as List<dynamic>))
-          : null,
-      price: map['price'] != null ? map['price'] as int : null,
-      coin: map['coin'] != null ? map['coin'] as int : null,
-      prevPrice: map['prevPrice'] != null ? map['prevPrice'] as String : null,
-      discount: map['discount'] != null ? map['discount'] as String : null,
-      desc: map['desc'] != null ? map['desc'] as String : null,
-      isSale: map['isSale'] != null ? map['isSale'] as bool : null,
-      isNew: map['isNew'] != null ? map['isNew'] as bool : null,
-      weight: map['weight'] != null ? map['weight'] as double : null,
-      withSugar: map['withSugar'] != null ? map['withSugar'] as bool : null,
-      isFavorite: map['isFavorite'] != null ? map['isFavorite'] as bool : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory FavItem.fromJson(String source) =>
-      FavItem.fromMap(json.decode(source) as Map<String, dynamic>);
 }

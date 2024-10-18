@@ -5,15 +5,31 @@ part 'password_obscure_state.dart';
 
 class ObscureCubit extends Cubit<ObscureState> {
   ObscureCubit()
-      : super(const ObscureState(
-            isPasswordObscured: true, isConfirmPasswordObscured: true));
+      : super(
+          const ObscureState(
+            isPasswordObscured: true,
+            isConfirmPasswordObscured: true,
+            isoldPasswordObscured: true,
+          ),
+        );
 
   void togglePasswordObscure() {
     emit(state.copyWith(isPasswordObscured: !state.isPasswordObscured));
   }
 
   void toggleConfirmPasswordObscure() {
-    emit(state.copyWith(
-        isConfirmPasswordObscured: !state.isConfirmPasswordObscured));
+    emit(
+      state.copyWith(
+        isConfirmPasswordObscured: !state.isConfirmPasswordObscured,
+      ),
+    );
+  }
+
+  void toggleoldPasswordObscure() {
+    emit(
+      state.copyWith(
+        isoldPasswordObscured: !state.isoldPasswordObscured,
+      ),
+    );
   }
 }

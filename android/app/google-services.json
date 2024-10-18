@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "432591314406",
+    "project_id": "halk-market-352cb",
+    "storage_bucket": "halk-market-352cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432591314406:android:27bf4a2ecdc8b3007e0a27",
+        "android_client_info": {
+          "package_name": "com.example.halkmarket_ecommerce"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi5Mp3cDOF3ee_G00YIAi7u8c_3QFqWuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

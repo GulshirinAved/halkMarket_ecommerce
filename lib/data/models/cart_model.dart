@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:halkmarket_ecommerce/data/models/getAllProducts_model.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class CartItem {
@@ -9,27 +10,31 @@ class CartItem {
   final List<dynamic>? image;
   final int? price;
   final int? coin;
-  final String? prevPrice;
-  final String? discount;
+  final SimpleDiscount? discount;
   final String? desc;
   final bool? isSale;
   final bool? isNew;
   final double? weight;
-  final bool? withSugar;
+  final bool? sugar;
+  final String? shopId;
+  final int? amount;
+  final UnitModel? unit;
   int quantity;
   CartItem({
     required this.id,
+    required this.shopId,
     this.name,
     this.image,
     this.price,
     this.coin,
-    this.prevPrice,
     this.discount,
     this.desc,
     this.isSale,
     this.isNew,
     this.weight,
-    this.withSugar,
+    this.sugar,
+    this.amount,
+    this.unit,
     this.quantity = 1,
   });
 
@@ -40,14 +45,16 @@ class CartItem {
       'image': image,
       'price': price,
       'coin': coin,
-      'prevPrice': prevPrice,
       'discount': discount,
       'desc': desc,
       'isSale': isSale,
       'isNew': isNew,
       'weight': weight,
-      'withSugar': withSugar,
+      'sugar': sugar,
+      'shopId': shopId,
       'quantity': quantity,
+      'amount': amount,
+      'unit': unit,
     };
   }
 
@@ -56,17 +63,21 @@ class CartItem {
       id: map['id'] as String,
       name: map['name'] != null ? map['name'] as String : null,
       image: map['image'] != null
-          ? List<dynamic>.from((map['image'] as List<dynamic>))
+          ? List<dynamic>.from(map['image'] as List<dynamic>)
           : null,
       price: map['price'] != null ? map['price'] as int : null,
       coin: map['coin'] != null ? map['coin'] as int : null,
-      prevPrice: map['prevPrice'] != null ? map['prevPrice'] as String : null,
-      discount: map['discount'] != null ? map['discount'] as String : null,
+      discount: map['discount'] == null
+          ? null
+          : SimpleDiscount.fromJson(map['discount']),
       desc: map['desc'] != null ? map['desc'] as String : null,
       isSale: map['isSale'] != null ? map['isSale'] as bool : null,
       isNew: map['isNew'] != null ? map['isNew'] as bool : null,
       weight: map['weight'] != null ? map['weight'] as double : null,
-      withSugar: map['withSugar'] != null ? map['withSugar'] as bool : null,
+      sugar: map['sugar'] != null ? map['sugar'] as bool : null,
+      shopId: map['shopId'] != null ? map['shopId'] as String : null,
+      amount: map['amount'] != null ? map['amount'] as int : null,
+      unit: map['unit'] == null ? null : UnitModel.fromJson(map['unit']),
       quantity: map['quantity'] as int,
     );
   }
@@ -83,12 +94,15 @@ class CartItem {
     int? price,
     int? coin,
     String? prevPrice,
-    String? discount,
+    SimpleDiscount? discount,
     String? desc,
     bool? isSale,
     bool? isNew,
     double? weight,
-    bool? withSugar,
+    bool? sugar,
+    String? shopId,
+    int? amount,
+    UnitModel? unit,
     int? quantity,
   }) {
     return CartItem(
@@ -97,13 +111,15 @@ class CartItem {
       image: image ?? this.image,
       price: price ?? this.price,
       coin: coin ?? this.coin,
-      prevPrice: prevPrice ?? this.prevPrice,
       discount: discount ?? this.discount,
       desc: desc ?? this.desc,
       isSale: isSale ?? this.isSale,
       isNew: isNew ?? this.isNew,
       weight: weight ?? this.weight,
-      withSugar: withSugar ?? this.withSugar,
+      sugar: sugar ?? this.sugar,
+      shopId: shopId ?? this.shopId,
+      amount: amount ?? this.amount,
+      unit: unit ?? this.unit,
       quantity: quantity ?? this.quantity,
     );
   }
@@ -117,13 +133,15 @@ class CartItem {
         listEquals(other.image, image) &&
         other.price == price &&
         other.coin == coin &&
-        other.prevPrice == prevPrice &&
         other.discount == discount &&
         other.desc == desc &&
         other.isSale == isSale &&
         other.isNew == isNew &&
         other.weight == weight &&
-        other.withSugar == withSugar &&
+        other.sugar == sugar &&
+        other.shopId == shopId &&
+        other.amount == amount &&
+        other.unit == unit &&
         other.quantity == quantity;
   }
 
@@ -134,13 +152,15 @@ class CartItem {
         image.hashCode ^
         price.hashCode ^
         coin.hashCode ^
-        prevPrice.hashCode ^
         discount.hashCode ^
         desc.hashCode ^
         isSale.hashCode ^
         isNew.hashCode ^
         weight.hashCode ^
-        withSugar.hashCode ^
+        sugar.hashCode ^
+        shopId.hashCode ^
+        unit.hashCode ^
+        amount.hashCode ^
         quantity.hashCode;
   }
 }

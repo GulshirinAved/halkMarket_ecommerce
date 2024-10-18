@@ -2,179 +2,250 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
-import 'package:halkmarket_ecommerce/blocs/cartButton/cart_button_bloc.dart';
-import 'package:halkmarket_ecommerce/config/constants/constants.dart';
+import 'package:halkmarket_ecommerce/blocs/auth/userProfile/user_profile_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/auth/validateTextField/validate_text_field_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/cart/cartButton/cart_button_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/cart/expandCartPrice/expand_cart_price_cubit.dart';
+import 'package:halkmarket_ecommerce/blocs/cart/getDelivery/get_delivery_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/cart/getPayment/get_payment_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/cart/toOrder/to_order_bloc.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
-import 'package:halkmarket_ecommerce/data/models/cart_model.dart';
+import 'package:halkmarket_ecommerce/presentation/CustomWidgets/animations.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.dart';
-import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
+import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_dialog.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/cart/components/cartPrice_bottomSheet.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/cart/components/cartProduct_card.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/cart/components/toOrder_bottomsheet.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
   @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  late TextEditingController nameController;
+  late TextEditingController phoneController;
+  late TextEditingController addressController;
+  late TextEditingController commentController;
+  late GetPaymentBloc _getPaymentBloc;
+  late GetDeliveryBloc _getDeliveryBloc;
+  late UserProfileBloc _userProfileBloc;
+
+  @override
+  void initState() {
+    nameController = TextEditingController();
+    phoneController = TextEditingController(text: '+993 | ');
+
+    addressController = TextEditingController();
+    commentController = TextEditingController();
+    _getPaymentBloc = GetPaymentBloc()..add(GetPaymentList());
+    _getDeliveryBloc = GetDeliveryBloc()..add(const GetDeliveryList());
+    _userProfileBloc = UserProfileBloc()..add(GetUserData());
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    commentController.dispose();
+    _getPaymentBloc.close();
+    _getDeliveryBloc.close();
+    _userProfileBloc.close();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.categoryProfile(
-        title: AppLocalization.of(context).getTransatedValues('cart') ?? '',
-        needLeading: false,
-        actions: [
-          BlocBuilder<CartButtonBloc, CartButtonState>(
-            builder: (context, state) {
-              return IconButton(
-                onPressed: () {
-                  context.read<CartButtonBloc>().add(RemoveCartAllEvent());
-                },
-                icon: Text(
-                  AppLocalization.of(context).getTransatedValues('clean') ?? '',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: AppFonts.fontSize14,
-                    color: state.cartList.isEmpty
-                        ? AppColors.grey5Color
-                        : AppColors.redColor,
-                  ),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-      body: BlocBuilder<CartButtonBloc, CartButtonState>(
-        builder: (context, state) {
-          if (state is CartButtonInitial || state.cartList.isEmpty) {
-            return const Center(
-              child: Text('There is no product'),
-            );
-          }
-          return Column(
-            children: [
-              ///products
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
-                  ),
-                  margin: const EdgeInsets.all(10),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) => CartProductCard(
-                      index: index,
-                      cartItem: CartItem(
-                        id: state.cartList[index].id,
-                        isNew: state.cartList[index].isNew,
-                        isSale: state.cartList[index].isSale,
-                        image: state.cartList[index].image,
-                        price: state.cartList[index].price,
-                        prevPrice: state.cartList[index].prevPrice,
-                        desc: state.cartList[index].desc,
-                        weight: state.cartList[index].weight,
-                      ),
-                    ),
-                    separatorBuilder: (context, index) => Divider(
-                      color: AppColors.grey5Color,
-                    ),
-                    itemCount: state.cartList.length,
-                  ),
-                ),
-              ),
-              //price card
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: AppBorders.borderRadius16,
-                  color: AppColors.lightPurpleColor,
-                  border: Border.all(
-                    color: AppColors.grey5Color,
-                  ),
-                ),
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) => index == 0
-                          ? Text(
-                              AppLocalization.of(context)
-                                      .getTransatedValues(cartBill[index]) ??
-                                  '',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: AppFonts.fontSize18,
-                              ),
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  AppLocalization.of(context)
-                                          .getTransatedValues(
-                                        cartBill[index],
-                                      ) ??
-                                      '',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: AppFonts.fontSize16,
-                                  ),
-                                ),
-                                Text(
-                                  _getRowValue(index, state),
-                                  style: TextStyle(
-                                    fontWeight: index == 5
-                                        ? FontWeight.w800
-                                        : FontWeight.w600,
-                                    fontSize: AppFonts.fontSize16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                      separatorBuilder: (context, index) => Divider(
-                        color: AppColors.grey5Color,
-                      ),
-                      itemCount: 6,
-                    ),
-                    CustomButton(
-                      width: double.infinity,
-                      backColor: AppColors.purpleColor,
-                      textColor: AppColors.whiteColor,
-                      fontSize: AppFonts.fontSize16,
-                      fontweight: FontWeight.w600,
-                      title: AppLocalization.of(context)
-                              .getTransatedValues('orderReady') ??
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ExpandCartPriceCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ToOrderBloc(),
+        ),
+        BlocProvider(
+          create: (context) => ValidateTextFieldBloc(),
+        ),
+        BlocProvider.value(
+          value: _getPaymentBloc,
+        ),
+        BlocProvider.value(
+          value: _getDeliveryBloc,
+        ),
+        BlocProvider.value(
+          value: _userProfileBloc,
+        ),
+      ],
+      child: Scaffold(
+        appBar: CustomAppBar.categoryProfile(
+          title: AppLocalization.of(context).getTransatedValues('cart') ?? '',
+          needLeading: false,
+          actions: [
+            BlocBuilder<CartButtonBloc, CartButtonState>(
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: () {
+                    customDialog(
+                      context,
+                      subTitle: AppLocalization.of(context)
+                              .getTransatedValues('sureToDelete') ??
                           '',
-                      onTap: () {},
+                      rightOnTap: () {
+                        context
+                            .read<CartButtonBloc>()
+                            .add(const RemoveCartAllEvent());
+                      },
+                    );
+                  },
+                  icon: Text(
+                    AppLocalization.of(context).getTransatedValues('clean') ??
+                        '',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: AppFonts.fontSize14,
+                      color: state.cartList.isEmpty
+                          ? AppColors.grey5Color
+                          : AppColors.redColor,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        body: BlocBuilder<CartButtonBloc, CartButtonState>(
+          builder: (context, state) {
+            if (state is CartButtonInitial) {
+              return Animations.loading;
+            } else if (state.cartList.isEmpty) {
+              return Column(
+                children: [
+                  Animations.empty,
+                  Text(
+                    AppLocalization.of(context)
+                            .getTransatedValues('cartEmpty') ??
+                        '',
+                  ),
+                ],
+              );
+            }
+            return Stack(
+              children: [
+                //list of products
+                Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: AppColors.whiteColor,
+                        ),
+                        margin: const EdgeInsets.all(10),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) =>
+                              state.cartList[index] != null
+                                  ? CartProductCard(
+                                      index: index,
+                                      cartItem: state.cartList[index]!,
+                                    )
+                                  : const SizedBox.shrink(),
+                          itemCount: state.cartList.length,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          );
-        },
+                //initial bottomsheet with data about order
+                BlocBuilder<ToOrderBloc, ToOrderState>(
+                  builder: (context, deliveryState) {
+                    return CartPriceBottomSheet(
+                      state: state,
+                      deliveryPrice: deliveryState.deliveryPrice ?? 0,
+                      onTap: () {
+                        toOrderBottomSheet(
+                          context,
+                          phoneController: phoneController,
+                          nameController: nameController,
+                          commentController: commentController,
+                          adressController: addressController,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
+}
 
-  String _getRowValue(int index, state) {
-    switch (index) {
-      case 1:
-        return state.cartList.length.toString();
-      case 2:
-        return state.sum.toString();
-      case 3:
-        return '20';
-      case 4:
-        return state.salePrice.toString();
-      case 5:
-        return '${state.sum! + 20.0}';
-      default:
-        return '';
-    }
+class ReadyOrderButton extends StatelessWidget {
+  final String sumPrice;
+  final VoidCallback onTap;
+  const ReadyOrderButton({
+    required this.sumPrice,
+    required this.onTap,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 15,
+          horizontal: 5,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.purpleColor,
+          borderRadius: AppBorders.borderRadius12,
+          boxShadow: [
+            BoxShadow(
+              offset: const Offset(4, 4),
+              blurRadius: 15,
+              color: AppColors.grey3Color.withOpacity(0.35),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              AppLocalization.of(context).getTransatedValues(
+                    'orderReady',
+                  ) ??
+                  '',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: AppFonts.fontSize16,
+                color: AppColors.whiteColor,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              ' $sumPrice ${AppLocalization.of(context).getTransatedValues('manat')}',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: AppFonts.fontSize16,
+                color: AppColors.whiteColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

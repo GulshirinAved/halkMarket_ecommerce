@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
+import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/login_screen.dart';
@@ -38,19 +39,25 @@ class LoginCard extends StatelessWidget {
               fontWeight: FontWeight.w700,
               fontSize: AppFonts.fontSize18,
               color: AppColors.darkPurpleColor,
+              fontFamily: fontExo2,
             ),
           ),
-          Text(
-            AppLocalization.of(context).getTransatedValues('descForLogin') ??
-                '',
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: AppFonts.fontSize15,
-              color: AppColors.darkPurpleColor,
+          Padding(
+            padding: const EdgeInsets.only(top: 12, bottom: 20),
+            child: Text(
+              AppLocalization.of(context).getTransatedValues('descForLogin') ??
+                  '',
+              style: TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: AppFonts.fontSize15,
+                color: AppColors.darkPurpleColor,
+              ),
             ),
           ),
-          CustomButton(
+          CustomButton.text(
             width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            borderRadius: AppBorders.borderRadius12,
             backColor: AppColors.purpleColor,
             textColor: AppColors.whiteColor,
             fontSize: AppFonts.fontSize16,

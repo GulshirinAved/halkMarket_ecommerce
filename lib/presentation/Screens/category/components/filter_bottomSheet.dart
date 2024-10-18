@@ -1,22 +1,32 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:halkmarket_ecommerce/app_localization.dart';
+import 'package:halkmarket_ecommerce/blocs/brands/getAllBrands/get_all_brands_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/category/getOneCataloge/get_one_cateloge_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/brandExpand/brand_expand_cubit.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/brandSelection/brand_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/categoryExpand/category_expand_cubit.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/categorySelection/category_selection_bloc.dart';
-import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/priceSelection/price_selection_bloc.dart';
 import 'package:halkmarket_ecommerce/blocs/categoryProfile/filter/sortSelection/sort_selection_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/categoryProfile/selectSubCategory/select_sub_category_bloc.dart';
+import 'package:halkmarket_ecommerce/blocs/home/getAllProducts/get_all_products_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
+import 'package:halkmarket_ecommerce/presentation/CustomWidgets/animations.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_checkBox.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_radio.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_textField.dart';
 
-Future<dynamic> filterBottomSheet(BuildContext context) {
+Future<dynamic> filterBottomSheet(
+  BuildContext context, {
+  required TextEditingController fromPriceController,
+  required TextEditingController toPriceController,
+}) {
   return showModalBottomSheet(
     context: context,
     backgroundColor: AppColors.whiteColor,
@@ -29,43 +39,117 @@ Future<dynamic> filterBottomSheet(BuildContext context) {
     builder: (BuildContext contextt) => MultiBlocProvider(
       providers: [
         BlocProvider.value(value: context.read<SortSelectionBloc>()),
-        BlocProvider.value(value: context.read<PriceSelectionBloc>()),
         BlocProvider.value(value: context.read<CategorySelectionBloc>()),
         BlocProvider.value(value: context.read<BrandSelectionBloc>()),
+        BlocProvider.value(value: context.read<GetAllProductsBloc>()),
+        BlocProvider.value(value: context.read<GetAllBrandsBloc>()),
+        BlocProvider.value(value: context.read<GetOneCatelogeBloc>()),
+        BlocProvider.value(
+          value: context.read<SelectSubCategoryBloc>(),
+        ),
         BlocProvider(create: (context) => ToggleCubit()),
         BlocProvider(create: (context) => BrandExpandCubit()),
       ],
-      child: ListView(
+      child: Stack(
         children: [
-          //header arrowback,title and clean
-          _buildHeader(context, contextt),
-          //sort radio
-          const SortTile(),
-          //price textfield and  radio
-          PriceTile(contextt: contextt),
-          //category checkbox
-          const CategoryTile(),
-          //brandCheckBox
-          const BrandTile(),
-          //apply button
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: CustomButton(
-              width: MediaQuery.of(context).size.width * 0.8,
-              backColor: AppColors.purpleColor,
-              textColor: AppColors.whiteColor,
-              fontSize: AppFonts.fontSize16,
-              title:
-                  AppLocalization.of(context).getTransatedValues('apply') ?? '',
-              onTap: () {
-                context.read<SortSelectionBloc>().add(const ApplySortEvent());
-                context.read<PriceSelectionBloc>().add(const ApplyPriceEvent());
-                context
-                    .read<CategorySelectionBloc>()
-                    .add(const ApplyCategoryEvent());
-                context.read<BrandSelectionBloc>().add(const ApplyBrandEvent());
-              },
+          Padding(
+            padding:
+                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                //header arrowback,title and clean
+                _buildHeader(context, contextt),
+                //sort radio
+                const SortTile(),
+                //price textfield and  radio
+                PriceTile(
+                  contextt: contextt,
+                  toPriceController: toPriceController,
+                  fromPriceController: fromPriceController,
+                ),
+                //category checkbox
+                const CategoryTile(),
+                //brandCheckBox
+                const BrandTile(),
+              ],
             ),
+          ),
+          //apply button
+          BlocBuilder<BrandSelectionBloc, BrandSelectionState>(
+            builder: (context, brandState) {
+              return BlocBuilder<CategorySelectionBloc, CategorySelectionState>(
+                builder: (context, categoryState) {
+                  return BlocBuilder<SortSelectionBloc, SortSelectionState>(
+                    builder: (context, sortSelection) {
+                      return Positioned(
+                        bottom: kBottomNavigationBarHeight,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          child: CustomButton.text(
+                            borderRadius: AppBorders.borderRadius12,
+                            padding: const EdgeInsets.symmetric(vertical: 18),
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            backColor: AppColors.purpleColor,
+                            textColor: AppColors.whiteColor,
+                            fontSize: AppFonts.fontSize16,
+                            title: AppLocalization.of(context)
+                                    .getTransatedValues('apply') ??
+                                '',
+                            onTap: () {
+                              context
+                                  .read<SortSelectionBloc>()
+                                  .add(const ApplySortEvent());
+
+                              context
+                                  .read<CategorySelectionBloc>()
+                                  .add(const ApplyCategoryEvent());
+                              context
+                                  .read<BrandSelectionBloc>()
+                                  .add(const ApplyBrandEvent());
+                              context.read<SelectSubCategoryBloc>().add(
+                                    const SelectSubCategoryEvent(
+                                      pressedIndex: -1,
+                                    ),
+                                  );
+                              context.read<GetAllProductsBloc>().add(
+                                    GetProducts(
+                                      ordering: sortSelection.selectedTitle,
+                                      priceTo: int.parse(
+                                        toPriceController.text == ''
+                                            ? '0'
+                                            : toPriceController.text,
+                                      ),
+                                      priceFrom: int.parse(
+                                        fromPriceController.text == ''
+                                            ? '0'
+                                            : fromPriceController.text,
+                                      ),
+                                      categories: categoryState.categoryIdList
+                                          .map(
+                                            (e) => e['id'],
+                                          )
+                                          .toList(),
+                                      brands: brandState.brandIdList
+                                          .map(
+                                            (e) => e['id'],
+                                          )
+                                          .toList(),
+                                    ),
+                                  );
+
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+            },
           ),
         ],
       ),
@@ -98,7 +182,6 @@ Widget _buildHeader(BuildContext context, BuildContext contextt) {
       GestureDetector(
         onTap: () {
           context.read<SortSelectionBloc>().add(const CleanSortEvent());
-          context.read<PriceSelectionBloc>().add(const CleanPriceEvent());
           context.read<CategorySelectionBloc>().add(const CleanCategoryEvent());
           context.read<BrandSelectionBloc>().add(const CleanBrandEvent());
         },
@@ -123,24 +206,40 @@ class BrandTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildTile(
-      context: context,
-      titleKey: 'brands',
-      itemCount: brands.length,
-      items: brands,
-      itemBuilder: (context, index) {
-        return BlocBuilder<BrandSelectionBloc, BrandSelectionState>(
-          builder: (context, state) {
-            return CustomCheckBox(
-              isChecked: state.brandList
-                  .any((brand) => brand['name'] == brands[index]),
-              title: brands[index],
-              onChanged: (value) => context.read<BrandSelectionBloc>().add(
-                    ChooseBrandEvent(pressedBrandName: brands[index]),
-                  ),
-            );
-          },
-        );
+    return BlocBuilder<GetAllBrandsBloc, GetAllBrandsState>(
+      builder: (context, allBrandState) {
+        if (allBrandState is GetAllBrandsLoaded) {
+          return _buildTile(
+            context: context,
+            titleKey: 'brands',
+            itemCount: allBrandState.allBrandsList.length,
+            items: allBrandState.allBrandsList,
+            itemBuilder: (context, index) {
+              return BlocBuilder<BrandSelectionBloc, BrandSelectionState>(
+                builder: (context, state) {
+                  return CustomCheckBox(
+                    isChecked: state.brandList.any(
+                      (brand) =>
+                          brand['name'] ==
+                          allBrandState.allBrandsList[index].name,
+                    ),
+                    title: allBrandState.allBrandsList[index].name,
+                    onChanged: (value) =>
+                        context.read<BrandSelectionBloc>().add(
+                              ChooseBrandEvent(
+                                pressedBrandName:
+                                    allBrandState.allBrandsList[index].name,
+                                pressedBrandId:
+                                    allBrandState.allBrandsList[index].id,
+                              ),
+                            ),
+                  );
+                },
+              );
+            },
+          );
+        }
+        return const SizedBox.shrink();
       },
     );
   }
@@ -151,24 +250,58 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildTile(
-      context: context,
-      titleKey: 'categories',
-      itemCount: categories.length,
-      items: categories,
-      itemBuilder: (context, index) {
-        return BlocBuilder<CategorySelectionBloc, CategorySelectionState>(
-          builder: (context, state) {
-            return CustomCheckBox(
-              isChecked: state.categoryList
-                  .any((category) => category['name'] == categories[index]),
-              title: categories[index],
-              onChanged: (value) => context.read<CategorySelectionBloc>().add(
-                    ChooseCategoryEvent(pressedCategoryName: categories[index]),
-                  ),
-            );
-          },
-        );
+    return BlocBuilder<GetOneCatelogeBloc, GetOneCatelogeState>(
+      builder: (context, state) {
+        if (state is GetOneCatalogeError) {
+          return Column(
+            children: [
+              Animations.error,
+              Text(state.error ?? ''),
+              Text(
+                AppLocalization.of(context).getTransatedValues('error') ?? '',
+              ),
+            ],
+          );
+        } else if (state is GetOneCatelogeInitial ||
+            state is GetOneCatalogeLoading) {
+          return Center(
+            child: Animations.loading,
+          );
+        } else if (state is GetOneCatalogeLoaded) {
+          return _buildTile(
+            context: context,
+            titleKey: 'categories',
+            itemCount: state.getOneCatalogeList.subcategories!.length,
+            items: state.getOneCatalogeList.subcategories!,
+            itemBuilder: (context, index) {
+              return BlocBuilder<CategorySelectionBloc, CategorySelectionState>(
+                builder: (context, selectState) {
+                  return CustomCheckBox(
+                    isChecked: selectState.categoryList.any(
+                      (category) =>
+                          category['name'] ==
+                          state.getOneCatalogeList.subcategories![index].name,
+                    ),
+                    title: state.getOneCatalogeList.subcategories![index].name,
+                    onChanged: (value) =>
+                        context.read<CategorySelectionBloc>().add(
+                              ChooseCategoryEvent(
+                                pressedCategoryName: state.getOneCatalogeList
+                                        .subcategories![index].name ??
+                                    '',
+                                pressedCategoryId: state.getOneCatalogeList
+                                        .subcategories![index].id ??
+                                    '',
+                              ),
+                            ),
+                  );
+                },
+              );
+            },
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       },
     );
   }
@@ -178,14 +311,14 @@ Widget _buildTile({
   required BuildContext context,
   required String titleKey,
   required int itemCount,
-  required List<String> items,
+  required List<dynamic> items,
   required IndexedWidgetBuilder itemBuilder,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 14.w),
+        padding: const EdgeInsets.symmetric(horizontal: 14),
         child: Text(
           AppLocalization.of(context).getTransatedValues(titleKey) ?? '',
           style: TextStyle(
@@ -236,7 +369,15 @@ Widget _buildTile({
 
 class PriceTile extends StatelessWidget {
   final BuildContext contextt;
-  const PriceTile({required this.contextt, super.key});
+  final TextEditingController toPriceController;
+  final TextEditingController fromPriceController;
+
+  const PriceTile({
+    required this.contextt,
+    required this.toPriceController,
+    required this.fromPriceController,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +385,7 @@ class PriceTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.w),
+          padding: const EdgeInsets.symmetric(horizontal: 14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -256,58 +397,53 @@ class PriceTile extends StatelessWidget {
                   color: AppColors.darkPurpleColor,
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 33.h,
-                      child: CustomTextField.normal(
-                        hinText: AppLocalization.of(context)
-                                .getTransatedValues('to') ??
-                            '',
-                        borderColor: AppColors.grey1Color,
-                        backColor: AppColors.whiteColor,
-                        nonActiveBorderColor: AppColors.grey1Color,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
-                    child: SizedBox(
-                      height: 33.h,
-                      child: CustomTextField.normal(
-                        hinText: AppLocalization.of(context)
-                                .getTransatedValues('from') ??
-                            '',
-                        borderColor: AppColors.grey1Color,
-                        backColor: AppColors.whiteColor,
-                        nonActiveBorderColor: AppColors.grey1Color,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Column(
-          children: List.generate(
-            getPriceList(contextt).length,
-            (index) => BlocBuilder<PriceSelectionBloc, PriceSelectionState>(
-              builder: (context, state) {
-                return CustomRadio(
-                  title: getPriceList(contextt)[index],
-                  value: getPriceList(contextt)[index],
-                  groupValue: state.selectedPrice,
-                  fontSize: AppFonts.fontSize14,
-                  onChanged: (value) => context.read<PriceSelectionBloc>().add(
-                        ChoosePriceEvent(
-                          pressedTitle: value ?? getPriceList(contextt).last,
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 50,
+                        child: CustomTextField.normal(
+                          hintText: AppLocalization.of(context)
+                                  .getTransatedValues('from') ??
+                              '',
+                          borderColor: AppColors.grey1Color,
+                          backColor: AppColors.whiteColor,
+                          nonActiveBorderColor: AppColors.grey1Color,
+                          textEditingController: fromPriceController,
+                          keyboardType: TextInputType.number,
+                          rangeNumber: 6,
+                          onFieldSubmitted: (value) {
+                            fromPriceController.text = value;
+                          },
                         ),
                       ),
-                );
-              },
-            ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: SizedBox(
+                        height: 50,
+                        child: CustomTextField.normal(
+                          hintText: AppLocalization.of(context)
+                                  .getTransatedValues('to') ??
+                              '',
+                          borderColor: AppColors.grey1Color,
+                          backColor: AppColors.whiteColor,
+                          nonActiveBorderColor: AppColors.grey1Color,
+                          textEditingController: toPriceController,
+                          keyboardType: TextInputType.number,
+                          rangeNumber: 6,
+                          onFieldSubmitted: (value) {
+                            toPriceController.text = value;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
         const Divider(endIndent: 10, indent: 10),
@@ -329,16 +465,19 @@ class SortTile extends StatelessWidget {
       itemBuilder: (context, index) {
         return BlocBuilder<SortSelectionBloc, SortSelectionState>(
           builder: (context, state) {
-            return CustomRadio(
-              title: AppLocalization.of(context)
-                      .getTransatedValues(sortTitle[index]) ??
-                  '',
-              value: sortTitle[index],
-              groupValue: state.selectedTitle,
-              fontSize: AppFonts.fontSize14,
-              onChanged: (value) => context.read<SortSelectionBloc>().add(
-                    ChooseSortTitleEvent(pressedTitle: value ?? sortTitle[0]),
-                  ),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: CustomRadio(
+                title: AppLocalization.of(context)
+                        .getTransatedValues(sortTitle[index]) ??
+                    '',
+                value: sortTitle[index],
+                groupValue: state.selectedTitle,
+                fontSize: AppFonts.fontSize14,
+                onChanged: (value) => context.read<SortSelectionBloc>().add(
+                      ChooseSortTitleEvent(pressedTitle: value ?? sortTitle[0]),
+                    ),
+              ),
             );
           },
         );

@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halkmarket_ecommerce/data/models/cart_model.dart';
 import 'package:halkmarket_ecommerce/data/models/fav_model.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/product_card.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/category/categoryProfile_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/topTitle_tile.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class ProductsSlider extends StatelessWidget {
   final String topTitle;
   final List productList;
+  final int index;
+  final String? categoryId;
+
   const ProductsSlider({
     required this.topTitle,
     required this.productList,
+    required this.index,
+    required this.categoryId,
     super.key,
   });
 
@@ -20,12 +26,21 @@ class ProductsSlider extends StatelessWidget {
       children: [
         TopTitle(
           topTitle: topTitle,
-          onTap: () {},
+          onTap: () {
+            pushScreenWithNavBar(
+              context,
+              CategoryProfileScreen(
+                topTitle: topTitle,
+                categoryId: categoryId!,
+                brandId: '',
+              ),
+            );
+          },
           bottomMargin: 12,
           topMargin: 20,
         ),
         SizedBox(
-          height: 230.h,
+          height: 243,
           width: double.infinity,
           child: ListView.builder(
             shrinkWrap: true,
@@ -37,23 +52,25 @@ class ProductsSlider extends StatelessWidget {
                 index: index,
                 favItem: FavItem(
                   id: productList[index].id,
-                  isNew: productList[index].isNew,
-                  isSale: productList[index].isSale,
-                  image: productList[index].image,
+                  name: productList[index].name,
+                  image: productList[index].images,
                   price: productList[index].price,
-                  prevPrice: productList[index].prevPrice,
-                  desc: productList[index].desc,
-                  weight: productList[index].weight,
+                  desc: productList[index].description,
+                  shopId: productList[index].shopId,
+                  discount: productList[index].discount,
+                  amount: productList[index].amount,
+                  unit: productList[index].unit,
                 ),
                 cartItem: CartItem(
                   id: productList[index].id,
-                  isNew: productList[index].isNew,
-                  isSale: productList[index].isSale,
-                  image: productList[index].image,
+                  name: productList[index].name,
+                  image: productList[index].images,
                   price: productList[index].price,
-                  prevPrice: productList[index].prevPrice,
-                  desc: productList[index].desc,
-                  weight: productList[index].weight,
+                  desc: productList[index].description,
+                  shopId: productList[index].shopId,
+                  discount: productList[index].discount,
+                  amount: productList[index].amount,
+                  unit: productList[index].unit,
                 ),
               );
             },

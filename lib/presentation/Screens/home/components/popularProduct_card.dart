@@ -1,6 +1,7 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
+import 'package:halkmarket_ecommerce/data/endpoints.dart';
 
 class PopularProductsCard extends StatelessWidget {
   final String topTitle;
@@ -43,9 +44,9 @@ class PopularProductsCard extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: Image.asset(
-              image,
-              height: imageHeight.h,
+            child: ExtendedImage.network(
+              '${Endpoints().url}/$image',
+              height: imageHeight,
             ),
           ),
         ],

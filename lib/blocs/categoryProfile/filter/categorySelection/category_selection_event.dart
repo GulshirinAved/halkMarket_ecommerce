@@ -9,8 +9,10 @@ sealed class CategorySelectionEvent extends Equatable {
 
 class ChooseCategoryEvent extends CategorySelectionEvent {
   final String pressedCategoryName;
+  final String pressedCategoryId;
 
-  const ChooseCategoryEvent({required this.pressedCategoryName});
+  const ChooseCategoryEvent(
+      {required this.pressedCategoryName, required this.pressedCategoryId});
 }
 
 class ApplyCategoryEvent extends CategorySelectionEvent {
