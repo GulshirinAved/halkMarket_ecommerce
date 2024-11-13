@@ -12,8 +12,6 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
 
 # Screenshots
 
-
-
 <table>
   <tr>
     <td align="center">Home Screen</td>
@@ -27,13 +25,13 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
   </tr>
   <tr>
     <td align="center">Cart Screen</td>
-    <td align="center">Category Screen</td>
-    <td align="center">Map Screen</td>
+    <td align="center">Profile Screen</td>
+    <td align="center">Search Screen</td>
   </tr>
   <tr>
     <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Cart Screenshot" width="300" height="600"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Category Screenshot" width="300" height="600"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Map Screenshot" width="300" height="600"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/Profile%20btn-portrait.png?raw=true" alt="Profile Screenshot" width="300" height="600"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/search.png?raw=true" alt="Search Screenshot" width="300" height="600"></td>
   </tr>
 </table>
 
