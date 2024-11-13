@@ -126,4 +126,15 @@ lib
 │           │   ├───components
 │           │   └───utils
 │           ├───splash
-│           └───webview"""
+│           └───webview
+```
+# Installation
+
+To get started with the project, clone the repository and install the dependencies:
+
+```bash
+git https://github.com/GulshirinAved/halkMarket_ecommerce.git
+cd halkmarket_ecommerce
+flutter pub get
+flutter run
+```
