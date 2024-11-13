@@ -37,7 +37,6 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
 
 # Directory Structure
 
-"""
 lib
 │   ├───blocs
 │   │   ├───auth
@@ -128,4 +127,3 @@ lib
 │           │   └───utils
 │           ├───splash
 │           └───webview
-"""
