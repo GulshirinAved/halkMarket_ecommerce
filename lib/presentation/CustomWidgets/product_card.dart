@@ -176,14 +176,16 @@ class ProductCard extends StatelessWidget {
               ],
             ),
             //desc
-            Text(
-              favItem.name ?? '',
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: AppFonts.fontSize12,
-                color: AppColors.darkPurpleColor,
+            Expanded(
+              child: Text(
+                favItem.name ?? '',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: AppFonts.fontSize12,
+                  color: AppColors.darkPurpleColor,
+                ),
               ),
             ),
             //weight

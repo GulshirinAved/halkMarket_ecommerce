@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppLocalization.of(context).getTransatedValues('profile') ?? '',
             centerTitle: false,
             leadingWidth: 20,
+            titleTap: true,
             fontSize: AppFonts.fontSize15,
             textColor: AppColors.purpleColor,
             needBoxshadow: false,

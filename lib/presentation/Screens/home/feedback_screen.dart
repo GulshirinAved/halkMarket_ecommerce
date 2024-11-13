@@ -106,9 +106,16 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       },
                     ),
                     //phone field
-                    PhoneTextField(
-                      phoneController: phoneController,
-                      readOnly: true,
+                    BlocBuilder<UserProfileBloc, UserProfileState>(
+                      builder: (context, state) {
+                        return PhoneTextField(
+                          phoneController: phoneController,
+                          readOnly: state is UserProfileLoaded &&
+                                  state.userData.phone == ''
+                              ? true
+                              : false,
+                        );
+                      },
                     ),
                     //message
                     BlocBuilder<ValidateTextFieldBloc, ValidateTextFieldState>(

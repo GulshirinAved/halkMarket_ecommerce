@@ -14,7 +14,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           phone: event.phoneNumber,
           password: event.password,
         );
-        print('it is status code $statusCode');
 
         if (statusCode == 200 || statusCode == 201) {
           emit(RegisterLoaded(statusCode: statusCode!));

@@ -9,7 +9,7 @@ import 'package:halkmarket_ecommerce/presentation/Screens/home/payMethod_screen.
 import 'package:halkmarket_ecommerce/presentation/Screens/home/personalData_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/faq_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/support_screen.dart';
-import 'package:halkmarket_ecommerce/presentation/Screens/home/whereIsOrder_screen.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/home/trackOrder_screen.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/webview/webview_screen.dart';
 
 const String fontNunitoSans = 'NunitoSans';
@@ -44,7 +44,6 @@ const String eyeOffIcon = 'assets/icons/eyeOff.svg';
 const String trashIcon = 'assets/icons/trash.svg';
 const String cuteHeartIcon = 'assets/icons/cuteHeart.svg';
 const String cuteBoldHeartIcon = 'assets/icons/cuteBoldHeart.svg';
-const String gpsIcon = 'assets/icons/gps.svg';
 const String locateIcon = 'assets/icons/locate.svg';
 const String pencilIcon = 'assets/icons/pencil.svg';
 const String arrowUpIcon = 'assets/icons/arrowUp.svg';
@@ -149,7 +148,7 @@ final List<Map<String, dynamic>> longProfileCard = [
   {
     'icon': truckIcon,
     'title': 'whereMyOrder',
-    'screen': const WhereIsOrderScreen(),
+    'screen': const TrackOrderScreen(),
   },
   {
     'icon': mapPinnedIcon,
@@ -192,7 +191,6 @@ final List<Map<String, dynamic>> longProfileCard = [
 ];
 final List<Map<String, dynamic>> profile2Card = [
   {'icon': globeIcon, 'title': 'lang'},
-  {'icon': moonIcon, 'title': 'theme'},
 ];
 final List<String> cartBill = [
   'productQuantity',

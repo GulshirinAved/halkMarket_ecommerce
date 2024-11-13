@@ -517,6 +517,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.2"
+  image:
+    dependency: transitive
+    description:
+      name: image
+      sha256: f31d52537dc417fdcde36088fdf11d191026fd5e4fae742491ebd40e5a8bea7d
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.3.0"
   image_picker:
     dependency: "direct main"
     description:
@@ -598,7 +606,7 @@ packages:
     source: hosted
     version: "0.6.7"
   latlong2:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: latlong2
       sha256: "98227922caf49e6056f91b6c56945ea1c7b166f28ffcd5fb8e72fc0b453cc8fe"
@@ -669,6 +677,30 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.2"
+  maplibre_gl:
+    dependency: "direct main"
+    description:
+      name: maplibre_gl
+      sha256: ea2fa443e7d5dc18db7f37a0f6f5af40642888c56b81a14441aeddea077adaea
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.20.0"
+  maplibre_gl_platform_interface:
+    dependency: transitive
+    description:
+      name: maplibre_gl_platform_interface
+      sha256: "718c3503f36936fbf35c34d6ddf8bf770474c5ba1e6cb1d8caece44efae424af"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.20.0"
+  maplibre_gl_web:
+    dependency: transitive
+    description:
+      name: maplibre_gl_web
+      sha256: e7d71b08f24dca70e9c9cf841b096704a677e6239447d87220ec071355768149
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.20.0"
   matcher:
     dependency: transitive
     description:
@@ -906,6 +938,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  socket_io_client:
+    dependency: "direct main"
+    description:
+      name: socket_io_client
+      sha256: "98d4ad59316c359cf0a80380b068c53cd50fa425c73da12a672543715fe36f9c"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
+  socket_io_common:
+    dependency: transitive
+    description:
+      name: socket_io_common
+      sha256: "41fdf2d333d1f8209d9c39885c2805141afc570df6bd93ae791e12e271e2e42c"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   source_span:
     dependency: transitive
     description:

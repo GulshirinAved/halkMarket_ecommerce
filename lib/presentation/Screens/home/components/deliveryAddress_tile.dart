@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +34,7 @@ class DeliveryAddressTile extends StatelessWidget {
           child: SvgPicture.asset(userIcon),
         ),
       ),
-      // add delivery address  button
+      // add delivery address button
       title: GestureDetector(
         onTap: () {
           LocationBottomsheet().addAddressBottomsheet(context);
@@ -46,7 +44,6 @@ class DeliveryAddressTile extends StatelessWidget {
           children: [
             BlocBuilder<LocationAddBloc, LocationAddState>(
               builder: (context, state) {
-                log('here it is home page ${state.selectedRadioValue.toString()}');
                 return Flexible(
                   child: Text(
                     state.selectedRadioValue != ''
@@ -68,10 +65,6 @@ class DeliveryAddressTile extends StatelessWidget {
             SvgPicture.asset(arrowRightIcon),
           ],
         ),
-      ),
-      trailing: GestureDetector(
-        onTap: () {},
-        child: SvgPicture.asset(locationIcon),
       ),
     );
   }

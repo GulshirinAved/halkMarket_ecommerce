@@ -14,7 +14,7 @@ class SmallTitleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 16,
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 3,
       ),

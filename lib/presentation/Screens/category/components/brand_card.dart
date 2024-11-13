@@ -18,6 +18,7 @@ class BrandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         pushScreenWithNavBar(
@@ -42,9 +43,9 @@ class BrandCard extends StatelessWidget {
               height: 80,
               width: 80,
             ),
-            const Divider(
-              endIndent: 5,
-              indent: 5,
+            Divider(
+              endIndent: size.width * 0.02,
+              indent: size.width * 0.02,
             ),
             Text(
               brandList[index].name,

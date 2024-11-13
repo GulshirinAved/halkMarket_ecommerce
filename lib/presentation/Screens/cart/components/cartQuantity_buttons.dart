@@ -18,7 +18,7 @@ class CartQuantityButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CartCountButton(
           needShadow: isCart!,

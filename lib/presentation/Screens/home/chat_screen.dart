@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:extended_image/extended_image.dart';
@@ -90,7 +89,6 @@ class _ChatScreenState extends State<ChatScreen>
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           _scrollToBottom();
                         });
-                        log('Displaying messages: //${state.messages}');
 
                         return ListView.builder(
                           controller: scrollController,
@@ -210,7 +208,6 @@ class _ChatScreenState extends State<ChatScreen>
                       ),
                       suffixWidget: IconButton(
                         onPressed: () {
-                          log('image ${imageState.file?.path}');
                           final messageText = messageController.text;
                           if (messageText.isNotEmpty) {
                             context.read<ChatBloc>().add(

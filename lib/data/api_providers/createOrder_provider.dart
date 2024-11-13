@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
@@ -18,10 +17,7 @@ class CreateOrderProvider {
         data: json.encode(postData),
         options: Options(headers: headers),
       );
-      log('it is create order $postData');
       if (response.data['statusCode'] == 200) {
-        log('it is create order $postData');
-
         return true;
       }
 

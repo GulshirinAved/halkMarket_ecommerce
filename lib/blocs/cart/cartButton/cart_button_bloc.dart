@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
@@ -21,7 +19,6 @@ class CartButtonBloc extends Bloc<CartButtonEvent, CartButtonState> {
     on<AddCartEvent>((event, emit) async {
       final updatedList = List<CartItem>.from(state.cartList)
         ..add(event.cartItem);
-      log('it is added ${event.cartItem.id}');
       await box.put(
         'cartList',
         updatedList.map((item) => item.toJson()).toList(),
@@ -122,7 +119,6 @@ class CartButtonBloc extends Bloc<CartButtonEvent, CartButtonState> {
           .map((item) => CartItem.fromJson(item))
           .toList();
       final sum = _calculateSum(loadedList);
-      print('it is sum $sum');
       emit(SumProductState(cartList: loadedList, sum: sum));
     });
   }
@@ -147,9 +143,7 @@ class CartButtonBloc extends Bloc<CartButtonEvent, CartButtonState> {
             productId: cartItem.id,
             quantity: cartItem.quantity,
           );
-          if (!success) {
-            // Handle API error: add a snackbar or other feedback
-          }
+          if (!success) {}
           break;
         case CartAction.increaseQuantity:
           final success = await basketRepository.addBasket(
@@ -157,26 +151,19 @@ class CartButtonBloc extends Bloc<CartButtonEvent, CartButtonState> {
             productId: cartItem.id,
             quantity: cartItem.quantity + 1,
           );
-          if (!success) {
-            // Handle API error
-          }
+          if (!success) {}
           break;
         case CartAction.decreaseQuantity:
           final success = await basketRepository.removeProduct(id: cartItem.id);
-          if (!success) {
-            // Handle API error
-          }
+          if (!success) {}
           break;
         case CartAction.remove:
           final success = await basketRepository.removeProduct(id: cartItem.id);
-          if (!success) {
-            // Handle API error
-          }
+          if (!success) {}
           break;
         default:
       }
     } catch (e) {
-      // Handle API errors
       print('Error updating basket: $e');
     }
   }

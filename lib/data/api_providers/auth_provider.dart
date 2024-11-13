@@ -94,17 +94,7 @@ class AuthProvider {
           'password': password ?? '',
         }),
       );
-      print({
-        'phone': phone ?? '+99365671855',
-        'name': name ?? 'Gulshirin',
-        'address': address ?? 'some text data',
-        'birthday': birthday ?? '1991-01-01',
-        'email': email,
-        'gender': gender ?? 'male',
-        'password': password ?? '',
-      });
-      log(response.statusCode.toString());
-      print(response.data['statusCode']);
+      log(response.data['statusCode'].runtimeType.toString());
       return response.data['statusCode'];
     } catch (e) {
       throw Exception(e.toString());
@@ -117,9 +107,7 @@ class AuthProvider {
         Endpoints().otp,
         data: json.encode({'phone': phone, 'otp': otp}),
       );
-      log(
-        ' data: json.encode({phone: $phone, otp: $otp}),',
-      );
+
       if (response.statusCode == 201) {
         final Map<String, dynamic>? data =
             response.data['data'] as Map<String, dynamic>?;
@@ -131,14 +119,18 @@ class AuthProvider {
         if (user != null && token != null) {
           final accessToken = token['access'];
           final refreshToken = token['refresh'];
+          final userId = user['id'];
 
           if (accessToken != null && refreshToken != null) {
             await authBox.put('accessToken', accessToken);
             await authBox.put('refreshToken', refreshToken);
+            await authBox.put('userId', userId);
           }
         } else {
           throw Exception('Invalid response data. Missing user or token.');
         }
+        log(response.statusCode.toString());
+
         return response.data['statusCode'] as int?;
       } else {
         throw Exception(
@@ -146,6 +138,8 @@ class AuthProvider {
         );
       }
     } catch (e) {
+      log(e.toString());
+
       throw Exception('Error during OTP request: ${e.toString()}');
     }
   }
@@ -156,16 +150,18 @@ class AuthProvider {
         Endpoints().signIn,
         data: json.encode({'phone': phone, 'password': password}),
       );
-      log('{phone: $phone, password: $password}');
 
       if (response.statusCode == 201) {
         final data = response.data['data'];
         if (data != null) {
           final accessToken = data['token']?['access'];
           final refreshToken = data['token']?['refresh'];
+          final userId = data['user']?['id'];
+
           if (accessToken != null && refreshToken != null) {
             await authBox.put('accessToken', accessToken);
             await authBox.put('refreshToken', refreshToken);
+            await authBox.put('userId', userId);
           }
         }
       }
@@ -192,16 +188,18 @@ class AuthProvider {
         data: json.encode(responseData),
         options: Options(headers: headers),
       );
-      log('it is chnage pass ${response.data['statusCode']}');
 
       if (response.data['statusCode'] == 200) {
         final data = response.data['data'];
         if (data != null) {
           final accessToken = data['token']?['access'];
           final refreshToken = data['token']?['refresh'];
+          final userId = data['user']?['id'];
+
           if (accessToken != null && refreshToken != null) {
             await authBox.put('accessToken', accessToken);
             await authBox.put('refreshToken', refreshToken);
+            await authBox.put('userId', userId);
           }
         }
         return Data.fromJson(data);
@@ -219,9 +217,12 @@ class AuthProvider {
             if (data != null) {
               final accessToken = data['token']?['access'];
               final refreshToken = data['token']?['refresh'];
+              final userId = data['user']?['id'];
+
               if (accessToken != null && refreshToken != null) {
                 await authBox.put('accessToken', accessToken);
                 await authBox.put('refreshToken', refreshToken);
+                await authBox.put('userId', userId);
               }
             }
             return Data.fromJson(data);
@@ -246,11 +247,8 @@ class AuthProvider {
         data: json.encode({'phone': phone, 'password': password}),
       );
       final int statusCode = response.data['statusCode'];
-      log(json.encode({'phone': phone, 'password': password}));
-      log(statusCode.toString());
       return statusCode;
     } catch (e) {
-      log(e.toString());
       throw Exception(e.toString());
     }
   }
@@ -265,13 +263,10 @@ class AuthProvider {
     try {
       final Map<String, dynamic> requestData = {
         'name': name,
-        'phone': phone,
         'email': email,
         'birthday': birthday,
         'gender': gender,
       };
-      print('huhuu');
-      log(requestData.toString());
 
       final headers = {
         'Content-Type': 'application/json',
@@ -284,8 +279,7 @@ class AuthProvider {
         data: json.encode(requestData),
         options: Options(headers: headers),
       );
-      print(requestData);
-      log(requestData.toString());
+
       if (response.statusCode == 201) {
         final data = response.data['data'];
 
@@ -343,6 +337,10 @@ class AuthProvider {
 
   String? getRefreshToken() {
     return authBox.get('refresh');
+  }
+
+  String? getUserId() {
+    return authBox.get('userId');
   }
 
   Future<Data> getUserProfile() async {

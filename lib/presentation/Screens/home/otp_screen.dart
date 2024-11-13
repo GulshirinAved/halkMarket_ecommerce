@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,6 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
               AppLocalization.of(context).getTransatedValues('profile') ?? '',
           centerTitle: false,
           leadingWidth: 20,
+          titleTap: true,
           fontSize: AppFonts.fontSize15,
           textColor: AppColors.purpleColor,
           needBoxshadow: false,
@@ -139,11 +142,12 @@ class _OtpScreenState extends State<OtpScreen> {
                         } else {
                           focusNodes[index].unfocus();
                         }
-                        saveOtpInputBloc.add(AddCodeEvent(otpCode: value));
+                        saveOtpInputBloc
+                            .add(AddCodeEvent(otpCode: value, index: index));
                       } else if (value.isEmpty && index > 0) {
                         FocusScope.of(context)
                             .requestFocus(focusNodes[index - 1]);
-                        saveOtpInputBloc.add(RemoveCodeEvent(otpCode: value));
+                        saveOtpInputBloc.add(RemoveCodeEvent(index: index));
                       }
                     },
                     onFieldSubmitted: (value) {
@@ -197,6 +201,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                   .getTransatedValues('confirmCode') ??
                               '',
                           onTap: () {
+                            log(inputState.otpCode!.length.toString());
                             if (inputState.otpCode!.length != 4) {
                               Animations().snackbar(
                                 context,

@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:geocode/geocode.dart';
 import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
 import 'package:halkmarket_ecommerce/data/api_repositories/auth_repository.dart';
 import 'package:halkmarket_ecommerce/data/api_repositories/userAddress_repository.dart';
-import 'package:halkmarket_ecommerce/data/models/updateUserData_model.dart';
 import 'package:hive/hive.dart';
 
 part 'location_add_event.dart';
@@ -35,54 +32,36 @@ class LocationAddBloc extends Bloc<LocationAddEvent, LocationAddState> {
           ),
         ) {
     on<SaveAddressEvent>((event, emit) async {
-      final GeoCode geoCode = GeoCode();
-      double latitude = 0.0;
-      double longitude = 0.0;
-
       try {
-        final Coordinates coordinates = await geoCode.forwardGeocoding(
+        // Get coordinates
+        final GeoCode geoCode = GeoCode();
+        final coordinates = await geoCode.forwardGeocoding(
           address: event.address.toString(),
         );
-        latitude = coordinates.latitude ?? 0;
-        longitude = coordinates.longitude ?? 0;
-      } catch (e) {
-        print('Failed to get coordinates: $e');
-      }
 
-      final List<Map<String, dynamic>> currentList =
-          List<Map<String, dynamic>>.from(
-        (addressBox.get('addressBox', defaultValue: <Map<String, dynamic>>[])
-                as List)
-            .map((item) => Map<String, dynamic>.from(item)),
-      );
+        final newAddress = {
+          'address': event.address,
+          'apartment': event.apartment,
+          'entrance': event.entrance,
+          'floor': event.floor,
+          'comment': event.comment,
+          'latitude': coordinates.latitude?.toString() ?? '0.0',
+          'longitude': coordinates.longitude?.toString() ?? '0.0',
+        };
 
-      final newAddress = {
-        'address': event.address,
-        'apartment': event.apartment,
-        'entrance': event.entrance,
-        'floor': event.floor,
-        'comment': event.comment,
-        'latitude': latitude.toString(),
-        'longitude': longitude.toString(),
-      };
+        // Get current list and check for duplicates
+        final List<Map<String, dynamic>> currentList =
+            List<Map<String, dynamic>>.from(
+          addressBox.get('addressBox', defaultValue: <Map<String, dynamic>>[]),
+        );
 
-// Check if the address already exists in the list
-      final bool addressExists = currentList.any(
-        (item) =>
-            item['address'] == event.address &&
-            item['apartment'] == event.apartment &&
-            item['entrance'] == event.entrance &&
-            item['floor'] == event.floor &&
-            item['comment'] == event.comment,
-      );
+        if (!_addressExists(currentList, newAddress)) {
+          // Add to local storage
+          currentList.add(newAddress);
+          await addressBox.put('addressBox', currentList);
 
-      if (!addressExists) {
-        currentList.add(newAddress);
-        await addressBox.put('addressBox', currentList);
-
-// Check if token is available
-        if (token != null) {
-          try {
+          // Sync with backend if logged in
+          if (token != null) {
             await userAddressRepository.addAddress(
               id: '',
               address: event.address ?? '',
@@ -90,46 +69,57 @@ class LocationAddBloc extends Bloc<LocationAddEvent, LocationAddState> {
               entrance: event.entrance ?? '',
               floor: event.floor ?? '',
               comment: event.comment ?? '',
-              latitude: latitude.toString(),
-              longitude: longitude.toString(),
+              latitude: newAddress['latitude']!,
+              longitude: newAddress['longitude']!,
             );
-          } catch (e) {
-// Handle error
-            print('Failed to save address to backend: $e');
           }
+
+          // Emit new state with updated list
+          emit(
+            SaveAddressState(
+              savedLocation: currentList,
+              selectedRadioValue:
+                  addressBox.get('selectedAddress', defaultValue: ''),
+            ),
+          );
         }
+      } catch (e) {
+        print('Error saving address: $e');
+        // Consider emitting an error state here
       }
     });
 
     on<ShowSavedLocationEvent>((event, emit) async {
-      if (token != null) {
-        final Data addressData = await authRepository.getUserProfile();
-        final locationList = addressData.address!;
-        final List<Map<String, dynamic>> locationMapList =
-            locationList.map((address) => address.toJson()).toList();
-        await addressBox.put('addressBox', locationMapList);
-        log('it is showSavedLocEvent${addressBox.get('selectedAddress', defaultValue: '')}');
+      try {
+        List<Map<String, dynamic>> locationList;
+
+        if (token != null) {
+          // Get from backend if logged in
+          final addressData = await authRepository.getUserProfile();
+          locationList = addressData.address
+                  ?.map((address) => address.toJson())
+                  .toList() ??
+              [];
+          // Update local storage with backend data
+          await addressBox.put('addressBox', locationList);
+        } else {
+          // Get from local storage if not logged in
+          locationList = List<Map<String, dynamic>>.from(
+            addressBox
+                .get('addressBox', defaultValue: <Map<String, dynamic>>[]),
+          );
+        }
+
         emit(
           SaveAddressState(
-            savedLocation: locationMapList,
+            savedLocation: locationList,
             selectedRadioValue:
                 addressBox.get('selectedAddress', defaultValue: ''),
           ),
         );
-      } else {
-        emit(
-          SaveAddressState(
-            savedLocation: List<Map<String, dynamic>>.from(
-              (addressBox.get(
-                'addressBox',
-                defaultValue: <Map<String, dynamic>>[],
-              ) as List)
-                  .map((item) => Map<String, dynamic>.from(item))
-                  .toList(),
-            ),
-            selectedRadioValue: state.selectedRadioValue,
-          ),
-        );
+      } catch (e) {
+        print('Error loading addresses: $e');
+        // Consider emitting an error state here
       }
     });
 
@@ -149,7 +139,6 @@ class LocationAddBloc extends Bloc<LocationAddEvent, LocationAddState> {
         'comment': event.comment,
       };
 
-// Custom comparison to find and remove the address
       currentList.removeWhere(
         (item) =>
             item['address'] == newAddress['address'] &&
@@ -173,7 +162,6 @@ class LocationAddBloc extends Bloc<LocationAddEvent, LocationAddState> {
             id: event.id!,
           );
         } catch (e) {
-// Handle error
           print('Failed to save address to backend: $e');
         }
       }
@@ -194,7 +182,6 @@ class LocationAddBloc extends Bloc<LocationAddEvent, LocationAddState> {
 
     on<ToggleAddressEvent>((event, emit) {
       addressBox.put('selectedAddress', event.selectedValue);
-      log('it is toggle ${addressBox.get('selectedAddress', defaultValue: '')}');
 
       emit(
         SaveAddressState(
@@ -204,5 +191,17 @@ class LocationAddBloc extends Bloc<LocationAddEvent, LocationAddState> {
         ),
       );
     });
+  }
+  bool _addressExists(
+    List<Map<String, dynamic>> list,
+    Map<String, dynamic> newAddress,
+  ) {
+    return list.any(
+      (item) =>
+          item['address'] == newAddress['address'] &&
+          item['apartment'] == newAddress['apartment'] &&
+          item['entrance'] == newAddress['entrance'] &&
+          item['floor'] == newAddress['floor'],
+    );
   }
 }

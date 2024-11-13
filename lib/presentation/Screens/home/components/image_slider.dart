@@ -24,7 +24,7 @@ class ImageSlider extends StatelessWidget {
         Container(
           height: 390,
           width: 390,
-          margin: EdgeInsets.only(bottom: 5),
+          margin: const EdgeInsets.only(bottom: 5),
           child: PageView.builder(
             controller: _pageController,
             itemCount: imageList.length,
@@ -55,7 +55,7 @@ class ImageSlider extends StatelessWidget {
           ),
         ),
         imageList.length == 1
-            ? SizedBox.shrink()
+            ? const SizedBox.shrink()
             : Positioned(
                 bottom: 20,
                 child: Row(
@@ -91,7 +91,7 @@ class ImageSlider extends StatelessWidget {
                                 style: BorderStyle.solid,
                               ),
                             ),
-                            margin: EdgeInsets.only(right: 5),
+                            margin: const EdgeInsets.only(right: 5),
                           ),
                         );
                       },

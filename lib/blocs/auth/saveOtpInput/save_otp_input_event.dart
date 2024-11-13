@@ -10,14 +10,13 @@ sealed class SaveOtpInputEvent extends Equatable {
 
 class AddCodeEvent extends SaveOtpInputEvent {
   final String otpCode;
-  const AddCodeEvent({
-    required this.otpCode,
-  });
+  final int index;
+
+  const AddCodeEvent({required this.otpCode, required this.index});
 }
 
 class RemoveCodeEvent extends SaveOtpInputEvent {
-  final String otpCode;
-  const RemoveCodeEvent({
-    required this.otpCode,
-  });
+  final int index;
+
+  const RemoveCodeEvent({required this.index});
 }

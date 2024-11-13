@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/endpoints.dart';
@@ -24,6 +23,7 @@ class GetAllProductsProvider {
       'Accept-Language': langBox.get('lang') ?? 'tr',
       'Content-Type': 'application/json; charset=UTF-8',
     };
+
     try {
       final Response response = await dio.post(
         Endpoints().allProducts,
@@ -47,23 +47,7 @@ class GetAllProductsProvider {
       if (response.statusCode == 201) {
         final List<dynamic> products =
             response.data['data']['rows'].map((e) => Row.fromJson(e)).toList();
-        log(
-          (
-            {
-              'categories': categories,
-              'brands': brands,
-              'shops': shops,
-              'priceFrom': priceFrom,
-              'priceTo': priceTo,
-              'ordering': ordering,
-              'search': search,
-              'page': page,
-              'pageSize': 10,
-              'discount': discount,
-              'isLiked': false,
-            },
-          ).toString(),
-        );
+
         return products;
       } else {
         return [];

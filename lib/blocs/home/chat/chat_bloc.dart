@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -23,17 +22,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
     on<GetRoomMessages>((event, emit) async {
       try {
-        // Check if the access token is available
         final String? accessToken = AuthProvider().getAccessToken();
 
         if (accessToken == null || accessToken.isEmpty) {
-          // If there's no access token, get the device ID asynchronously
           roomId = await AuthProvider().getDeviceId();
         } else {
-          // If access token exists, fetch the user profile asynchronously
           final userProfile = await AuthProvider().getUserProfile();
-          roomId =
-              userProfile.id; // Assuming userProfile has a field called 'id'
+          roomId = userProfile.id;
         }
 
         if (roomId == null) {
@@ -41,7 +36,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           return;
         }
 
-        // Send WebSocket request to find messages for the user/device
         final request = {
           'event': 'findOneChat',
           'data': {
@@ -50,8 +44,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         };
 
         webSocketService.sendMessage(request);
-        log('Requesting messages for id: $roomId');
-        emit(ChatLoading()); // Emit loading state while fetching messages
+        emit(ChatLoading());
       } catch (e) {
         emit(ChatError('Failed to fetch messages: $e'));
       }
@@ -72,8 +65,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       };
 
       messages.insert(0, message);
-      log(messages.toString());
-      emit(ChatLoaded(messages: List.from(messages))); // Emit updated state
+      emit(ChatLoaded(messages: List.from(messages)));
 
       final wsMessage = {
         'event': 'create-message',
@@ -107,7 +99,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (decodedMessage['event'] == 'greeting') {
         if (roomId == null) {
           roomId = decodedMessage['data']['roomId'];
-          log('Received roomId: $roomId');
           add(const GetRoomMessages());
         }
       }
@@ -131,8 +122,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           ),
         );
       }
-
-      log('Received message: ${decodedMessage['event']} for roomId: $roomId');
     });
   }
 }

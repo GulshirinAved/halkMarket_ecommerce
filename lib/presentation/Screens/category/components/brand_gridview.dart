@@ -13,25 +13,31 @@ class BrandGridview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return Column(
       children: [
         TopTitle(
           needArrow: false,
           topTitle: brandList[index].name,
           onTap: () {},
-          topMargin: 20,
-          bottomMargin: 5,
+          topMargin: screenSize.height * 0.025,
+          bottomMargin: screenSize.height * 0.006,
         ),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15),
-          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: screenSize.width * 0.04),
+          padding: EdgeInsets.symmetric(
+            vertical: screenSize.height * 0.006,
+            horizontal: screenSize.width * 0.03,
+          ),
+          width: screenSize.width,
           child: GridView.builder(
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
+              crossAxisSpacing: screenSize.width * 0.02,
+              mainAxisSpacing: screenSize.width * 0.02,
+              childAspectRatio: 0.85,
             ),
             itemCount: brandList.length,
             shrinkWrap: true,

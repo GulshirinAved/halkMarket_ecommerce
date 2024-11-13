@@ -1,6 +1,7 @@
 class Endpoints {
   final String url = 'http://216.250.13.221:8091/magaz';
   final String webSocketUrl = 'ws://216.250.13.221:8088';
+  final String socketUrl = 'http://216.250.13.221:9091/location';
   String get home => '$url/api/home';
   String category({required int page}) =>
       '$url/category/?page=$page&pageSize=10';

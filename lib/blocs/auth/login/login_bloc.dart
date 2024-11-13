@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:halkmarket_ecommerce/data/api_repositories/auth_repository.dart';
@@ -17,16 +15,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           password: event.password,
         );
         if (statusCode == 200 || statusCode == 201) {
-          log(statusCode.toString());
           emit(LoginLoaded(statusCode: statusCode!));
         } else {
-          log(statusCode.toString());
-
           emit(LoginFailure(statusCode: statusCode!));
         }
       } catch (e) {
-        log(e.toString());
-
         Exception(e);
       }
     });

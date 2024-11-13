@@ -209,6 +209,9 @@ class ReadyOrderButton extends StatelessWidget {
           vertical: 15,
           horizontal: 5,
         ),
+        margin: const EdgeInsets.only(
+          bottom: 15,
+        ),
         decoration: BoxDecoration(
           color: AppColors.purpleColor,
           borderRadius: AppBorders.borderRadius12,
@@ -221,18 +224,20 @@ class ReadyOrderButton extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              AppLocalization.of(context).getTransatedValues(
-                    'orderReady',
-                  ) ??
-                  '',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: AppFonts.fontSize16,
-                color: AppColors.whiteColor,
-                overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: Text(
+                AppLocalization.of(context).getTransatedValues(
+                      'orderReady',
+                    ) ??
+                    '',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: AppFonts.fontSize16,
+                  color: AppColors.whiteColor,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
             Text(

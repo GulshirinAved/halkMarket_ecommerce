@@ -19,6 +19,7 @@ import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_appBar.da
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/fav_button.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/product_card.dart';
+import 'package:halkmarket_ecommerce/presentation/Screens/cart/components/cartQuantity_buttons.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/expandable_text.dart';
 import 'package:halkmarket_ecommerce/presentation/Screens/home/components/image_slider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -151,6 +152,7 @@ class _ProductProfileScreenState extends State<ProductProfileScreen> {
                           ],
                         ),
                         //add cart button
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -160,34 +162,44 @@ class _ProductProfileScreenState extends State<ProductProfileScreen> {
                                   (item) => item?.id == widget.cartItem.id,
                                 );
                                 return Container(
-                                  height: 44,
                                   padding: const EdgeInsets.only(right: 20),
                                   width: MediaQuery.of(context).size.width - 85,
-                                  child: CustomButton.text(
-                                    width: double.infinity,
-                                    backColor: AppColors.purpleColor,
-                                    textColor: AppColors.whiteColor,
-                                    fontSize: AppFonts.fontSize16,
-                                    title: AppLocalization.of(context)
-                                            .getTransatedValues('addCart') ??
-                                        '',
-                                    onTap: () {
-                                      if (!isItemInCart) {
-                                        context.read<CartButtonBloc>().add(
-                                              AddCartEvent(
-                                                cartItem: widget.cartItem,
-                                              ),
-                                            );
-                                        Animations()
-                                            .snackbar(context, 'addedToCart');
-                                      }
-                                    },
-                                    borderRadius: AppBorders.borderRadius12,
-                                    padding: const EdgeInsets.only(
-                                      top: 10,
-                                      bottom: 13,
-                                    ),
-                                  ),
+                                  child: isItemInCart
+                                      ? CartQuantityButtons(
+                                          cartItem: widget.cartItem,
+                                        )
+                                      : CustomButton.text(
+                                          width: double.infinity,
+                                          backColor: AppColors.purpleColor,
+                                          textColor: AppColors.whiteColor,
+                                          fontSize: AppFonts.fontSize16,
+                                          title: AppLocalization.of(context)
+                                                  .getTransatedValues(
+                                                'addCart',
+                                              ) ??
+                                              '',
+                                          onTap: () {
+                                            if (!isItemInCart) {
+                                              context
+                                                  .read<CartButtonBloc>()
+                                                  .add(
+                                                    AddCartEvent(
+                                                      cartItem: widget.cartItem,
+                                                    ),
+                                                  );
+                                              Animations().snackbar(
+                                                context,
+                                                'addedToCart',
+                                              );
+                                            }
+                                          },
+                                          borderRadius:
+                                              AppBorders.borderRadius12,
+                                          padding: const EdgeInsets.only(
+                                            top: 10,
+                                            bottom: 13,
+                                          ),
+                                        ),
                                 );
                               },
                             ),

@@ -53,14 +53,6 @@ class SubCategoryContent extends StatelessWidget {
                           value: entry.id!,
                           headerBuilder: (context, isExpanded) => ListTile(
                             contentPadding: EdgeInsets.zero,
-                            trailing: entry.subcategories!.isEmpty
-                                ? const SizedBox.shrink()
-                                : Icon(
-                                    isExpanded
-                                        ? Icons.keyboard_arrow_up
-                                        : Icons.keyboard_arrow_down,
-                                    color: AppColors.purpleColor,
-                                  ),
                             title: Text(
                               entry.name!,
                               style: TextStyle(

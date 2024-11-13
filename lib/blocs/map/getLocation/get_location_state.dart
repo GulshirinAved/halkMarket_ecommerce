@@ -1,4 +1,4 @@
-import 'package:latlong2/latlong.dart';
+import 'package:maplibre_gl/maplibre_gl.dart';
 
 class LocationState {
   final LatLng? location;
@@ -15,6 +15,7 @@ class LocationState {
     LatLng? location,
     int? showCurrentLocation,
     String? address,
+    Symbol? lastSymbol,
   }) {
     return LocationState(
       location: location ?? this.location,

@@ -86,6 +86,8 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(backgroundNotificationHandler);
 
   log(AuthProvider().getAccessToken().toString());
+  log(AuthProvider().getUserId().toString());
+
   runApp(
     const MyApp(),
   );
@@ -104,11 +106,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    String? token;
-    FirebaseMessaging.instance.getToken().then((value) {
-      token = value;
-      log('it is fcmtoken $token');
-    });
+
     print(AuthProvider().getAccessToken());
     FCMConfig().requestPermission();
     FCMConfig().subscribeToTopic('halk_market');

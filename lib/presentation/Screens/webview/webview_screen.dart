@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:halkmarket_ecommerce/presentation/CustomWidgets/animations.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class WebViewScreen extends StatefulWidget {
 
 class _WebViewScreenState extends State<WebViewScreen> {
   late WebViewController controller;
-  var loadingPercentage = 0;
+  bool isloading = true;
   final Dio dio = Dio();
 
   @override
@@ -33,19 +34,21 @@ class _WebViewScreenState extends State<WebViewScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (url) {
-            setState(() {
-              loadingPercentage = 0;
-            });
+            if (mounted) {
+              setState(() {
+                isloading = true;
+              });
+            }
           },
           onProgress: (progress) {
-            setState(() {
-              loadingPercentage = progress;
-            });
+            if (mounted) {
+              isloading = true;
+            }
           },
           onPageFinished: (url) {
-            setState(() {
-              loadingPercentage = 100;
-            });
+            if (mounted) {
+              isloading = false;
+            }
           },
           onWebResourceError: (error) {
             print('WebView encountered an error: $error');
@@ -59,7 +62,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   Future<void> _loadWebViewContent() async {
     try {
       final response = await dio.get(widget.path);
-      controller.loadRequest(
+      await controller.loadRequest(
         Uri.dataFromString(
           response.data,
           mimeType: 'text/html',
@@ -77,11 +80,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
       body: Stack(
         children: [
           WebViewWidget(controller: controller),
-          if (loadingPercentage < 100)
-            LinearProgressIndicator(
-              color: Colors.purple,
-              value: loadingPercentage / 100.0,
-            ),
+          if (isloading == true) Animations.loading,
         ],
       ),
     );

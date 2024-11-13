@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
@@ -96,7 +95,6 @@ class BasketProvider {
               (e) => Row.fromJson(e),
             )
             .toList();
-        log('it is egget hisory $orderList');
         return orderList;
       } else {
         return [];

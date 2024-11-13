@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +32,6 @@ class PayMethodScreen extends StatelessWidget {
               //card
               BlocBuilder<SaveCardBloc, SaveCardState>(
                 builder: (context, state) {
-                  log(state.toString());
                   if (state is LoadCardState) {
                     return ListView.builder(
                       shrinkWrap: true,

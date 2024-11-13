@@ -68,7 +68,6 @@ class SettingsScreen extends StatelessWidget {
                             final Data? userData = state is UserProfileLoaded
                                 ? state.userData
                                 : null;
-                            print(userData);
                             return Padding(
                               padding:
                                   const EdgeInsets.only(top: 12, bottom: 30),

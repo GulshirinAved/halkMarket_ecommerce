@@ -40,7 +40,7 @@ class CategoryCard extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10, right: 10),
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         decoration: BoxDecoration(
           color: AppColors.grey2Color,
           borderRadius: AppBorders.borderRadius12,
@@ -53,22 +53,22 @@ class CategoryCard extends StatelessWidget {
               height: 78,
               fit: BoxFit.cover,
             ),
-            Container(
-              height: 25,
-              margin: const EdgeInsets.only(top: 2),
-              decoration: BoxDecoration(
-                border: Border(top: BorderSide(color: AppColors.grey5Color)),
-              ),
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                maxLines: 2,
-                productList[index].name,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: AppFonts.fontSize10,
-                  color: AppColors.darkPurpleColor,
+            Flexible(
+              child: Container(
+                margin: const EdgeInsets.only(top: 2),
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: AppColors.grey5Color)),
+                ),
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  productList[index].name,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: AppFonts.fontSize10,
+                    color: AppColors.darkPurpleColor,
+                  ),
                 ),
               ),
             ),

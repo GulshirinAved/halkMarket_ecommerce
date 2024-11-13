@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,7 +69,6 @@ class MyAddressScreen extends StatelessWidget {
 
                   BlocBuilder<LocationAddBloc, LocationAddState>(
                     builder: (context, state) {
-                      log('here it is locationaddbloc sate ${state.selectedRadioValue}');
                       return Expanded(
                         child: ListView.builder(
                           shrinkWrap: true,

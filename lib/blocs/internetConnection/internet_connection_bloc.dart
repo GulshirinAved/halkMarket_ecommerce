@@ -14,7 +14,7 @@ class InternetConnectionBloc
         ) {
     on<InternetListenEvent>((event, emit) async {
       try {
-        final result = await InternetAddress.lookup('google.com');
+        final result = await InternetAddress.lookup('216.250.13.221');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           emit(const InternetConnectedState());
         }

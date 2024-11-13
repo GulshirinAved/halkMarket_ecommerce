@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
@@ -40,16 +39,6 @@ class UserAdressProvider {
     );
     try {
       if (response.statusCode == 201) {
-        log('it is location add ${"""data: json.encode({
-        'id': '',
-        'address': $address,
-        'apartment': $apartment,
-        'entrance': $entrance,
-        'floor': $floor,
-        'comment': $comment,
-        'latitude': $latitude,
-        'longitude': $longitude,
-      })"""},');
         final Map<String, dynamic> userData = response.data['data'];
         final Data userAdress = Data.fromJson(userData);
         return userAdress;

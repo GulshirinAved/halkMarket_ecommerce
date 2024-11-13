@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
@@ -34,6 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function(String)? onFieldSubmitted;
   final bool? needBoxshadow;
   final String? withSubtitle;
+  final bool? titleTap;
   const CustomAppBar({
     required this.appBarStyle,
     this.toolBarHeight,
@@ -50,6 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onFieldSubmitted,
     this.needBoxshadow,
     this.withSubtitle,
+    this.titleTap,
     super.key,
   });
   const CustomAppBar._({
@@ -68,6 +71,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onFieldSubmitted,
     this.needBoxshadow,
     this.withSubtitle,
+    this.titleTap,
   });
   factory CustomAppBar.onlySearch({
     required TextEditingController textEditingController,
@@ -129,6 +133,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final bool? needBoxshadow,
     final List<Widget>? actions,
     final String? withSubtitle,
+    final bool? titleTap,
   }) {
     return CustomAppBar._(
       appBarStyle: AppBarStyle.leadingTitle,
@@ -143,6 +148,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       needBoxshadow: needBoxshadow ?? true,
       actions: actions,
       withSubtitle: withSubtitle ?? '',
+      titleTap: titleTap,
     );
   }
   @override
@@ -175,15 +181,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : appBarStyle == AppBarStyle.categoryProfile ||
                   appBarStyle == AppBarStyle.leadingTitle &&
                       withSubtitle!.isEmpty
-              ? Text(
-                  title ?? '',
-                  style: TextStyle(
-                    fontFamily: fontExo2,
-                    fontWeight: fontweight ?? FontWeight.w600,
-                    fontSize: fontSize ?? AppFonts.fontSize20,
-                    color: textColor ?? AppColors.darkPurpleColor,
-                  ),
-                )
+              ? titleTap != null
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        title ?? '',
+                        style: TextStyle(
+                          fontFamily: fontExo2,
+                          fontWeight: fontweight ?? FontWeight.w600,
+                          fontSize: fontSize ?? AppFonts.fontSize20,
+                          color: textColor ?? AppColors.darkPurpleColor,
+                        ),
+                      ),
+                    )
+                  : Text(
+                      title ?? '',
+                      style: TextStyle(
+                        fontFamily: fontExo2,
+                        fontWeight: fontweight ?? FontWeight.w600,
+                        fontSize: fontSize ?? AppFonts.fontSize20,
+                        color: textColor ?? AppColors.darkPurpleColor,
+                      ),
+                    )
               //I did it for chat
               : appBarStyle == AppBarStyle.leadingTitle &&
                           withSubtitle != null ||

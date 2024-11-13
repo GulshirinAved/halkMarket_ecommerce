@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/endpoints.dart';
@@ -22,7 +21,6 @@ class CreateFeedbackProvider {
           'email': null,
         }),
       );
-      log(response.statusCode.toString());
       if (response.statusCode == 201) {
         return true;
       } else {

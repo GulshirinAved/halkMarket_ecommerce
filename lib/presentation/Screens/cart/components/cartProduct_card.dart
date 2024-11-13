@@ -49,6 +49,7 @@ class CartProductCard extends StatelessWidget {
           colorFilter: ColorFilter.mode(AppColors.whiteColor, BlendMode.srcIn),
         ),
       ),
+      direction: DismissDirection.endToStart,
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.endToStart) {
           return await customDialog(
@@ -66,6 +67,7 @@ class CartProductCard extends StatelessWidget {
             },
           );
         }
+
         return null;
       },
       child: Container(
