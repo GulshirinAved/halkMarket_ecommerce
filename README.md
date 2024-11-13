@@ -11,7 +11,7 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
   * Deals and Discounts
 
 # Screenshots
- <img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/home.png?raw=true" alt="home Screenshot" width="500" height="1000">
- <img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/search.png?raw=true" alt="Search Screenshot" width="500" height="1000">
 
-
+Home screen            |   Category screen             |  Map Screen       |  Cart Screen           |   Category screen             |  Map Screen       |  Cart Screen
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------: :-------------------------:|:-------------------------:|
+![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/home.png?raw=true)|![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/category.png?raw=true)|![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/map.png?raw=true)|![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true)|![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true)|![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true)|![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true)
