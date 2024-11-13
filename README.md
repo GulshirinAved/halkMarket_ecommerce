@@ -36,8 +36,8 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
 </table>
 
 # Directory Structure
-
-"""lib
+```bash
+lib
 │   ├───blocs
 │   │   ├───auth
 │   │   │   ├───changePass
