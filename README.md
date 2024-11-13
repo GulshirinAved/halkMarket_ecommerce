@@ -11,5 +11,5 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
   * Deals and Discounts
 
 # Screenshots
-![Uploading home.png…]()
+![](https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/search.png?raw=true)
 
