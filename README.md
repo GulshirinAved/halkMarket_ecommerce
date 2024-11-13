@@ -13,23 +13,27 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
 # Screenshots
 
 
+
 <table>
   <tr>
-    <td>Home Screen</td>
-    <td>Category Screen</td>
-    <td>Map Screen</td>
-    <td>Cart Screen</td>
-    <td>Category Screen</td>
-    <td>Map Screen</td>
-    <td>Cart Screen</td>
+    <td align="center">Home Screen</td>
+    <td align="center">Category Screen</td>
+    <td align="center">Map Screen</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/home.png?raw=true" alt="Home Screenshot" width="200"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/category.png?raw=true" alt="Category Screenshot" width="200"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/map.png?raw=true" alt="Map Screenshot" width="200"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Cart Screenshot" width="200"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Category Screenshot" width="200"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Map Screenshot" width="200"></td>
-    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Cart Screenshot" width="200"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/home.png?raw=true" alt="Home Screenshot" width="300" height="600"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/category.png?raw=true" alt="Category Screenshot" width="300" height="600"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/map.png?raw=true" alt="Map Screenshot" width="300" height="600"></td>
+  </tr>
+  <tr>
+    <td align="center">Cart Screen</td>
+    <td align="center">Category Screen</td>
+    <td align="center">Map Screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Cart Screenshot" width="300" height="600"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Category Screenshot" width="300" height="600"></td>
+    <td><img src="https://github.com/GulshirinAved/halkMarket_ecommerce/blob/main/screenshots/cart.png?raw=true" alt="Map Screenshot" width="300" height="600"></td>
   </tr>
 </table>
+
