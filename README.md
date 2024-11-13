@@ -35,3 +35,95 @@ Welcome to Halk Market, your one-stop solution for all your shopping needs. Disc
   </tr>
 </table>
 
+# Directory Structure
+
+lib
+│   ├───blocs
+│   │   ├───auth
+│   │   │   ├───changePass
+│   │   │   ├───forgetPass
+│   │   │   ├───login
+│   │   │   ├───otp
+│   │   │   ├───register
+│   │   │   ├───removeAccaunt
+│   │   │   ├───saveOtpInput
+│   │   │   ├───timer
+│   │   │   ├───updateUserData
+│   │   │   ├───userProfile
+│   │   │   └───validateTextField
+│   │   ├───brands
+│   │   │   └───getAllBrands
+│   │   ├───cart
+│   │   │   ├───cancelOrder
+│   │   │   ├───cartButton
+│   │   │   ├───createOrder
+│   │   │   ├───expandCartPrice
+│   │   │   ├───expandIcon
+│   │   │   ├───getDelivery
+│   │   │   ├───getPayment
+│   │   │   ├───oneOrderHistory
+│   │   │   ├───orderHistory
+│   │   │   └───toOrder
+│   │   ├───category
+│   │   │   ├───getAllCategory
+│   │   │   ├───getOneCataloge
+│   │   │   └───tabBar
+│   │   ├───categoryProfile
+│   │   │   ├───filter
+│   │   │   │   ├───brandExpand
+│   │   │   │   ├───brandSelection
+│   │   │   │   ├───categoryExpand
+│   │   │   │   ├───categorySelection
+│   │   │   │   └───sortSelection
+│   │   │   └───selectSubCategory
+│   │   ├───favButton
+│   │   ├───home
+│   │   │   ├───answerTip
+│   │   │   ├───bannerSlider
+│   │   │   ├───chat
+│   │   │   ├───emailSubscription
+│   │   │   ├───expansionPanelExpand
+│   │   │   ├───getAllProducts
+│   │   │   ├───getHome
+│   │   │   ├───imagePicker
+│   │   │   ├───passwordVisibility
+│   │   │   ├───quizQn
+│   │   │   ├───selectCard
+│   │   │   ├───selectMapOptions
+│   │   │   └───vote
+│   │   ├───internetConnection
+│   │   ├───language
+│   │   ├───map
+│   │   │   ├───addDeliveryLocation
+│   │   │   └───getLocation
+│   │   ├───productProfile
+│   │   │   ├───dotIndicator
+│   │   │   ├───expanableText
+│   │   │   ├───getOneProduct
+│   │   │   └───imageScrolling
+│   │   ├───profile
+│   │   │   ├───createFeedback
+│   │   │   ├───faq
+│   │   │   └───savePaymentCard
+│   │   └───trackOrder
+│   ├───config
+│   │   ├───constants
+│   │   └───theme
+│   ├───data
+│   │   ├───api_providers
+│   │   ├───api_repositories
+│   │   └───models
+│   └───presentation
+│       ├───CustomWidgets
+│       └───Screens
+│           ├───bottomNavBar
+│           ├───cart
+│           │   └───components
+│           ├───category
+│           │   └───components
+│           ├───favorite
+│           ├───home
+│           │   ├───components
+│           │   └───utils
+│           ├───splash
+│           └───webview
