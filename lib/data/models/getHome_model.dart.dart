@@ -205,9 +205,15 @@ class Row {
             ? null
             : DateTime.parse(json['createdAt']),
         image: json['image'] == null ? null : Image.fromJson(json['image']),
-        price: json['price'],
-        usd: json['usd'],
-        coin: json['coin'],
+        price: json['price'] is int
+            ? json['price']
+            : (json['price'] as double?)?.toInt(),
+        usd: json['usd'] is int
+            ? json['usd']
+            : (json['usd'] as double?)?.toInt(),
+        coin: json['coin'] is int
+            ? json['coin']
+            : (json['coin'] as double?)?.toInt(),
         images: json['images'] == null
             ? []
             : List<Image>.from(json['images']!.map((x) => Image.fromJson(x))),
@@ -215,7 +221,9 @@ class Row {
         shopId: json['shopId'],
         quantity: json['quantity'],
         visibility: json['visibility'],
-        amount: json['amount'],
+        amount: json['amount'] is int
+            ? json['amount']
+            : (json['amount'] as double?)?.toInt(),
         unitId: json['unitId'],
         brand: json['brand'] == null ? null : Brand.fromJson(json['brand']),
         categories: json['categories'] == null
@@ -231,9 +239,7 @@ class Row {
         content: json['content'],
         discount: json['discount'] == null
             ? null
-            : SimpleDiscount.fromJson(
-                json['discount'],
-              ),
+            : SimpleDiscount.fromJson(json['discount']),
         unit: json['unit'] == null ? null : UnitModel.fromJson(json['unit']),
       );
 

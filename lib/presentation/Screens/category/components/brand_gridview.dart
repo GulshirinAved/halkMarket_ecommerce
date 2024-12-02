@@ -5,20 +5,26 @@ import 'package:halkmarket_ecommerce/presentation/Screens/home/components/topTit
 class BrandGridview extends StatelessWidget {
   final int index;
   final List brandList;
+  final List categoryList;
   const BrandGridview({
     required this.index,
     required this.brandList,
+    required this.categoryList,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
+    final List filteredBrands = brandList.where((brand) {
+      return brand.categories
+          .any((category) => category.name == categoryList[index].name);
+    }).toList();
     return Column(
       children: [
         TopTitle(
           needArrow: false,
-          topTitle: brandList[index].name,
+          topTitle: categoryList[index].name,
           onTap: () {},
           topMargin: screenSize.height * 0.025,
           bottomMargin: screenSize.height * 0.006,
@@ -39,13 +45,11 @@ class BrandGridview extends StatelessWidget {
               mainAxisSpacing: screenSize.width * 0.02,
               childAspectRatio: 0.85,
             ),
-            itemCount: brandList.length,
+            itemCount: filteredBrands.length,
             shrinkWrap: true,
-            itemBuilder: (context, index) => GestureDetector(
-              child: BrandCard(
-                brandList: brandList,
-                index: index,
-              ),
+            itemBuilder: (context, index) => BrandCard(
+              brandList: filteredBrands,
+              index: index,
             ),
           ),
         ),

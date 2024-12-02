@@ -1,14 +1,14 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
 import 'package:halkmarket_ecommerce/data/endpoints.dart';
 
 class CreateOrderProvider {
   Dio dio = Dio();
   Future<bool> createCartProduct(Map<String, dynamic> postData) async {
     final headers = {
-      'Authorization': 'Bearer ${AuthProvider().getAccessToken()}',
+      'Content-Type': 'application/json',
       'Cookie': 'i18n_redirected=ru',
     };
     try {
@@ -17,12 +17,17 @@ class CreateOrderProvider {
         data: json.encode(postData),
         options: Options(headers: headers),
       );
+      log('Response status: ${response.statusCode}');
+      log('Response message: ${response.statusMessage}');
+      log('Response data: ${response.data}');
+      log('Request data: $postData');
       if (response.data['statusCode'] == 200) {
         return true;
       }
 
       return false;
     } catch (e) {
+      log(e.toString());
       throw Exception(e.toString());
     }
   }

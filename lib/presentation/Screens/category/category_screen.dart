@@ -116,7 +116,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       return IndexedStack(
                         index: tabState,
                         children: [
-                          //! categry content
+                          //! category content
                           ListView.builder(
                             controller:
                                 BlocProvider.of<AllCategoryBloc>(context)
@@ -137,11 +137,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                         child: CircularProgressIndicator(),
                                       )
                                     : const SizedBox.shrink();
-                              }
-
-                              if (state.allCategoryList[index].subcategories!
-                                  .isEmpty) {
-                                return const SizedBox.shrink();
                               }
 
                               return CategoryGridview(
@@ -191,11 +186,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   physics:
                                       const AlwaysScrollableScrollPhysics(),
                                   scrollDirection: Axis.vertical,
-                                  itemCount:
-                                      brandState.allBrandsList.length + 1,
+                                  itemCount: state.allCategoryList.length + 1,
                                   itemBuilder: (context, index) {
-                                    if (index >=
-                                        brandState.allBrandsList.length) {
+                                    if (index >= state.allCategoryList.length) {
                                       if (!BlocProvider.of<GetAllBrandsBloc>(
                                         context,
                                       ).isLoadingMore) {
@@ -203,7 +196,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                           context,
                                         ).add(GetMoreBrand());
                                       }
-                                      return brandState.allBrandsList.length !=
+                                      return state.allCategoryList.length !=
                                               index
                                           ? const Center(
                                               child:
@@ -214,6 +207,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
                                     return BrandGridview(
                                       index: index,
+                                      categoryList: state.allCategoryList,
                                       brandList: brandState.allBrandsList,
                                     );
                                   },

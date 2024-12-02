@@ -184,7 +184,9 @@ class Row {
 
   factory Row.fromJson(Map<String, dynamic> json) => Row(
         id: json['id'],
-        price: json['price'],
+        price: json['price'] is int
+            ? json['price']
+            : (json['price'] as double?)?.toInt(),
         usd: json['usd'],
         coin: json['coin'],
         images: json['images'] == null
@@ -197,7 +199,9 @@ class Row {
             ? null
             : DateTime.parse(json['createdAt']),
         visibility: json['visibility'],
-        amount: json['amount'],
+        amount: json['amount'] is int
+            ? json['amount']
+            : (json['amount'] as double?)?.toInt(),
         unitId: json['unitId'],
         brand: json['brand'] == null ? null : Brand.fromJson(json['brand']),
         shop: json['shop'] == null ? null : Brand.fromJson(json['shop']),

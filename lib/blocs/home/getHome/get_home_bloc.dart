@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:halkmarket_ecommerce/data/api_repositories/getHome_repository.dart';
@@ -30,6 +32,8 @@ class GetHomeBloc extends Bloc<GetHomeEvent, GetHomeState> {
           ),
         );
       } catch (e) {
+        log('it is bloc exception $e');
+
         emit(GetHomeError(error: e.toString()));
       }
     });

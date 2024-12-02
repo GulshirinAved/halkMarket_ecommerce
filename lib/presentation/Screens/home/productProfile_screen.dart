@@ -303,6 +303,8 @@ class _ProductProfileScreenState extends State<ProductProfileScreen> {
                                 favItem: FavItem(
                                   id: state.getOneProductList
                                       .similaryProducts![index].id!,
+                                  name: state.getOneProductList
+                                      .similaryProducts![index].name,
                                   image: state.getOneProductList
                                       .similaryProducts![index].images,
                                   price: state.getOneProductList
@@ -319,6 +321,8 @@ class _ProductProfileScreenState extends State<ProductProfileScreen> {
                                 cartItem: CartItem(
                                   id: state.getOneProductList
                                       .similaryProducts![index].id!,
+                                  name: state.getOneProductList
+                                      .similaryProducts![index].name,
                                   image: state.getOneProductList
                                       .similaryProducts![index].images,
                                   price: state.getOneProductList

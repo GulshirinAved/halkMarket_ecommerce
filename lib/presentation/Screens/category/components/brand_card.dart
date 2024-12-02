@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +23,15 @@ class BrandCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
+        log(brandList[index].categories[0].name);
+        log(brandList[index].name);
         pushScreenWithNavBar(
           context,
           CategoryProfileScreen(
             topTitle: brandList[index].name,
             categoryId: '',
             brandId: brandList[index].id,
+            subCategoryId: '',
           ),
         );
       },

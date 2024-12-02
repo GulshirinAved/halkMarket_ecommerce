@@ -31,6 +31,7 @@ class ProductsSlider extends StatelessWidget {
               context,
               CategoryProfileScreen(
                 topTitle: topTitle,
+                subCategoryId: '',
                 categoryId: categoryId!,
                 brandId: '',
               ),

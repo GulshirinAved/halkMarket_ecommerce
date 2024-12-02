@@ -36,6 +36,7 @@ class CategoryGridview extends StatelessWidget {
               CategoryProfileScreen(
                 topTitle: productList[index].name,
                 categoryId: productList[index].id,
+                subCategoryId: '',
                 brandId: '',
               ),
             );
@@ -58,7 +59,7 @@ class CategoryGridview extends StatelessWidget {
               index: index,
               productList: subCategoryList,
               topTitle: productList[index].name,
-              categoryid: categoryId,
+              subCategoryId: subCategoryList[index].id,
             ),
           ),
         ),

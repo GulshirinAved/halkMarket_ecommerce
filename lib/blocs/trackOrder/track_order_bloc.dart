@@ -20,13 +20,13 @@ class TrackOrderBloc extends Bloc<TrackOrderEvent, TrackOrderState> {
       (data) {
         log('connected new location $data');
 
-        add(TrackOrderNewLocationEvent());
+        add(TrackOrderNewLocationEvent(data: data));
       },
     );
 
     on<TrackOrderNewLocationEvent>(
       (event, emit) {
-        emit(TrackOrderNewLocationState());
+        emit(TrackOrderNewLocationState(data: event.data));
       },
     );
   }

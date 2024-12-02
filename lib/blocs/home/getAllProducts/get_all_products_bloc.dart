@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -57,8 +59,10 @@ class GetAllProductsBloc
           ordering: currentOrdering,
           page: page,
         );
+        log('it is in bloc $getAllProductsList');
         emit(GetAllProductsLoaded(getAllProductsList: getAllProductsList));
       } catch (e) {
+        log('it is in bloc $e');
         emit(GetAllProductsError(error: e.toString()));
       }
     });

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,11 +23,14 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 class CategoryProfileScreen extends StatefulWidget {
   final String topTitle;
   final String categoryId;
+  final String subCategoryId;
+
   final String brandId;
 
   const CategoryProfileScreen({
     required this.topTitle,
     required this.categoryId,
+    required this.subCategoryId,
     required this.brandId,
     super.key,
   });
@@ -41,6 +46,8 @@ class _CategoryProfileScreenState extends State<CategoryProfileScreen> {
   @override
   void initState() {
     super.initState();
+    log(widget.categoryId);
+    log(widget.subCategoryId);
     _toPriceController = TextEditingController();
     _fromPriceController = TextEditingController();
     _pageController = PageController();
@@ -62,15 +69,25 @@ class _CategoryProfileScreenState extends State<CategoryProfileScreen> {
           create: (context) => SelectSubCategoryBloc(),
         ),
         BlocProvider(
-          create: (context) =>
-              GetOneCatelogeBloc()..add(GetOneCataloge(id: widget.categoryId)),
+          create: (context) => GetOneCatelogeBloc()
+            ..add(
+              GetOneCataloge(
+                id: widget.categoryId == ''
+                    ? widget.subCategoryId
+                    : widget.categoryId,
+              ),
+            ),
         ),
         BlocProvider(
           create: (context) => GetAllProductsBloc()
             ..add(
               GetProducts(
                 ordering: 'popular',
-                categories: widget.categoryId == '' ? [] : [widget.categoryId],
+                categories: widget.brandId != ''
+                    ? []
+                    : widget.categoryId == ''
+                        ? [widget.subCategoryId]
+                        : [widget.categoryId],
                 brands: widget.brandId == '' ? [] : [widget.brandId],
               ),
             ),
@@ -120,7 +137,7 @@ class _CategoryProfileScreenState extends State<CategoryProfileScreen> {
                 return BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
                   builder: (context, allProductState) {
                     if (allProductState is GetAllProductsError) {
-                      Column(
+                      return Column(
                         children: [
                           Animations.error,
                           Text(

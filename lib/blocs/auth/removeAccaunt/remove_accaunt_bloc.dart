@@ -9,16 +9,8 @@ class RemoveAccauntBloc extends Bloc<RemoveAccauntEvent, RemoveAccauntState> {
   RemoveAccauntBloc() : super(RemoveAccauntInitial()) {
     final AuthRepository removeAccauntRepository = AuthRepository();
     on<RemoveAccauntSubmitted>((event, emit) async {
-      final int? statusCode = await removeAccauntRepository.removesAccaunt();
-      try {
-        if (statusCode == 200) {
-          emit(RemoveAccauntSuccess());
-        } else {
-          emit(RemoveAccauntFailure());
-        }
-      } catch (e) {
-        emit(RemoveAccauntFailure());
-      }
+      await removeAccauntRepository.removesAccaunt();
+      emit(RemoveAccauntSuccess());
     });
   }
 }

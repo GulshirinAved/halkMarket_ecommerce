@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
 import 'package:halkmarket_ecommerce/blocs/auth/userProfile/user_profile_bloc.dart';
@@ -17,7 +17,6 @@ import 'package:halkmarket_ecommerce/blocs/home/selectCard/select_card_cubit.dar
 import 'package:halkmarket_ecommerce/blocs/map/addDeliveryLocation/location_add_bloc.dart';
 import 'package:halkmarket_ecommerce/config/constants/constants.dart';
 import 'package:halkmarket_ecommerce/config/theme/constants.dart';
-import 'package:halkmarket_ecommerce/data/api_providers/auth_provider.dart';
 import 'package:halkmarket_ecommerce/data/models/updateUserData_model.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/animations.dart';
 import 'package:halkmarket_ecommerce/presentation/CustomWidgets/custom_radio.dart';
@@ -65,6 +64,7 @@ Future<dynamic> toOrderBottomSheet(
                           if (userState is UserProfileLoaded) {
                             final userData = userState.userData;
                             phoneController!.text = userData.phone ?? '';
+                            nameController!.text = userData.name ?? '';
                           }
                           final List<Address>? addressList =
                               userState is UserProfileLoaded
@@ -105,10 +105,10 @@ Future<dynamic> toOrderBottomSheet(
                                                 title: paymentTypes[index].name,
                                                 subTitle: paymentTypes[index]
                                                     .description,
-                                                value: state.payment ??
-                                                    paymentTypes[0].name,
+                                                value: state.paymentId ??
+                                                    paymentTypes[0].id,
                                                 groupValue:
-                                                    paymentTypes[index].name,
+                                                    paymentTypes[index].id,
                                                 onChanged: (value) => context
                                                     .read<ToOrderBloc>()
                                                     .add(
@@ -148,17 +148,17 @@ Future<dynamic> toOrderBottomSheet(
                                                     '${deliveryTypes[index].name} (${deliveryTypes[index].price} TMT)',
                                                 subTitle: deliveryTypes[index]
                                                     .description,
-                                                value: state.deliveryName,
+                                                value: state.deliveryName ??
+                                                    deliveryTypes[0].id,
                                                 groupValue:
-                                                    '${deliveryTypes[index].name}',
+                                                    '${deliveryTypes[index].id}',
                                                 onChanged: (value) => context
                                                     .read<ToOrderBloc>()
                                                     .add(
                                                       ToOrderEvent(
                                                         state.payment,
                                                         state.paymentId,
-                                                        deliveryTypes[index]
-                                                            .name,
+                                                        deliveryTypes[index].id,
                                                         deliveryTypes[index]
                                                             .price,
                                                         deliveryTypes[index].id,
@@ -230,32 +230,35 @@ Future<dynamic> toOrderBottomSheet(
                                             },
                                           ),
                                           //phone number field
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 10,
-                                            ),
-                                            child: CustomTextField.normal(
-                                              textEditingController:
-                                                  phoneController!,
-                                              backColor: AppColors.whiteColor,
-                                              borderColor:
-                                                  AppColors.purpleColor,
-                                              nonActiveBorderColor:
-                                                  AppColors.grey5Color,
-                                              labelText: AppLocalization.of(
-                                                context,
-                                              ).getTransatedValues(
-                                                'phoneNumber',
-                                              ),
-                                              readOnly: true,
-                                              hintText:
-                                                  AppLocalization.of(context)
-                                                          .getTransatedValues(
-                                                        'phoneNumber',
-                                                      ) ??
-                                                      '',
-                                            ),
+                                          PhoneTextField(
+                                            phoneController: phoneController!,
                                           ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.symmetric(
+                                          //     vertical: 10,
+                                          //   ),
+                                          //   child: CustomTextField.normal(
+                                          //     textEditingController:
+                                          //         phoneController!,
+                                          //     backColor: AppColors.whiteColor,
+                                          //     borderColor:
+                                          //         AppColors.purpleColor,
+                                          //     nonActiveBorderColor:
+                                          //         AppColors.grey5Color,
+                                          //     labelText: AppLocalization.of(
+                                          //       context,
+                                          //     ).getTransatedValues(
+                                          //       'phoneNumber',
+                                          //     ),
+                                          //     readOnly: false,
+                                          //     hintText:
+                                          //         AppLocalization.of(context)
+                                          //                 .getTransatedValues(
+                                          //               'phoneNumber',
+                                          //             ) ??
+                                          //             '',
+                                          //   ),
+                                          // ),
                                           //address tile
                                           // if address is empty then show textfield
                                           addressList!.isEmpty
@@ -549,12 +552,7 @@ void _handleOnTap(
   final List deliveryTypes,
   final List paymentTypes,
 ) {
-  if (AuthProvider().getAccessToken() == null) {
-    pushScreen(
-      context,
-      screen: const LoginScreen(),
-    );
-  } else if (nameController!.text.isEmpty ||
+  if (nameController!.text.isEmpty ||
       adressController!.text.isEmpty && addressList.isEmpty) {
     context.read<ValidateTextFieldBloc>().add(
           NameChanged(
@@ -562,6 +560,8 @@ void _handleOnTap(
           ),
         );
   } else {
+    final String phone = phoneController!.text.replaceFirst('+993 | ', '');
+
     context.read<CreateOrderBloc>().add(
           CreateOrderPressed(
             postData: {
@@ -569,7 +569,9 @@ void _handleOnTap(
                   ? adressController.text
                   : '${addressList[0].address} ${addressList[0].apartment}',
               'name': nameController.text,
-              'phone': phoneController?.text,
+              'phone': phoneController.text.startsWith('+993')
+                  ? '+993$phone'
+                  : phoneController.text,
               'deliveryId': deliveryState.deliveryId ?? deliveryTypes[0].id,
               'paymentId': deliveryState.paymentId ?? paymentTypes[0].id,
               'summa': (cartState is SumProductState) ? cartState.sum : 0,

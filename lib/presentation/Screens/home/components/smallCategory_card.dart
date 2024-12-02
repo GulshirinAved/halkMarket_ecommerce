@@ -23,6 +23,7 @@ class SmallCategoryCard extends StatelessWidget {
           CategoryProfileScreen(
             topTitle: categoryList[index].name,
             categoryId: categoryList[index].id,
+            subCategoryId: '',
             brandId: '',
           ),
         );

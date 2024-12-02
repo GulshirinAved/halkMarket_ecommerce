@@ -47,77 +47,81 @@ class _ForgetPassContentState extends State<ForgetPassContent> {
           create: (context) => ObscureCubit(),
         ),
       ],
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //phone textfield
-          PhoneTextField(phoneController: phoneController),
-          //pass textfield
-          PasswordTextField(passController: newPassController),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //phone textfield
+            PhoneTextField(phoneController: phoneController),
+            //pass textfield
+            PasswordTextField(passController: newPassController),
 
-          BlocListener<ForgetPassBloc, ForgetPassState>(
-            listener: (context, state) {
-              if (state is ForgetPassLoaded) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  pushScreenWithoutNavBar(
-                    context,
-                    OtpScreen(
-                      phoneNumber:
-                          phoneController.text.replaceFirst('+993 | ', ''),
-                    ),
-                  );
-                });
-              } else if (state is ForgetPassFailure) {
-                String message;
-                switch (state.statusCode) {
-                  case 602:
-                    message = 'userExists';
-                    break;
-                  case 603:
-                    message = 'otpinvalid';
-                    break;
-                  default:
-                    message = 'error';
-                }
-                Animations().snackbar(context, message);
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: CustomButton.text(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                borderRadius: AppBorders.borderRadius12,
-                width: double.infinity,
-                backColor: AppColors.purpleColor,
-                textColor: AppColors.whiteColor,
-                fontSize: AppFonts.fontSize18,
-                title: AppLocalization.of(context)
-                        .getTransatedValues('confirmCode') ??
-                    '',
-                onTap: () {
-                  final String phone =
-                      phoneController.text.replaceFirst('+993 | ', '');
-                  if (phone.length != 8 || newPassController.text.length < 8) {
-                    context.read<ValidateTextFieldBloc>().add(
-                          PhoneNumberChanged(phoneNumber: phoneController.text),
-                        );
-                    context.read<ValidateTextFieldBloc>().add(
-                          PasswordChanged(passWord: newPassController.text),
-                        );
-                  } else {
-                    context.read<ForgetPassBloc>().add(
-                          ForgetPassSubmitted(
-                            phoneNumber: '+993$phone',
-                            password: newPassController.text,
-                          ),
-                        );
-                    context.read<ForgetPassBloc>().add(ResetForgetPass());
+            BlocListener<ForgetPassBloc, ForgetPassState>(
+              listener: (context, state) {
+                if (state is ForgetPassLoaded) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    pushScreenWithoutNavBar(
+                      context,
+                      OtpScreen(
+                        phoneNumber:
+                            phoneController.text.replaceFirst('+993 | ', ''),
+                      ),
+                    );
+                  });
+                } else if (state is ForgetPassFailure) {
+                  String message;
+                  switch (state.statusCode) {
+                    case 602:
+                      message = 'userExists';
+                      break;
+                    case 603:
+                      message = 'otpinvalid';
+                      break;
+                    default:
+                      message = 'error';
                   }
-                },
+                  Animations().snackbar(context, message);
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: CustomButton.text(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  borderRadius: AppBorders.borderRadius12,
+                  width: double.infinity,
+                  backColor: AppColors.purpleColor,
+                  textColor: AppColors.whiteColor,
+                  fontSize: AppFonts.fontSize18,
+                  title: AppLocalization.of(context)
+                          .getTransatedValues('confirmCode') ??
+                      '',
+                  onTap: () {
+                    final String phone =
+                        phoneController.text.replaceFirst('+993 | ', '');
+                    if (phone.length != 8 ||
+                        newPassController.text.length < 8) {
+                      context.read<ValidateTextFieldBloc>().add(
+                            PhoneNumberChanged(
+                                phoneNumber: phoneController.text),
+                          );
+                      context.read<ValidateTextFieldBloc>().add(
+                            PasswordChanged(passWord: newPassController.text),
+                          );
+                    } else {
+                      context.read<ForgetPassBloc>().add(
+                            ForgetPassSubmitted(
+                              phoneNumber: '+993$phone',
+                              password: newPassController.text,
+                            ),
+                          );
+                      context.read<ForgetPassBloc>().add(ResetForgetPass());
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

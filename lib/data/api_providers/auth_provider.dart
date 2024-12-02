@@ -311,24 +311,9 @@ class AuthProvider {
     }
   }
 
-  Future<int?> removeAccount() async {
-    try {
-      final headers = {
-        'Authorization': 'Bearer ${getAccessToken()}',
-        'Cookie': 'i18n_redirected=ru',
-      };
-      final Response response = await dio.post(
-        Endpoints().removeAccaunt,
-        options: Options(headers: headers),
-      );
-      if (response.statusCode == 201) {
-        await authBox.clear();
-      }
-
-      return response.data['statusCode'];
-    } catch (e) {
-      rethrow;
-    }
+  Future removeAccount() async {
+    await authBox.clear();
+    return null;
   }
 
   String? getAccessToken() {

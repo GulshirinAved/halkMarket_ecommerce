@@ -6,9 +6,11 @@ class GetAllBrandsProvider {
   Dio dio = Dio();
   Future<List<Row>> getAllBrands({required int page}) async {
     try {
-      final Response response = await dio.get(Endpoints().allBrands(
-        page: page,
-      ));
+      final Response response = await dio.get(
+        Endpoints().allBrands(
+          page: page,
+        ),
+      );
       if (response.statusCode == 200) {
         final List<dynamic> brandsData = response.data['data']['rows'];
         final List<Row> brands = brandsData

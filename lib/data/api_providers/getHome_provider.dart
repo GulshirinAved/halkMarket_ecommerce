@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/endpoints.dart';
 import 'package:halkmarket_ecommerce/data/models/category_model.dart';
@@ -15,6 +17,7 @@ class HomeProvider {
   Future<List<dynamic>> fetchAllHomeBanner() async {
     try {
       final Response response = await dio.get(Endpoints().home);
+      log(response.statusCode.toString());
       if (response.statusCode == 200) {
         final List<dynamic> homeTypeData = response.data['data'];
         final List<dynamic> bannerList = homeTypeData
@@ -44,6 +47,8 @@ class HomeProvider {
     };
     try {
       final Response response = await dio.get(Endpoints().allCategory);
+      log(response.statusCode.toString());
+
       if (response.statusCode == 200) {
         final List<dynamic> categoriesData = response.data['data']['rows'];
         final List<Rows> categories = categoriesData
@@ -64,6 +69,8 @@ class HomeProvider {
     try {
       if (homePopularCategoryBox.isEmpty) {
         final Response response = await dio.get(Endpoints().home);
+        log(response.statusCode.toString());
+
         if (response.statusCode == 200) {
           final List<dynamic> homeTypeData = response.data['data'];
           final List<dynamic> popularCategoryList = homeTypeData
@@ -101,6 +108,8 @@ class HomeProvider {
     try {
       if (homeDataBox.isEmpty) {
         final Response response = await dio.get(Endpoints().home);
+        log(response.statusCode.toString());
+
         if (response.statusCode == 200) {
           final List<dynamic> homeData = response.data['data']
               .where((item) => item['type'] == 'products')
@@ -142,6 +151,8 @@ class HomeProvider {
     try {
       if (homeBox.isEmpty) {
         final Response response = await dio.get(Endpoints().home);
+        log(response.statusCode.toString());
+
         if (response.statusCode == 200) {
           final List<dynamic> homeData = response.data['data']
               .where((item) => item['type'] == 'products')

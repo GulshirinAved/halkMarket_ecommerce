@@ -9,4 +9,10 @@ sealed class TrackOrderState extends Equatable {
 
 final class TrackOrderInitial extends TrackOrderState {}
 
-final class TrackOrderNewLocationState extends TrackOrderState {}
+final class TrackOrderNewLocationState extends TrackOrderState {
+  final List data;
+
+  const TrackOrderNewLocationState({required this.data});
+  @override
+  List<Object> get props => [data];
+}

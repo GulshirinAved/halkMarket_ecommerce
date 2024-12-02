@@ -111,7 +111,6 @@ class _MyAppState extends State<MyApp> {
     FCMConfig().requestPermission();
     FCMConfig().subscribeToTopic('halk_market');
 
-    // Listen for foreground messages and handle notifications safely
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {
         FCMConfig().sendNotification(

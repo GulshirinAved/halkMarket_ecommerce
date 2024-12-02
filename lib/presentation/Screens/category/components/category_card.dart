@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,13 +12,13 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 class CategoryCard extends StatelessWidget {
   final int index;
   final String topTitle;
-  final String categoryid;
+  final String subCategoryId;
 
   final List productList;
   const CategoryCard({
     required this.index,
     required this.topTitle,
-    required this.categoryid,
+    required this.subCategoryId,
     required this.productList,
     super.key,
   });
@@ -32,11 +34,13 @@ class CategoryCard extends StatelessWidget {
         pushScreenWithNavBar(
           context,
           CategoryProfileScreen(
-            topTitle: topTitle,
-            categoryId: categoryid,
+            topTitle: productList[index].name,
+            categoryId: '',
+            subCategoryId: subCategoryId,
             brandId: '',
           ),
         );
+        log(topTitle);
       },
       child: Container(
         margin: const EdgeInsets.only(top: 10, right: 10),

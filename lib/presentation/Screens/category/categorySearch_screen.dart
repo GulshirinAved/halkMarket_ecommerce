@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,8 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
           body: BlocBuilder<GetAllProductsBloc, GetAllProductsState>(
             builder: (context, state) {
               if (state is GetAllProductsError) {
+                log('it is search ${state.error}');
+
                 return Center(
                   child: Column(
                     children: [

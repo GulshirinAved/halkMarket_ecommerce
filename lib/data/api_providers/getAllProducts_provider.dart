@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:halkmarket_ecommerce/data/endpoints.dart';
@@ -45,6 +46,22 @@ class GetAllProductsProvider {
       );
 
       if (response.statusCode == 201) {
+        log(
+          {
+            'categories': categories,
+            'brands': brands,
+            'shops': shops,
+            'priceFrom': priceFrom,
+            'priceTo': priceTo,
+            'ordering': ordering,
+            'search': search,
+            'page': page,
+            'pageSize': 10,
+            'discount': discount,
+            'isLiked': false,
+          }.toString(),
+        );
+        log(Endpoints().allProducts);
         final List<dynamic> products =
             response.data['data']['rows'].map((e) => Row.fromJson(e)).toList();
 

@@ -51,7 +51,7 @@ class AuthRepository {
     );
   }
 
-  Future<int?> removesAccaunt() async {
+  Future removesAccaunt() async {
     return _authProvider.removeAccount();
   }
 
@@ -59,8 +59,10 @@ class AuthRepository {
     return _authProvider.getUserProfile();
   }
 
-  Future<Data?> changePass(
-      {required String newPass, required String oldPass}) async {
+  Future<Data?> changePass({
+    required String newPass,
+    required String oldPass,
+  }) async {
     return _authProvider.changePass(newPass: newPass, oldPass: oldPass);
   }
 }

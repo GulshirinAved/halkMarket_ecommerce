@@ -7,4 +7,10 @@ sealed class TrackOrderEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TrackOrderNewLocationEvent extends TrackOrderEvent {}
+class TrackOrderNewLocationEvent extends TrackOrderEvent {
+  final List data;
+
+  const TrackOrderNewLocationEvent({required this.data});
+  @override
+  List<Object> get props => [data];
+}

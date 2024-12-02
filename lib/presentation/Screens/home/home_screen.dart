@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halkmarket_ecommerce/app_localization.dart';
@@ -156,6 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return BlocBuilder<GetHomeBloc, GetHomeState>(
                         builder: (context, state) {
                           if (state is GetHomeError) {
+                            log(state.error.toString());
                             return Column(
                               children: [
                                 Animations.error,
